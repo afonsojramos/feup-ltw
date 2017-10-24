@@ -1,5 +1,7 @@
 # feup-ltw - Group 1
-LTW Project - [Instructions](https://web.fe.up.pt/~arestivo/page/courses/2017/ltw/project/)
+LTW Project - A TODO list management platform:
+
+Official [instructions](https://web.fe.up.pt/~arestivo/page/courses/2017/ltw/project/).
 
 # Database
 
@@ -29,7 +31,7 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
  * All the content should be in english;
  * Use **camelCase** in variables and database fields;
  * Classes names start with **C**apital letter;
- * Classes file names start with **C**apital letter, example: `User`
+ * Classes file names start with **C**apital letter, example: `User`;
  * pages file names are _underscore_ separared, example: `produt_edit_members.php`;
  * Use [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig);
  * Use `dirname(__FILE__)` when including/requiring files, example in the classes folder files:
@@ -38,8 +40,33 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
 require_once(dirname(__FILE__)."../connection.php");
 ```
  
+# Features
+
+<h2 align="center">Minimum</h2>
+
+- [ ] Register a new account
+- [ ] Login into an account
+- [ ] Logout of an account
+- [ ] Edit user profiles
+- [ ] List a user's todo lists
+- [ ] Create new todo list (that belongs to a user)
+- [ ] Add items to a todo list
+- [ ] Mark an item as complete
+- [ ] Delete a todo list
  
-# Extra 
+<h2 align="center">Extra</h2>
+
+- [ ] Share a link to a todo list
+- [ ] Create a Project
+- [ ] Add users to Project
+- [ ] Change a List's color
+- [ ] Edit tags
+- [ ] Allow items to be assigned to user (in project)
+- [ ] Create a new todo list (in a project)
+- [ ] Escolher foto de perfil
+
+
+# Potential Extra 
  * Embed todo list in other websites
  * RSS Feed
  * User can share
