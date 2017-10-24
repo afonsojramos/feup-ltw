@@ -27,6 +27,8 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
  
 # Code practices
  * Use **camelCase** in variables and database fields;
+ * Classes names start with capital letter;
+ * pages file names are _underscore_ separared;
  * Use [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig);
  * Use `dirname(__FILE__)` when including/requiring files, example in the classes folder files:
   
