@@ -38,23 +38,22 @@
 	class QueryBuilder	{
 		protected $object;
 		protected $parameters = array();//array of key-values to use for the binds, if needed
+		protected $keys = array();
 		//query creation attributes
-		protected $select = false;
-		protected $orderBy = false;
-		protected $limit = false;
-
-		protected $update = false;
-		protected $insert = false;
-
-		protected $where = false;
+		protected $select;
+		protected $orderBy;
+		protected $limit;
+		protected $update;
+		protected $insert;
+		protected $where;
 
 		/**
 		 * Object is a class instance or a Class:class
 		 */
 		function __construct($object, $table = ""){
-			$this->loadObject($object);
-			$this->loadTableName($table);//loads the table name
-			$this->setKey();//load the object's id, by default it's the first parameter on the class
+			$this->object = $object;
+			$this->table = $table;
+			$this->clear();//initialize the variables
 			$this->debug();
 			return $this;
 		}
@@ -87,7 +86,7 @@
 			if(is_string($where)){//custom where
 				$this->where["value"] = $where;
 			}elseif(is_numeric($where)){
-				$this->where = "WHERE " . $this->getWhereKeys($where);
+				$this->where = " WHERE " . $this->getWhereKeys($where);
 			}else{//clears the where clause
 				$this->where = false;
 			}
@@ -95,7 +94,7 @@
 		}
 
 		public function get(){
-
+			return $this->select . $this->where;
 			echo $this->getWhereKeys();
 			return $this;
 		}
@@ -105,12 +104,29 @@
 			return $this;
 		}
 
+		public function clear(){
+			$this->loadObject($this->object);//load the parameters from scratch
+			$this->loadTableName($this->table);//loads the table name
+			//empty query creation variables
+			$this->select = false;
+			$this->orderBy = false;
+			$this->limit = false;
+			$this->update = false;
+			$this->insert = false;
+			$this->where = false;
+			$this->setKey();//load the object's id, by default it's the first parameter on the class
+		}
 
 		/**
 		 * pass a string with "column1, column2 as c2, ..."
 		 */
 		public function select($what = "*"){
-			$query = "SELETCT " . $what . " FROM " . $this->table;
+			if(is_string($what)){
+				$this->select = "SELECT " . $what . " FROM " . $this->table;
+			}else{
+				$this->select = false;
+			}
+			return $this;
 		}
 
 
@@ -125,13 +141,13 @@
 		public function setKey($keys = null){
 			if(is_array($keys)){
 				foreach ($keys as $value) {
-					$value = ":$value";
+					$value = "$value";
 				}
 				$this->keys = $keys;
 			}elseif(is_string($keys)){
-				$this->keys = array(":$keys");
+				$this->keys = array("$keys");
 			}elseif(isset($this->columns[0])){
-				$this->keys = array(":".$this->columns[0]);
+				$this->keys = array($this->columns[0]);
 			}else{
 				$this->keys = false;
 			}
@@ -164,8 +180,14 @@
 
 		//if a valid table is given load its name, else get the name from the class name
 		private function loadTableName($table){
-			if(count($table) < 1){
-				$table = strtolower(get_class($this->object))."s";
+			if(!is_string($table)){
+				throw new Exception("QueryBuilder: table name must be a string", 1);
+			}
+			if(strlen($table) < 1){
+				//get the classname from either Class::class or object (class instance)
+				$className = is_string($this->object)?$this->object:get_class($this->object);
+				//convert the first letter to lower case as per the table naming system
+				$table = strtolower(substr($className, 0, 1). substr($className, 1))."s";
 			}
 			$this->table = $table;
 		}
