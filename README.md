@@ -26,6 +26,12 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
     * :file_folder: **list** - List includes
     * :file_folder: **project** - Project includes
    
+   
+# UML (napknin version)
+
+<p align="center">
+	<img src="https://github.com/msramalho/feup-ltw/blob/master/public/images/other/uml_basic.png"/>
+</p>
  
 # Code practices
  * All the content should be in english;
