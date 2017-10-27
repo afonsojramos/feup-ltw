@@ -80,15 +80,8 @@
 			try {
 				$stmt = $connection->prepare($query);
 				foreach ($matches as $key => $value) {
-					$pdoType = PDO::PARAM_STR;
-					if(is_bool($value) === true){
-						$pdoType = PDO::BOOL;
-					}elseif(is_numeric($value) === true){
-						$pdoType = PDO::PARAM_INT;
-					}
-					$key = ":$key";
 					echo "PREPARE: $key------>$value<br/>";
-					$stmt->bindValue($key, $value, $pdoType);
+					$stmt->bindValue(":$key", $value, $pdoType);
 				}
 				$stmt->execute();
 				if($stmt){
