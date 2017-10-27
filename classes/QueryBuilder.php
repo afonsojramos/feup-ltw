@@ -50,7 +50,6 @@
 		protected $toUpdate = false;//list of properties changed since last update
 		//query creation attributes
 		protected $select;
-		protected $update;
 		protected $orderBy;
 		protected $limit;
 		protected $offset;
@@ -74,7 +73,6 @@
 
 		static public function execute($query, $matches = array()){
 			global $connection;
-			//TODO: make accessible via User::class
 			echo "<br>$query<br>";
 			//PDO query building and execution
 			try {
@@ -107,22 +105,30 @@
 		}
 
 		/**
-		 * no parameter -> UPDATE all the values, except the keys
-		 * pass a string with "column1 = :column2, column2 as c2, ..."
-		 * pass an array of key=>values
-		 * automatically updates, return query
+		 * Run an UPDATE query
+		 * @param what
+		 * 		1. default -> UPDATE all the values, except the keys
+		 * 		2. pass a string with "column1 = :column2, column2 as c2, ..."
+		 * @return integer with the number of updated rows, false on query fail
 		 */
 		public function update($what = null){
 			$this->select = false;
-			if($what == null){//update everything
-				$what = $this->getUpdateColumns();
-				if($what == null){//there is nothing to update
-					$update = false;
-					return $this;
-				}
+			$what = ($what == null? $this->getUpdateColumns() : $what);//update from parameter or everything
+			if($what == null){//there is nothing to update ->abort
+				return 0;
 			}
-			$this->update = "UPDATE " . $this->table . " SET " . $what;
-			return $this;
+			//check if where condition is set, use default if not
+			if(!$this->where){
+				$this->where(true);//Default where uses the id
+			}
+			//create the $query
+			$query = "UPDATE " . $this->table . " SET " . $what . $this->where;
+			//execute the query
+			if($result = self::execute($query, $this->getQueryParameters($query))){
+				$this->toUpdate = false;
+				return $result->rowCount();
+			}
+			return false;
 		}
 
 		/**
@@ -208,17 +214,7 @@
 						return $result->fetch(PDO::FETCH_ASSOC);
 					}
 				}
-			}elseif($this->update){
-				if(!$this->where){
-					$this->where(true);//Default where uses the id
-				}
-				$query = $this->update . $this->where;
-				if($result = self::execute($query, $this->getQueryParameters($query))){
-					$this->toUpdate = false;
-					return $result->rowCount();
-				}
 			}
-
 			return false;
 		}
 
@@ -259,7 +255,6 @@
 			//empty query creation variables
 			$this->parameters = array();
 			$this->select = false;
-			$this->update = false;
 			$this->orderBy = false;
 			$this->limit();
 			$this->offset();
