@@ -37,13 +37,13 @@
 	 */
 	class QueryBuilder	{
 		protected $object;
-		protected $parameters = array();//array of key-values to use for the binds, if needed
-		protected $keys = array();
+		protected $parameters;//array of key-values to use for the binds, if needed
+		protected $keys;
 		//query creation attributes
 		protected $select;
 		protected $orderBy;
 		protected $limit;
-		protected $update;
+		protected $offset;
 		protected $insert;
 		protected $where;
 
@@ -54,9 +54,47 @@
 			$this->object = $object;
 			$this->table = $table;
 			$this->clear();//initialize the variables
-			$this->debug();
+			//$this->debug();
 			return $this;
 		}
+
+		static public function execute($query, $parameters = array()){
+			$query = "select * from users";
+			global $connection;
+			echo "$query<br/>";
+			var_dump($parameters);
+			echo "<br/>";
+			if(!is_string($query)){//custom user query
+				throw new Exception("QueryBuilder: Execute - poorly constructed query, must be string.", 1);
+			}
+			//get all the values to bind
+			$regexBindings = '/:([^\s,]*)/m';
+			preg_match_all($regexBindings, $query, $matches, PREG_SET_ORDER, 0);
+
+			//check if all the values to bind are matched by a parenthesis
+			$uniqueMatches = array();
+			foreach ($matches as $match) {//the index 1 contains the variable name to search, index 0 to bind
+				if(!isset($parameters[$match[1]])){
+					throw new Exception("QueryBuilder: Cannot execute query ($query) without all parameters, stopped at missing parameter: '" . $match[1] . "'", 1);
+				}
+				if (!in_array($match[0], $uniqueMatches)){//if unique not yet save key => value
+					$uniqueMatches[$match[0]] = $parameters[$match[1]];
+				}
+			}
+
+			$stmt = $connection->prepare($query);
+			if(!$stmt){
+				echo "\nPDO::errorInfo():\n";
+				print_r($connection->errorInfo());
+			}
+			foreach ($uniqueMatches as $key => $value) {
+				echo "$key=>$value<br/>";
+				$stmt->bindParam($key, $value);
+			}
+			$stmt->execute();
+			//var_dump($stmt->fetchAll());
+		}
+
 
 		public function debug(){
 			//echo "object: (".var_dump($this->object).")<br>";
@@ -65,59 +103,8 @@
 			echo "keys: (".var_dump($this->keys).")<br>";
 		}
 
-		public function addParams($params){
-			if(is_array($params)){
-				foreach ($params as $param) {
-					$this->addParam($param);
-				}
-			}else{
-				$this->addParam($param);
-			}
-		}
 		/**
-		 * @param where
-		 * if this function is not called, no WHERE is added
-		 * if a string is passed as a parameter that string will be used as the where condition (extra parameters must be given)
-		 * if a number is given, that number will be used if there is only one primary key set
-		 * if it is called with no parameters (or none of the above) then the where is cancelled
-		 *
-		 */
-		public function where($where = null){
-			if(is_string($where)){//custom where
-				$this->where["value"] = $where;
-			}elseif(is_numeric($where)){
-				$this->where = " WHERE " . $this->getWhereKeys($where);
-			}else{//clears the where clause
-				$this->where = false;
-			}
-			return $this;
-		}
-
-		public function get(){
-			return $this->select . $this->where;
-			echo $this->getWhereKeys();
-			return $this;
-		}
-
-		public function getAll(){
-
-			return $this;
-		}
-
-		public function clear(){
-			$this->loadObject($this->object);//load the parameters from scratch
-			$this->loadTableName($this->table);//loads the table name
-			//empty query creation variables
-			$this->select = false;
-			$this->orderBy = false;
-			$this->limit = false;
-			$this->update = false;
-			$this->insert = false;
-			$this->where = false;
-			$this->setKey();//load the object's id, by default it's the first parameter on the class
-		}
-
-		/**
+		 * no parameter -> SELECT *
 		 * pass a string with "column1, column2 as c2, ..."
 		 */
 		public function select($what = "*"){
@@ -129,7 +116,127 @@
 			return $this;
 		}
 
+		/**
+		 * no parameter -> UPDATE all the values, except the keys
+		 * pass a string with "column1 = :column2, column2 as c2, ..."
+		 * pass an array of key=>values
+		 * automatically updates, return query
+		 */
+		public function update($what = null, $parameters = array()){
+			if($what == null){//update everything
+				$what = $this->getUpdateColumns();
+			}
+			$this->where(true);
+			$query = "UPDATE " . $this->table . " SET " . $what . $this->where;
 
+			$this->addParams($parameters);
+			return self::execute($query, $this->parameters);
+		}
+
+		/**
+		 * @param where
+		 * if this function is not called, no WHERE is added for Class but the object has the default where
+		 * if a string is passed as a parameter that string will be used as the where condition (extra parameters must be given), it is added after "WHERE "
+		 * if it is called with no parameters (or none of the above) then the where is cancelled
+		 * if it is true then the default key values will be used (for class, parameters must be passed before or at execute/update)
+		 */
+		public function where($where = false){
+			if(is_string($where)){//custom where
+				$this->where = " WHERE " . $where;
+			}elseif(is_numeric($where) && $this->keys && count($this->keys) == 1){//if this is a number and there is only one primary key, use this as the where condition
+				$this->addParam($this->keys[0], $where);//update the parameter
+				$this->where = " WHERE " . $this->keys[0] . " = :" . $this->keys[0];
+			}elseif(is_object($this->object) || $where === true){//if this is an object, use the default id
+				$this->where = " WHERE " . $this->getWhereKeys();
+			}else{//clears the where clause
+				$this->where = false;
+			}
+			return $this;
+		}
+
+		/**
+		 * add orderBy clause
+		 * no parameters -> removes orderBy
+		 * parameter decide the new order: ex: "dateUpdated DESC, score ASC"
+		 */
+		public function orderBy($order = ""){
+			if(is_string($order) && strlen($order) > 0){
+				$this->orderBy = " ORDER BY " . $order;
+			}else{
+				$this->orderBy = false;
+			}
+			return $this;
+		}
+
+		/**
+		 * add the LIMIT clause to the query
+		 * no parameter -> removes $limit
+		 * $limit is numeric => create new limit for get_all
+		 */
+		public function limit($limit = ""){
+			if(is_numeric($limit)){
+				$this->limit = " LIMIT :limit";
+				$this->addParam("limit", $limit);
+			}else{
+				$this->limit = false;
+			}
+			return $this;
+		}
+
+		/**
+		 * add the OFFSET clause to the query
+		 * no parameter -> removes $offset
+		 * $offset is numeric => create new offset for get_all
+		 */
+		public function offset($offset = ""){
+			if(is_numeric($offset)){
+				$this->offset = " OFFSET :offset";
+				$this->addParam("offset", $offset);
+			}else{
+				$this->offset = false;
+			}
+			return $this;
+		}
+
+		public function get($parameters = array()){
+			$query = "";
+
+			if($this->select && is_string($this->select)){//case a select is the operation
+				$query = $this->appendTry($this->select, $this->where);
+				$query = $this->appendTry($query, $this->orderBy);
+				$query = $this->appendTry($query, $this->limit);
+				$query = $this->appendTry($query, $this->offset);
+			}
+			$this->addParams($parameters);//adds the last passed parameters before executing
+			return self::execute($query, $this->parameters);
+		}
+
+		public function getAll(){
+
+			return $this;
+		}
+
+		/**
+		 * resets all the changes made after the constructor is called
+		 * loads the object parameters
+		 * loads the table name (this is not recycled)
+		 */
+		public function clear($table = ""){
+			$this->parameters = array();//array of key-values to use for the binds, if needed
+			$this->keys = array();//array of key-values to use for the binds, if needed
+
+			$this->loadObject($this->object);//load the parameters from scratch
+			$this->setTable($table);//loads the table name
+			//empty query creation variables
+			$this->select = false;
+			$this->orderBy = false;
+			$this->limit = false;
+			$this->offset = false;
+			$this->insert = false;
+			$this->where = false;
+			$this->setKey();//load the object's id, by default it's the first parameter on the class
+			return $this;
+		}
 
 		/**
 		 * If the first parameter of the class is not the id then pass:
@@ -139,26 +246,58 @@
 		 * default is the first parameter
 		 */
 		public function setKey($keys = null){
-			if(is_array($keys)){
-				foreach ($keys as $value) {
-					$value = "$value";
-				}
+			if(is_array($keys)){//multiple primary keys
 				$this->keys = $keys;
-			}elseif(is_string($keys)){
+			}elseif(is_string($keys)){//single primary key
 				$this->keys = array("$keys");
-			}elseif(isset($this->columns[0])){
+			}elseif(isset($this->columns[0])){//default is the first property of the class
 				$this->keys = array($this->columns[0]);
-			}else{
+			}else{//else no primary key is given
 				$this->keys = false;
 			}
 		}
-//-------------------------Private functions
+
+		/**
+		 * if a valid table is given -> load its name, else derive the name from the class name
+		 * an array of table names is also accepted
+		 */
+		public function setTable($table){
+			if(is_array($table)){
+				$table = implode(", ", $table);
+			}elseif(is_string($table)){//if a string is passed use that (default is "")
+				if(strlen($table) < 1){//if empty string load the expected table name
+					//get the classname from either Class::class or object (class instance)
+					$className = is_string($this->object)?$this->object:get_class($this->object);
+					//convert the first letter to lower case as per the table naming system
+					$table = strtolower(substr($className, 0, 1). substr($className, 1))."s";
+				}
+			}else{
+				throw new Exception("QueryBuilder: table name must be a string or an array of strings", 1);
+			}
+
+			$this->table = $table;
+			return $this;
+		}
+
+		/**
+		 * Adds one or more parameters to $this->parameters, so they are used when binding key values in the query
+		 */
+		public function addParams($parameters){
+			if(is_array($parameters)){
+				foreach ($parameters as $key=>$value) {
+					$this->addParam($key, $value);
+				}
+			}
+			return $this;
+		}
+
+		//-------------------------Private functions
 
 		//adds a parameter to the $this->parameters
-		private function addParam($param){
-			if(count($param) == 2){
-				$this->parameters[$param[0]] = $param[1];
-			} else{
+		private function addParam($param, $value){
+			if(is_string($param)){
+				$this->parameters[$param] = $value;
+			} else {
 				return $this;
 			}
 		}
@@ -178,19 +317,6 @@
 			$this->object = $object;
 		}
 
-		//if a valid table is given load its name, else get the name from the class name
-		private function loadTableName($table){
-			if(!is_string($table)){
-				throw new Exception("QueryBuilder: table name must be a string", 1);
-			}
-			if(strlen($table) < 1){
-				//get the classname from either Class::class or object (class instance)
-				$className = is_string($this->object)?$this->object:get_class($this->object);
-				//convert the first letter to lower case as per the table naming system
-				$table = strtolower(substr($className, 0, 1). substr($className, 1))."s";
-			}
-			$this->table = $table;
-		}
 
 		//return something like "id1 = :id1 AND id2 = :id2" from $this->keys
 		private function getWhereKeys(){
@@ -204,9 +330,27 @@
 			}
 			return $whereKeys;
 		}
-/* 		private function clear(){
-			$this->query = "";
-			return $this;
-		} */
 
+		//return something like "column1 = :column1, column2 = :column2" from $this->columns, ignore the keys
+		private function getUpdateColumns(){
+			$whereColumns = "1";
+			if($this->columns){
+				$whereColumns = array();
+				foreach ($this->columns as $column) {
+					if(!in_array($column, $this->keys)){
+						$whereColumns[] = "$column = :$column";
+					}
+				}
+				$whereColumns = implode(", ", $whereColumns);
+			}
+			return $whereColumns;
+		}
+
+		//append a string to another if the second is a string
+		private function appendTry($str1, $str2){
+			if(!is_string($str2)){
+				return $str1;//original if str2 invalid
+			}
+			return $str1.$str2;//concatenation if str valid
+		}
 	}
