@@ -71,20 +71,25 @@
 			return $this;
 		}
 
-		static public function execute($query, $matches = array()){
+		/**
+		 * Execute a query given it's binding parameters
+		 * It is used internally, but can be invoked like a static method of QueryBuilder
+		 * @param query the sql query to execute
+		 * @param parameters an array of key=>value, where all the query binding variables are declared, without ":"
+		 * @return false on failure, the PDO::statement on success after it is .executed()
+		 */
+		static public function execute($query, $parameters = array()){
 			global $connection;
 			echo "<br>$query<br>";
 			//PDO query building and execution
 			try {
 				$stmt = $connection->prepare($query);
-				foreach ($matches as $key => $value) {
-					echo "PREPARE: $key------>$value<br/>";
+				foreach ($parameters as $key => $value) {
+					//echo "PREPARE: $key------>$value<br/>";
 					$stmt->bindValue(":$key", $value);
 				}
 				$stmt->execute();
-				if($stmt){
-					return $stmt;
-				}
+				return $stmt?$stmt:false;//return $stmt is successful, false otherwise
 			} catch (PDOException $e) {
 				echo "QueryBuilder PDO error: ". $e->getMessage();
 			}
@@ -198,6 +203,12 @@
 			return $this;
 		}
 
+		/**
+		 * execute a query and return the result
+		 * @param $parameters the parameters that are required to execute the query
+		 * @param fetchAll boolean, on true returns all matches, on false only the first
+		 * @return the data when successful, false otherwise
+		 */
 		public function get($parameters = array(), $fetchAll = false){
 			$this->addParams($parameters);//adds the last passed parameters before executing
 			if($this->select){//case a select is the operation
