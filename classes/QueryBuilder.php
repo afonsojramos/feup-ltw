@@ -35,6 +35,11 @@
 	 * 		executeQuery passed (checks for :values and binds them)
 	 *
 	 */
+	/**
+	 * The order of the Class's attributes is important
+	 * . If no key is specified then the first attribute is used
+	 * . The order of the attributes must match the ORDER of the database values (for the load function)
+	 */
 	class QueryBuilder	{
 		protected $object;
 		protected $parameters;//array of key-values to use for the binds, if needed
@@ -215,7 +220,13 @@
 					throw new Exception("QueryBuilder: load function should receive a number, if the id is just one column or an array of keyvalues", 1);
 				}
 			}
-			return $this->select()->where(true)->limit(1)->get();
+			if($objectLoad = $this->select()->where(true)->limit(1)->get()){
+				//load the query data into $this->object
+				$reflector = new ReflectionClass($this->object);
+				$this->object = $reflector->newInstanceArgs(array_values($objectLoad));
+				return $this->object;
+			}
+			return false;
 		}
 
 		public function getAll(){
