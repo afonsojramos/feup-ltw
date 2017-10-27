@@ -81,7 +81,7 @@
 				$stmt = $connection->prepare($query);
 				foreach ($matches as $key => $value) {
 					echo "PREPARE: $key------>$value<br/>";
-					$stmt->bindValue(":$key", $value, $pdoType);
+					$stmt->bindValue(":$key", $value);
 				}
 				$stmt->execute();
 				if($stmt){
@@ -198,7 +198,9 @@
 				$query = $this->appendTry($this->select, $this->where);
 				$query = $this->appendTry($query, $this->orderBy);
 				$query = $this->appendTry($query, $this->limit);
-				$query = $this->appendTry($query, $this->offset);
+				if($this->limit){//only add offset if limit is supplied
+					$query = $this->appendTry($query, $this->offset);
+				}
 				if($result = self::execute($query, $this->getQueryParameters($query))){
 					if($fetchAll){
 						return $result->fetchAll(PDO::FETCH_ASSOC);
@@ -227,10 +229,6 @@
 		public function load($ids = null){
 			if(is_numeric($ids) && count($this->keys) == 1){//single id
 				$this->addParam($this->keys[0], $ids);
-				if(!$this->isGeneric){
-					$key = $this->keys[0];
-					$this->$key = $ids;
-				}
 			}elseif(is_array($ids) && count($ids) == count($this->keys)){//primary key has many ids
 				for ($i=0; $i < count($ids); $i++) {//add all the keys to the parameters
 					$this->addParam($this->keys[$i], $ids[$i]);
