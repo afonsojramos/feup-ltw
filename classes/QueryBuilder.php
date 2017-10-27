@@ -59,48 +59,31 @@
 		}
 
 		static public function execute($query, $parameters = array()){
-			$query = "select * from users";
 			global $connection;
-			echo "$query<br/>";
-			var_dump($parameters);
-			echo "<br/>";
-			if(!is_string($query)){//custom user query
-				throw new Exception("QueryBuilder: Execute - poorly constructed query, must be string.", 1);
-			}
+
+			echo "<br>$query<br>";
+
 			//get all the values to bind
 			$regexBindings = '/:([^\s,]*)/m';
 			preg_match_all($regexBindings, $query, $matches, PREG_SET_ORDER, 0);
 
 			//check if all the values to bind are matched by a parenthesis
-			$uniqueMatches = array();
-			foreach ($matches as $match) {//the index 1 contains the variable name to search, index 0 to bind
-				if(!isset($parameters[$match[1]])){
-					throw new Exception("QueryBuilder: Cannot execute query ($query) without all parameters, stopped at missing parameter: '" . $match[1] . "'", 1);
+			$uniqueMatches = self::assertQueryBindings($query, $parameters);//fails if any parameter is missing
+			//PDO query building and execution
+			try {
+				$stmt = $connection->prepare($query);
+				foreach ($uniqueMatches as $key => $value) {
+					echo "$key=>$value<br/>";
+					$stmt->bindParam($key, $value);
 				}
-				if (!in_array($match[0], $uniqueMatches)){//if unique not yet save key => value
-					$uniqueMatches[$match[0]] = $parameters[$match[1]];
+				$stmt->execute();
+				if($stmt){
+					return $stmt;
 				}
-			}
-
-			$stmt = $connection->prepare($query);
-			if(!$stmt){
-				echo "\nPDO::errorInfo():\n";
-				print_r($connection->errorInfo());
-			}
-			foreach ($uniqueMatches as $key => $value) {
-				echo "$key=>$value<br/>";
-				$stmt->bindParam($key, $value);
-			}
-			$stmt->execute();
-			//var_dump($stmt->fetchAll());
-			/* try {
-				$stmt = $dbh->prepare("SELECT * FROM person WHERE name = ?");
-				$stmt->execute(array($name));
-				$result = $stmt->fetchAll()
 			} catch (PDOException $e) {
-				// Do something about it...
-				echo $e->getMessage();
-			} */
+				echo "QueryBuilder PDO error: ". $e->getMessage();
+			}
+			return false;
 		}
 
 
@@ -207,16 +190,32 @@
 		}
 
 		public function get($parameters = array()){
-			$query = "";
-
 			if($this->select && is_string($this->select)){//case a select is the operation
 				$query = $this->appendTry($this->select, $this->where);
 				$query = $this->appendTry($query, $this->orderBy);
 				$query = $this->appendTry($query, $this->limit);
 				$query = $this->appendTry($query, $this->offset);
+				$this->addParams($parameters);//adds the last passed parameters before executing
 			}
-			$this->addParams($parameters);//adds the last passed parameters before executing
-			return self::execute($query, $this->parameters);
+
+			if($result = self::execute($query, $this->parameters)){
+				return $result->fetch(PDO::FETCH_ASSOC);
+			}
+			return false;
+		}
+
+		public function load($ids = null){
+			$this->clear();
+			if(!is_object($this->object)){//if this a class instance
+				if(is_numeric($ids) && count($this->keys) == 1){//single id
+					$this->addParam($this->keys[0], $ids);
+				}elseif(is_array($ids) && count($ids) == count($this->keys)){//primary key has many ids
+					$this->addParams($ids);
+				}else{
+					throw new Exception("QueryBuilder: load function should receive a number, if the id is just one column or an array of keyvalues", 1);
+				}
+			}
+			return $this->select()->where(true)->limit(1)->get();
 		}
 
 		public function getAll(){
@@ -360,5 +359,25 @@
 				return $str1;//original if str2 invalid
 			}
 			return $str1.$str2;//concatenation if str valid
+		}
+
+		//fails if any parameter is missing
+		static private function assertQueryBindings($query, $parameters){
+			//get all the values to bind
+			$regexBindings = '/:([^\s,]*)/m';
+			preg_match_all($regexBindings, $query, $matches, PREG_SET_ORDER, 0);
+
+			//check if all the values to bind are matched by a parenthesis
+			$uniqueMatches = array();
+			foreach ($matches as $match) {//the index 1 contains the variable name to search, index 0 to bind
+				if(!isset($parameters[$match[1]])){
+					throw new Exception("QueryBuilder: Cannot execute query ($query) without all parameters, stopped at missing parameter: '" . $match[1] . "'", 1);
+				}
+				if (!in_array($match[0], $uniqueMatches)){//if unique not yet save key => value
+					$uniqueMatches[$match[0]] = $parameters[$match[1]];
+				}
+			}
+
+			return $uniqueMatches;
 		}
 	}
