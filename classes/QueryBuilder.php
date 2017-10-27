@@ -93,6 +93,14 @@
 			}
 			$stmt->execute();
 			//var_dump($stmt->fetchAll());
+			/* try {
+				$stmt = $dbh->prepare("SELECT * FROM person WHERE name = ?");
+				$stmt->execute(array($name));
+				$result = $stmt->fetchAll()
+			} catch (PDOException $e) {
+				// Do something about it...
+				echo $e->getMessage();
+			} */
 		}
 
 
