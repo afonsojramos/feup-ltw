@@ -71,30 +71,7 @@
 			return $this;
 		}
 
-		/**
-		 * Execute a query given it's binding parameters
-		 * It is used internally, but can be invoked like a static method of QueryBuilder
-		 * @param query the sql query to execute
-		 * @param parameters an array of key=>value, where all the query binding variables are declared, without ":"
-		 * @return false on failure, the PDO::statement on success after it is .executed()
-		 */
-		static public function execute($query, $parameters = array()){
-			global $connection;
-			echo "<br>$query<br>";
-			//PDO query building and execution
-			try {
-				$stmt = $connection->prepare($query);
-				foreach ($parameters as $key => $value) {
-					//echo "PREPARE: $key------>$value<br/>";
-					$stmt->bindValue(":$key", $value);
-				}
-				$stmt->execute();
-				return $stmt?$stmt:false;//return $stmt is successful, false otherwise
-			} catch (PDOException $e) {
-				echo "QueryBuilder PDO error: ". $e->getMessage();
-			}
-			return false;
-		}
+		//-----------------QUERY BUILDING FUNCTONS
 
 		/**
 		 * no parameter -> SELECT *
@@ -203,6 +180,33 @@
 			return $this;
 		}
 
+		//-------------------QUERY EXECUTION FUNCTIONS
+
+		/**
+		 * Execute a query given it's binding parameters
+		 * It is used internally, but can be invoked like a static method of QueryBuilder
+		 * @param query the sql query to execute
+		 * @param parameters an array of key=>value, where all the query binding variables are declared, without ":"
+		 * @return false on failure, the PDO::statement on success after it is .executed()
+		 */
+		static public function execute($query, $parameters = array()){
+			global $connection;
+			echo "<br>$query<br>";
+			//PDO query building and execution
+			try {
+				$stmt = $connection->prepare($query);
+				foreach ($parameters as $key => $value) {
+					//echo "PREPARE: $key------>$value<br/>";
+					$stmt->bindValue(":$key", $value);
+				}
+				$stmt->execute();
+				return $stmt?$stmt:false;//return $stmt is successful, false otherwise
+			} catch (PDOException $e) {
+				echo "QueryBuilder PDO error: ". $e->getMessage();
+			}
+			return false;
+		}
+
 		/**
 		 * execute a query and return the result
 		 * @param $parameters the parameters that are required to execute the query
@@ -229,22 +233,45 @@
 			return false;
 		}
 
+		/**
+		 * wrapper that calls QueryBuilder->get() with flag to get all set to true
+		 * @see QueryBuilder::get
+		 * @param $parameters the parameters that are required to execute the query
+		 * @return the data when successful, false otherwise
+		 */
 		public function getAll($parameters = array()){
 			return $this->get($parameters, true);
 		}
 
+		/**
+		 * Load an object into this instance or return a new instance of the class if QueryBuilder is used directly
+		 * @param ids
+		 * 		1. a number if ther is a single column in the primary key
+		 * 		2. an array of $key=>$value where $key matches every key in the primary key
+		 * 		3. an ordered array of values that match the multiple columns in the primary key
+		 * 		4. nothing if this is an extended class results in loading from the current primaryKey
+		 */
 		public function load($ids = null){
-			if(is_numeric($ids) && count($this->keys) == 1){//single id
+			if(is_numeric($ids) && count($this->keys) == 1){//primary key has one column
 				$this->addParam($this->keys[0], $ids);
 			}elseif(is_array($ids) && count($ids) == count($this->keys)){//primary key has many ids
+				try{
+					for ($i=0; $i < count($ids); $i++) {//add all the keys to the parameters
+						//add each key, assuming $ids is $key=>$value where the key matches
+						$this->addParam($this->keys[$i], $ids[$this->keys[$i]]);
+					}
+				}catch(Exception $e){
+					echo "<h2>load is assuming ordered list of keys</h2>";
+				}
 				for ($i=0; $i < count($ids); $i++) {//add all the keys to the parameters
+					//add each key, assuming $ids is $value and the order is the same as $this->keys
 					$this->addParam($this->keys[$i], $ids[$i]);
 				}
-			}elseif($this->isGeneric){//if this a class and not an inheritance
-				throw new Exception("QueryBuilder: load function should receive a number, if the id is just one column or an array of ordered values that match the multiple columns in the primary key", 1);
+			}elseif($this->isGeneric){//if this a class and not an inheritance and has no id, fails
+				throw new Exception('QueryBuilder: load function should receive a number, if the id is just one column; or an array of $key=>$value where $key matches every key in the primary key; or an ordered array of values that match the multiple columns in the primary key', 1);
 			}
+			//load the object
 			if($objectLoad = $this->select()->where(true)->limit(1)->get()){
-				$this->clear();//remove extra conditions
 				$this->toUpdate = array();
 				if($this->isGeneric){//return an object of the generic type, argument order must match
 					$reflector = new ReflectionClass($this->class);
@@ -336,16 +363,17 @@
 			return $this;
 		}
 
+		//------------Magick functions to improve the overall behaviour
+
 		public function __set($name, $value){
 			echo "Setting '$name' to '$value'\n";
 			$this->$name = $value;
 			$this->toUpdate[] = $name;
+			return $value;
 		}
 
 		public function __get($name){
-			if(isset($this->$name)){
-				return $this->$name;
-			}
+			return (isset($this->$name)?$this->$name:null);
 		}
 		//-------------------------Protected functions
 
@@ -381,9 +409,11 @@
 			return $whereKeys;
 		}
 
+		//return an array of the columns of the inheriting class, keys + values
 		protected function getAllColumns(){
 			return array_merge($this->columns, $this->keys);
 		}
+
 		//return something like "column1 = :column1, column2 = :column2" from $this->columns, ignore the keys
 		//only return the columns to update
 		protected function getUpdateColumns(){
