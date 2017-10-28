@@ -25,14 +25,14 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
     * :file_folder: **user** - User includes
     * :file_folder: **list** - List includes
     * :file_folder: **project** - Project includes
-   
-   
+
+
 # UML (napknin version)
 
 <p align="center">
 	<img src="https://github.com/msramalho/feup-ltw/blob/master/public/images/other/uml_basic.png"/>
 </p>
- 
+
 # Code practices
  * All the content should be in english;
  * Use **camelCase** in variables and database fields;
@@ -41,11 +41,11 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
  * pages file names are _underscore_ separared, example: `produt_edit_members.php`;
  * Use [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig);
  * Use `dirname(__FILE__)` when including/requiring files, example in the classes folder files:
-  
+
 ```php
 require_once(dirname(__FILE__)."../connection.php");
 ```
- 
+
 # Features
 
 <h2 align="center">Minimum</h2>
@@ -59,7 +59,7 @@ require_once(dirname(__FILE__)."../connection.php");
 - [ ] Add items to a todo list
 - [ ] Mark an item as complete
 - [ ] Delete a todo list
- 
+
 <h2 align="center">Extra</h2>
 
 - [ ] Share a link to a todo list
@@ -72,10 +72,29 @@ require_once(dirname(__FILE__)."../connection.php");
 - [ ] Escolher foto de perfil
 
 
-# Potential Extra 
+# Potential Extra
  * Embed todo list in other websites
  * RSS Feed
  * User can share
  * `.htaccess` to use REST-like paths
 
- 
+ # [QueryBuilder.php](https://github.com/msramalho/feup-ltw/blob/master/classes/QueryBuilder.php)
+ A class to isolate all the sql operations and query management.
+
+ How to use it:
+ 1. Database class should extend it;
+ 2. The primary key of the class should be the first property of the class;
+ 3. If more than one primary key exists they can be specified by:
+ 	1. Declaring a `static` property named `$primaryKeys`, like so:
+	``` php
+	public static $primaryKeys = array("id1", "id2");
+	```
+	2. Using the `.setKey()` method and passing it an array with the names of the parameters
+4. `public` properties of the child class are not "whatched" for changes, so if you want to call `update` to write the changes to the object to the datavase in the following way:
+```php
+$user->name = "New Name";
+$user->update();
+```
+ You need to declare `name` as `protected`: `protected $name;`;
+5. If the table name is not the same as the class name, but with the first letter in lowercase and with an `s` at the end, then you should set it using `.setTable()`, and give it the table name (or an array of table names, if that is the case);
+6. Do `parent::__construct();` inside the new class's constructor;
