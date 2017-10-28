@@ -90,7 +90,7 @@ require_once(dirname(__FILE__)."../connection.php");
 	public static $primaryKeys = array("id1", "id2");
 	```
 	2. Using the `.setKey()` method and passing it an array with the names of the parameters
-4. `public` properties of the child class are not "whatched" for changes, so if you want to call `update` to write the changes to the object to the datavase in the following way:
+4. `public` properties of the child class are not "whatched" for changes, so if you want to call `update` to write the changes on the object to the database in the following way:
 ```php
 $user->name = "New Name";
 $user->update();
