@@ -114,33 +114,38 @@ This operations only construct bits of the query, to run the generated query do 
 
 Notice that, for every new parameter you add that is not defined for that class, it must be given when the query executes `get($missingParameters)`. You can also call `.addParam($key, $value)` or `.addParams($arrayOfKeyValues)`. 
 
-### 1. `select($what)`
+#### 1. `select($what)`
  * Choose `$what`(string) you want to select;
  * _Default_ is `"*"`;
  * _Returns_ reference to the object(`$this`) .
-### 2. `where($where)`
+#### 2. `where($where)`
  * If this function is not called, no `WHERE` condition is added unless it is later required in the query, like `DELETE`;
  * If a string is passed as a parameter that string will be used as the where condition, it is added after "WHERE ";
  * If it is `true` then the default key values will be used;
  * If it is called with no parameters (or none of the above) then the `WHERE` condition is removed;
  * _Returns_ reference to the object(`$this`) .
-### 3. `orderBy($order)`
+#### 3. `orderBy($order)`
  * Adds `ORDER BY` clause to query;
  * No parameters -> removes `ORDER BY` clause;
  * String parameter should decide the new order: ex: "dateUpdated DESC, score ASC".
  * _Returns_ reference to the object(`$this`) .
-### 4. `limit($limit)`
+#### 4. `limit($limit)`
  * Adds `LIMIT` clause to query;
  * No parameters -> removes `LIMIT` clause;
  * Numeric parameter should specify the limit;
  * _Returns_ reference to the object(`$this`) .
-### 5. `offset($offset)`
+#### 5. `offset($offset)`
  * Adds `OFFSET` clause to query;
  * No parameters -> removes `OFFSET` clause;
  * Numeric parameter should specify the offset;
  * This clause **requires** a `LIMIT` clause, so be sure to set it before executing the query;
  * _Returns_ reference to the object(`$this`) .
-### 6. `clear()`
+#### 6. `clear()`
  * Erases the result of all the query changes calls made preivously;
  * Empties the custom parameters added, through `addParam` and `addParams`;
  * _Returns_ reference to the object(`$this`) .
+
+### Executing Queries
+**SELECT** - If you want to do a `SELECT` query you can define it's structure using the functions above. Afterwards, you would call `.get()` to fetch one row from the database or `.getAll()` to fetch all of the selected rows.
+
+**UPDATE** - call the `.update($what, $where)` function, both parameters are optional. If `$what` is not given, then all the coumns that have changed since the last `INSERT` or `UPDATE` are updated in the database. If `$where` is not given and the `.where($where)` function has not been called before then it is called for the default primary keys. 
