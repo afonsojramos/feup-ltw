@@ -140,6 +140,7 @@
 		static public function execute($query, $parameters = array()){
 			global $connection;
 			echo "<br>$query<br>";
+			//var_dump($parameters);
 			//PDO query building and execution
 			try {
 				$stmt = $connection->prepare($query);
@@ -209,7 +210,7 @@
 						$this->addParam($this->keys[$i], $ids[$this->keys[$i]]);
 					}
 				}catch(Exception $e){
-					echo "<h2>load is assuming ordered list of keys</h2>";
+					//load is assuming ordered list of keys
 				}
 				for ($i=0; $i < count($ids); $i++) {//add all the keys to the parameters
 					//add each key, assuming $ids is $value and the order is the same as $this->keys
@@ -507,7 +508,6 @@
 			$doNotGivePriorityTo = array_keys(get_class_vars(QueryBuilder::class));
 			foreach ($matches as $match) {
 				$columnName = $match[1];
-				echo "<h1>$columnName: ".$this->$columnName."</h1>";
 				//for each required parameter, try to find it's value
 				if(isset($this->$columnName) && !in_array($columnName, $doNotGivePriorityTo)){//use object parameter value if it is not a parameter of QueryBuidler
 					$res = $this->$columnName;
