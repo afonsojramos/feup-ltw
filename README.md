@@ -95,6 +95,7 @@ require_once(dirname(__FILE__)."../connection.php");
 $user->name = "New Name";
 $user->update();
 ```
- You need to declare `name` as `protected`: `protected $name;`;
+You need to declare `name` as `protected`: `protected $name;`;
+
 5. If the table name is not the same as the class name, but with the first letter in lowercase and with an `s` at the end, then you should set it using `.setTable()`, and give it the table name (or an array of table names, if that is the case);
 6. Do `parent::__construct();` inside the new class's constructor;
