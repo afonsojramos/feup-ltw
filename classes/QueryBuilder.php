@@ -3,14 +3,6 @@
 	require_once(dirname(__FILE__)."/../database/connection.php");
 
 	/**
-	 * SELECT (*) FROM table
-	 * SELECT (*) FROM table WHERE (id = :id AND something = :something)
-	 * SELECT (*) FROM table ORDER BY (id DESC, name ASC)
-	 * SELECT (*) FROM table WHERE (...) ORDER BY (...,...)
-	 * INSERT INTO (column1, column2, column3, ...) table values (:value1, :value2, :value3)
-	 * UPDATE table SET column1 = :value1, column2 = :value2 WHERE id = :id
-	 */
-	/**
 	 * The order of the Class's attributes is important
 	 * . If no key is specified then the first attribute is used
 	 * . The order of the attributes must match the ORDER of the database values (for the load function)
