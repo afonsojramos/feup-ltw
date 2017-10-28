@@ -11,31 +11,6 @@
 	 * UPDATE table SET column1 = :value1, column2 = :value2 WHERE id = :id
 	 */
 	/**
-	 * In the class, the id must be the first public parameter
-	 * Select:
-	 * 		*
-	 * 		custom
-	 * WHERE
-	 * 		none
-	 * 		id
-	 * 		custom
-	 * ORDER BY
-	 * 		custom
-	 * INSERT
-	 * 		all but id, returning id
-	 * 		all, in case there is no id or is not autoincrement
-	 * 		(custom)
-	 * UPDATE
-	 * 		all but id, identify by id
-	 * 		custom, identify by id
-	 * 		custom -> (overall)
-	 * LIMIT
-	 * 		value
-	 * Overall
-	 * 		executeQuery passed (checks for :values and binds them)
-	 *
-	 */
-	/**
 	 * The order of the Class's attributes is important
 	 * . If no key is specified then the first attribute is used
 	 * . The order of the attributes must match the ORDER of the database values (for the load function)
@@ -84,33 +59,6 @@
 				$this->select = false;
 			}
 			return $this;
-		}
-
-		/**
-		 * Run an UPDATE query
-		 * @param what
-		 * 		1. default -> UPDATE all the values, except the keys
-		 * 		2. pass a string with "column1 = :column2, column2 as c2, ..."
-		 * @return integer with the number of updated rows, false on query fail
-		 */
-		public function update($what = null){
-			$this->select = false;
-			$what = ($what == null? $this->getUpdateColumns() : $what);//update from parameter or everything
-			if($what == null){//there is nothing to update ->abort
-				return 0;
-			}
-			//check if where condition is set, use default if not
-			if(!$this->where){
-				$this->where(true);//Default where uses the id
-			}
-			//create the $query
-			$query = "UPDATE " . $this->table . " SET " . $what . $this->where;
-			//execute the query
-			if($result = self::execute($query, $this->getQueryParameters($query))){
-				$this->toUpdate = false;
-				return $result->rowCount();
-			}
-			return false;
 		}
 
 		/**
@@ -287,6 +235,72 @@
 		}
 
 		/**
+		 * execute an INSERT query
+		 * @param autoIncrement this decides whether the primary key is inserted or returned, only for single primary key, for multiple this is irrelevant as both are used
+		 * @param columnsToInsert an array with the name of the columns to insert
+		 * @return false if fails or reference to itself on success
+		 */
+		public function insert($autoIncrement = true, $columnsToInsert = null){
+			global $connection;
+			//create the query
+			$query = "INSERT INTO " . $this->table . " ". $this->getInsertColumns($autoIncrement, $columnsToInsert) . " VALUES " . $this->getInsertValues($autoIncrement, $columnsToInsert);
+			//execute the query
+			if($result = self::execute($query, $this->getQueryParameters($query))){
+				$this->toUpdate = false;
+				if(count($this->keys) == 1 && $autoIncrement){
+					$keyName = $this->keys[0];
+					$this->$keyName = $connection->lastInsertId();
+				}
+				return $this;
+			}
+			return false;
+		}
+
+		/**
+		 * Run an UPDATE query
+		 * @param what
+		 * 		1. default -> UPDATE all the values, except the keys
+		 * 		2. pass a string with "column1 = :column2, column2 as c2, ..."
+		 * @param where the arguments to call QueryBuilder->where() [optional, could have been called before]
+		 * @return integer with the number of updated rows, false on query fail
+		 */
+		public function update($what = null, $where = null){
+			$this->select = false;
+			$what = ($what == null? $this->getUpdateColumns() : $what);//update from parameter or everything
+			if($what == null){//there is nothing to update ->abort
+				return 0;
+			}
+			//use the supplied query if valid, execute default if not
+			$this->checkIfWhere($where);
+			//create the query
+			$query = "UPDATE " . $this->table . " SET " . $what . $this->where;
+			//execute the query
+			if($result = self::execute($query, $this->getQueryParameters($query))){
+				$this->toUpdate = false;
+				return $result->rowCount();
+			}
+			return false;
+		}
+
+		/**
+		 * Run a DELETE query
+		 * @param where the arguments to call QueryBuilder->where() [optional, could have been called before]
+		 * @return integer with the number of updated rows, false on query fail
+		 */
+		public function delete($where = null){
+			//use the supplied query if valid, execute default if not
+			$this->checkIfWhere($where);
+			//create the query
+			$query = "DELETE FROM " . $this->table . $this->where;
+			if($result = self::execute($query, $this->getQueryParameters($query))){
+				return $result->rowCount();
+			}
+			return false;
+		}
+
+		//------------HELPER PUBLIC FUCNTIONS
+
+		/**
 		 * resets all the changes made after the constructor is called to the dynamic queries
 		 */
 		public function clear(){
@@ -314,9 +328,11 @@
 				$this->keys = $keys;
 			}elseif(is_string($keys)){//single primary key
 				$this->keys = array("$keys");
-			}elseif(is_numeric($keys) && count($this->columns) <= $keys){
+			}elseif(is_numeric($keys) && count($this->columns) >= $keys){
 				$this->keys = array_slice($this->columns, 0, $keys);
-			}if(isset($this->columns[0])){//default is the first property of the class
+			}elseif(isset($this->class::$primaryKeys) && is_array($this->class::$primaryKeys)){//else if static primaryKeys is defined, those are the keys
+				$this->keys = $this->class::$primaryKeys;
+			}elseif(isset($this->columns[0])){//default is the first property of the class
 				$this->keys = array($this->columns[0]);
 			}else{//else no primary key is given
 				$this->keys = false;
@@ -363,10 +379,9 @@
 			return $this;
 		}
 
-		//------------Magick functions to improve the overall behaviour
+		//------------MAGICK METHODS (to improve the overall behaviour)
 
 		public function __set($name, $value){
-			echo "Setting '$name' to '$value'\n";
 			$this->$name = $value;
 			$this->toUpdate[] = $name;
 			return $value;
@@ -375,7 +390,7 @@
 		public function __get($name){
 			return (isset($this->$name)?$this->$name:null);
 		}
-		//-------------------------Protected functions
+		//------------HELPER PROTECTED FUCNTIONS
 
 		//get the class from this inherited instance or from the classname
 		protected function loadClass($class){
@@ -389,11 +404,28 @@
 			}
 		}
 
+		//fill $this->columns from the valid columns to use (without $this->keys)
 		protected function loadColumns(){
 			$this->columns = array_diff(
 				array_keys(get_class_vars($this->class)),
 				$this->getIgnoreAttributes()
 			);
+		}
+
+		//return an array of the columns of the inheriting class, keys + values
+		protected function getAllColumns(){
+			return array_merge($this->columns, $this->keys);
+		}
+
+		//get an array with the names of the attributes not to include in the queries
+		protected function getIgnoreAttributes(){
+			$reflector = new ReflectionClass($this->class);
+			$staticProperties = array_keys($reflector->getStaticProperties());
+			if($this->keys){
+				return array_merge(array_keys(get_class_vars(QueryBuilder::class)), $this->keys, $staticProperties);
+			}else{
+				return array_keys(get_class_vars(QueryBuilder::class), $staticProperties);
+			}
 		}
 
 		//return something like "id1 = :id1 AND id2 = :id2" from $this->keys
@@ -407,11 +439,6 @@
 				$whereKeys = implode(" AND ", $whereKeys);
 			}
 			return $whereKeys;
-		}
-
-		//return an array of the columns of the inheriting class, keys + values
-		protected function getAllColumns(){
-			return array_merge($this->columns, $this->keys);
 		}
 
 		//return something like "column1 = :column1, column2 = :column2" from $this->columns, ignore the keys
@@ -428,37 +455,60 @@
 			return $updateColumns;
 		}
 
-		//append a string to another if the second is a string
-		protected function appendTry($str1, $str2){
-			if(!is_string($str2)){
-				return $str1;//original if str2 invalid
+		//get the column names of the columns to use in insert query
+		protected function getInsertColumnNames($autoIncrement, $columnsToInsert){
+			//decide which columns to insert
+			if(!is_array($columnsToInsert) || count($columnsToInsert) == 0){
+				$columnsToInsert = $this->columns;//ignoring primary keys
+				if(!$autoIncrement || count($this->keys) > 1){//load the autoincrement
+					$columnsToInsert = array_merge($columnsToInsert, $this->keys);
+				}
 			}
-			return $str1.$str2;//concatenation if str valid
+			return $columnsToInsert;
+		}
+
+		//get the first piece of INSERT like so: (column1, column2, column3, ...)
+		protected function getInsertColumns($autoIncrement, $columnsToInsert){
+			$columnsToInsert = $this->getInsertColumnNames($autoIncrement, $columnsToInsert);
+			//create the query piece
+			$insertColumns = "";
+			if(count($columnsToInsert)>0){
+				$insertColumns = "(".implode(", ", $columnsToInsert).")";
+			}
+			return $insertColumns;
+		}
+
+		//get the second piece of INSERT like so: (:value1, :value2, :value3)
+		protected function getInsertValues($autoIncrement, $columnsToInsert){
+			$columnsToInsert = $this->getInsertColumnNames($autoIncrement, $columnsToInsert);
+			//create the query piece
+			$insertValues = "";
+			if(count($columnsToInsert)>0){
+				$insertValues = array();
+				foreach ($columnsToInsert as $column) {
+					$insertValues[] = ":$column";
+				}
+				$insertValues = "(".implode(", ", $insertValues).")";
+			}
+			return $insertValues;
 		}
 
 		//get the names of the query parameters - the index 1 contains the variable name to search, index 0 to bind
 		static protected function getQueryBindings($query){
-			$regexBindings = '/:([^\s,]*)/m';
+			$regexBindings = '/:([^\s,\)\(]*)/m';
 			preg_match_all($regexBindings, $query, $matches, PREG_SET_ORDER, 0);
 			return $matches;
 		}
 
-		protected function getIgnoreAttributes(){
-			if($this->keys){
-				return array_merge(array_keys(get_class_vars(QueryBuilder::class)), $this->keys);
-			}else{
-				return array_keys(get_class_vars(QueryBuilder::class));
-			}
-		}
-
-		//$this->getQueryParameters($query)
+		//return an array of $key=>$value for each parameter in the query, fails if any of them does not exist
 		protected function getQueryParameters($query){
 			$matches = QueryBuilder::getQueryBindings($query);
 			$parameters = array();
 			$doNotGivePriorityTo = array_keys(get_class_vars(QueryBuilder::class));
 			foreach ($matches as $match) {
-				//for each required parameter, try to find it's value
 				$columnName = $match[1];
+				echo "<h1>$columnName: ".$this->$columnName."</h1>";
+				//for each required parameter, try to find it's value
 				if(isset($this->$columnName) && !in_array($columnName, $doNotGivePriorityTo)){//use object parameter value if it is not a parameter of QueryBuidler
 					$res = $this->$columnName;
 				}elseif(isset($this->parameters[$columnName])){
@@ -469,6 +519,24 @@
 				$parameters[$columnName] = $res;
 			}
 			return $parameters;
+		}
+
+		//append a string to another if the second is a string
+		protected function appendTry($str1, $str2){
+			if(!is_string($str2)){
+				return $str1;//original if str2 invalid
+			}
+			return $str1.$str2;//concatenation if str valid
+		}
+
+		//checks if the passed where is valid and calls it if so, otherwise executes the default
+		protected function checkIfWhere($where){
+			if($where){//if this where is set, use it
+				$this->where($where);
+			}
+			if(!$this->where){//check if where condition is set, use default if not
+				$this->where(true);//Default where uses the id
+			}
 		}
 
 
