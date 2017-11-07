@@ -15,3 +15,9 @@ CREATE TABLE `projects` (
   `title` TEXT NOT NULL,
   `description` TEXT NOT NULL
 );
+
+CREATE TABLE `members` (
+  `userId` INTEGER NOT NULL,
+  `projectId` INTEGER NOT NULL,
+  PRIMARY KEY (`userId`, `projectId`)
+);
