@@ -9,3 +9,9 @@ CREATE TABLE `users` (
 INSERT INTO `users` VALUES (NULL, "bb", "bb@bb.com", "lolIsHashed");
 INSERT INTO `users` VALUES (NULL, "cc", "cc@cc.com", "lolIsHashed");
 INSERT INTO `users` VALUES (NULL, "dd", "dd@dd.com", "lolIsHashed"); */
+
+CREATE TABLE `projects` (
+  `projectId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  `title` TEXT NOT NULL,
+  `description` TEXT NOT NULL
+);
