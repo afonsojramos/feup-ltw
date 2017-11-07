@@ -20,8 +20,9 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
       * :file_folder: **other** - Any other images
  * :file_folder: **actions** - php files that receive post requests and redirect
  * :file_folder: **includes** - contains files that are reused across other `.php` files
- * :open_file_folder: **templates** - folder that contains the `html` templates for the main pages to use
     * :file_folder: **common** - Common includes
+ * :open_file_folder: **templates** - folder that contains the `html` templates for the main pages to use
+    * :file_folder: **common** - Common templates
     * :file_folder: **user** - User includes
     * :file_folder: **list** - List includes
     * :file_folder: **project** - Project includes
