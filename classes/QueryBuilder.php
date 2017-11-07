@@ -203,10 +203,10 @@
 					}
 				}catch(Exception $e){
 					//load is assuming ordered list of keys
-				}
-				for ($i=0; $i < count($ids); $i++) {//add all the keys to the parameters
-					//add each key, assuming $ids is $value and the order is the same as $this->keys
-					$this->addParam($this->keys[$i], $ids[$i]);
+					for ($i=0; $i < count($ids); $i++) {//add all the keys to the parameters
+						//add each key, assuming $ids is $value and the order is the same as $this->keys
+						$this->addParam($this->keys[$i], $ids[$i]);
+					}
 				}
 			}elseif($this->isGeneric){//if this a class and not an inheritance and has no id, fails
 				throw new Exception('QueryBuilder: load function should receive a number, if the id is just one column; or an array of $key=>$value where $key matches every key in the primary key; or an ordered array of values that match the multiple columns in the primary key', 1);
