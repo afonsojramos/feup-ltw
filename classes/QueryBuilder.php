@@ -372,6 +372,18 @@
 			return $this;
 		}
 
+		public function __toString(){//display query builder real content
+			$str = "<br/>" . strtoupper($this->class);
+			$str .= "<br/>Primary Key(s): ";
+			foreach ($this->keys as $key => $value) {
+				$str .= "($value => ".$this->$value.")";
+			}
+			$str .= "<br/>Properties: ";
+			foreach ($this->columns as $key => $value) {
+				$str .= "($value => ".$this->$value.")";
+			}
+			return $str;
+		}
 		//------------MAGICK METHODS (to improve the overall behaviour)
 
 		public function __set($name, $value){
