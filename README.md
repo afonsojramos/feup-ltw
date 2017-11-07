@@ -40,6 +40,8 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
  * Classes file names start with **C**apital letter, example: `User.php`;
  * pages file names are _underscore_ separared, example: `produt_edit_members.php`;
  * Use [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig);
+ * Always use `'use strict';` at the beginning of all **javascript** files;
+ * Use `defer` in script tags inside the html, at the head, like so: `<script = "script.js" defer></script>`, or `async` if necessary;
  * Use `dirname(__FILE__)` when including/requiring files, example in the classes folder files:
 
 ```php
@@ -110,9 +112,9 @@ You need to declare `name` as `protected`: `protected $name;`;
 ## QueryBuilder Methods
 This is a list of the methods and actions that yo can invoke on a QueryBuilder instance or on a Class that inherits from QueryBuilder:
 ### Creating Queries
-This operations only construct bits of the query, to run the generated query do `.get($parameters)` or `.getAll($parameters)`
+These operations only construct bits of the query, to run the generated query do `.get($parameters)` or `.getAll($parameters)`
 
-Notice that, for every new parameter you add that is not defined for that class, it must be given when the query executes `get($missingParameters)`. You can also call `.addParam($key, $value)` or `.addParams($arrayOfKeyValues)`. 
+Notice that, for every new parameter you add that is not defined for that class, it must be given when the query executes `get($missingParameters)`. You can also call `.addParam($key, $value)` or `.addParams($arrayOfKeyValues)`.
 
 #### 1. `select($what)`
  * Choose `$what`(string) you want to select;
@@ -146,6 +148,20 @@ Notice that, for every new parameter you add that is not defined for that class,
  * _Returns_ reference to the object(`$this`) .
 
 ### Executing Queries
+
 **SELECT** - If you want to do a `SELECT` query you can define it's structure using the functions above. Afterwards, you would call `.get()` to fetch one row from the database or `.getAll()` to fetch all of the selected rows.
 
-**UPDATE** - call the `.update($what, $where)` function, both parameters are optional. If `$what` is not given, then all the coumns that have changed since the last `INSERT` or `UPDATE` are updated in the database. If `$where` is not given and the `.where($where)` function has not been called before then it is called for the default primary keys. 
+**UPDATE** - To execute an `UPATE` query, call the `.update($what, $where)` function, both parameters are optional. If `$what` is not given, then all the columns that have been changed since the last `INSERT` or `UPDATE` are updated in the database. If `$where` is not given and the `.where($where)` function has not been called before then it is called for the default primary keys.
+
+**INSERT** - To execute an `INSERT` query, call the `.insert($autoIncrement = true, $columnsToInsert = null)` function, both parameters are optional. If `$autoIncrement` is `true`  **and** there is only a single primary key (which makes sense) then the the id of the variable will be automatically loaded . If `$columnsToInsert` is not given then all the columns that are not in the primary keys will be inserted, if you only wish to insert some of those properties pass an array with the names of the columns to insert.
+
+**LOAD** - To get a row from the database and loaded it into the variable, use the function `load($ids = null)`. This function loads an object into this instance **or** return a new instance of the class if QueryBuilder is used directly (not through inheritance). If no `$ids` are given then it uses the default keys, if a number is given and there is only one primary key that row is loaded, if an array of `$key=>$value` is used then the load uses this `$keys` as the primary keys and `$values` as its values, if an array of `$values` is given and it matches the length of the primary keys, then these values are used to load the object properties from the database.
+
+
+### More functionality
+Aditionally you can invoke the following functions:
+ * `.clear()` - resets all the changes made after the constructor is called to the dynamic queries;
+ * `.setKey($keys = null)` - Used when the fisrt parameter of the class is not the primary key. Receives an array of strings (the key names), or a single string with the id of the class, or even a number `n` that means that the first nth properties of the class constitute the primary key;
+ * `.setTable($table = "")` - If a string is passed that is the new table name, else if no parameter is passed derive the name from the class name, or if an array of strings is multiple tables are used;
+ * `.addParams($parameters)` - Adds one or more parameters to `QueryBuilder::parameters` (not static), so they are used when binding key values in the query execution. Receives an array of `$key=>$value`;
+ * `.addParam($param, $value)` - Adds a parameter to the `QueryBuilder::parameters` (not static).
