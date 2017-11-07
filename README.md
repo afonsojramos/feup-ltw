@@ -26,6 +26,18 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
     * :file_folder: **list** - List includes
     * :file_folder: **project** - Project includes
 
+# Tasks
+ - [ ] Define the pages to use:
+ 	* index.php - the landing page (**root**)
+		* If no login -> display an image, and some text
+		* If login -> redirect to (**root/dashboard.php**)
+	* dashboard.php - man interface page tha shows the projects, the todo lists cards and other utilities (**root**)
+	* register.php - display the register form in a single page (**root**)
+	* login.php - display the login form in a single page (**root**)
+	* logout.php -  log out the user and redirect (**actions**)
+	* _______.php -  (**____**)
+ - [ ] Implemented the default desgin (css)
+
 
 # UML (napknin version)
 
@@ -38,7 +50,8 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
  * Use **camelCase** in variables and database fields;
  * Classes names start with **C**apital letter;
  * Classes file names start with **C**apital letter, example: `User.php`;
- * pages file names are _underscore_ separared, example: `produt_edit_members.php`;
+ * Pages file names are _underscore_ separared, example: `produt_edit_members.php`;
+ * Pages must have specific titles assigned, in the html title tag;
  * Use [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig);
  * Always use `'use strict';` at the beginning of all **javascript** files;
  * Use `defer` in script tags inside the html, at the head, like so: `<script = "script.js" defer></script>`, or `async` if necessary;
