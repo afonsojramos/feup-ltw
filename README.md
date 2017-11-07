@@ -40,9 +40,15 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
 	* login.php - display the login form in a single page, can receive an `email` as GET and fills it automatically, redirects to `actions/login.php`
 	* actions/login.php - receives a `POST` and tries to login a user
 		* redirect to `dashboard.php` on success
-		* redirect to `login.php` on failure with the errors
+		* redirect to `login.php` on failure, with the errors
 	* actions/logout.php -  log out the user and redirect to `login.php`
- - [ ] Implemented the default desgin (css)
+	* edit_profile.php - accessible only for looged users, displays a form to edit the user profile, calls `actions/edit_profile.php`
+	* actions/edit_profile.php - receives a `POST` request to edit a user's profile
+		* redirect to ?????.php on success
+		* redirect to `edit_profile.php` on failure, with the errors
+	* user.php?id={userId} - accessible only for logged users, displays a user profile that is "readonly"
+	* 
+ - [ ] Implement the default desgin (css)
 
 
 # UML (napknin version)
