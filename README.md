@@ -86,7 +86,7 @@ require_once(dirname(__FILE__)."../connection.php");
 ## Extending QueryBuilder
 
  How to use it:
- 1. Database class should extend it: `class User extends QueryBuilder{`;
+ 1. Database class should extend it: `class User extends QueryBuilder{...};`;
  2. The primary key of the class should be the first property of the class;
  3. If more than one primary key exists they can be specified by:
  	1. Declaring a `static` property named `$primaryKeys`, like so:
