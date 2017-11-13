@@ -60,7 +60,7 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
 
 # Code practices
  * All the content should be in english;
- * Use **camelCase** in variables and database fields;
+ * Use **camelCase** in variables, database tables and database fields;
  * Classes names start with **C**apital letter;
  * Classes file names start with **C**apital letter, example: `User.php`;
  * Pages file names are _underscore_ separared, example: `produt_edit_members.php`;
