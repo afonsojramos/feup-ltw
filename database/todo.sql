@@ -21,3 +21,29 @@ CREATE TABLE `members` (
   `projectId` INTEGER NOT NULL,
   PRIMARY KEY (`userId`, `projectId`)
 );
+
+
+CREATE TABLE `todoLists` (
+  `todoListId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  `title` TEXT NOT NULL,
+  `tags` TEXT NOT NULL,
+  `colour` TEXT NOT NULL,
+  `archived` INTEGER NOT NULL DEFAULT 0,
+  `link` TEXT,
+  `userId` INTEGER NOT NULL,
+  `projectId` INTEGER DEFAULT 0
+);
+
+CREATE TABLE `items` (
+  `itemId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  `completed` INTEGER NOT NULL DEFAULT 0,
+  `content` TEXT NOT NULL,
+  `dueDate` DATETIME NOT NULL,
+  `todoListId` INTEGER NOT NULL
+);
+
+CREATE TABLE `assignments` (
+  `userId` INTEGER NOT NULL,
+  `todoListId` INTEGER NOT NULL,
+  PRIMARY KEY (`userId`, `todoListId`)
+);
