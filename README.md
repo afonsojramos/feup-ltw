@@ -71,7 +71,7 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
  * Use `dirname(__FILE__)` when including/requiring files, example in the classes folder files:
 
 ```php
-require_once(dirname(__FILE__)."../connection.php");
+require_once(dirname(__FILE__)."/connection.php");
 ```
 
 # Features
