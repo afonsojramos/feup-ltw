@@ -31,6 +31,19 @@ class User extends QueryBuilder{
 	}
 
 	/**
+	 * Test if an account with a given username already exists
+	 */
+	function duplicateUsername(){
+		return $this->select()->where("username = :username")->get() != false;
+	}
+	/**
+	 * Test if an account with a given email already exists
+	 */
+	function duplicateEmail(){
+		return $this->select()->where("email = :email")->get() != false;
+	}
+
+	/**
 	 * Login a user given an array with at least "username" and "password" fields
 	 */
 	public function login($params){
@@ -48,12 +61,5 @@ class User extends QueryBuilder{
 			}
 		}
 		return false;
-	}
-
-	public static function logout(){
-		sessionStart();
-		$_SESSION = array(); // Destroy the variables.
-		session_destroy(); // Destroy the session itself.
-		setcookie('PHPSESSID',null, time()-7200,'', 0, 0);//Destroy the cookie
 	}
 }
