@@ -29,4 +29,31 @@ class User extends QueryBuilder{
 		$this->password = password_hash($this->password, PASSWORD_DEFAULT);
 		return parent::insert($autoIncrement, $columnsToInsert);
 	}
+
+	/**
+	 * Login a user given an array with at least "username" and "password" fields
+	 */
+	public function login($params){
+		$this->select()->where("username = :username");
+		$this->username = $params["username"];
+
+		if($line = $this->get()){
+			if(password_verify($params["password"], $line["password"])){
+				//session creation
+				ini_set('session.cookie_lifetime', 60 * 60 * 24 * 7);  // 7 day cookie lifetime
+				sessionStart();
+				$_SESSION['userId'] = $line["userId"];
+				$_SESSION['username'] = $line["username"];
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static function logout(){
+		sessionStart();
+		$_SESSION = array(); // Destroy the variables.
+		session_destroy(); // Destroy the session itself.
+		setcookie('PHPSESSID',null, time()-7200,'', 0, 0);//Destroy the cookie
+	}
 }
