@@ -9,4 +9,10 @@
 
 <h1>Hello World</h1>
 
+<?php
+	require_once(dirname(__FILE__)."./classes/User.php");
+	$query = new QueryBuilder(User::class);
+	var_dump($query->select()->getAll());
+?>
+
 <?php require_once(dirname(__FILE__)."./templates/common/footer.php"); ?>
