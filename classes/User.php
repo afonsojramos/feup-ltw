@@ -10,6 +10,13 @@ class User extends QueryBuilder{
 	protected $password;
 	//protected $gender;//this property can be dynamically created and it will be updated, by doing $user->gender = "male"; $user->update();
 	//public static $primaryKeys = array("userId", "questionId");//define this static variable for custom primary keys or see QueryBuilder->setKey();
+	//static properties are ignored
+	public static $validationRules = array(//validation rules for update method
+		"username"=>"length:1:30",
+		"email"=>"email",
+		"password"=>"length:8:100"
+	);
+
 	public function __construct($userId = null, $username = "", $email = "", $password = ""){
 		$this->userId = $userId;
 		$this->username = $username;
