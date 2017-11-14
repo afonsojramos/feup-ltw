@@ -1,5 +1,5 @@
-<ul>
-	<li><a href="index.php">Index</a></li>
-	<li><a href="login.php">Login</a></li>
-	<li><a href="register.php">Register</a></li>
-</ul>
+<div class="flex-container" id="menu">
+	<div id="index"><a href="index.php">Index</a></div>
+	<div id="login"><a href="login.php">Login</a></div>
+	<div id="register"><a href="register.php">Register</a></div>
+</div>
