@@ -42,7 +42,7 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
 	* actions/login.php - receives a `POST` and tries to login a user
 		* return JSON response with boolean success and optional errors array
 	* actions/logout.php -  log out the user and redirect to `index.php`
-	* edit_profile.php - accessible only for looged users, displays a form to edit the user profile, calls `actions/edit_profile.php`
+	* edit_profile.php - accessible only for logged users, displays a form to edit the user profile, calls `actions/edit_profile.php`
 	* actions/edit_profile.php - receives a `POST` request to edit a user's profile
 		* redirect to ?????.php on success
 		* redirect to `edit_profile.php` on failure, with the errors
@@ -77,9 +77,9 @@ require_once(dirname(__FILE__)."/connection.php");
 
 <h2 align="center">Minimum</h2>
 
-- [ ] Register a new account
-- [ ] Login into an account
-- [ ] Logout of an account
+- [x] Register a new account
+- [x] Login into an account
+- [x] Logout of an account
 - [ ] Edit user profiles
 - [ ] List a user's todo lists
 - [ ] Create new todo list (that belongs to a user)
@@ -96,7 +96,7 @@ require_once(dirname(__FILE__)."/connection.php");
 - [ ] Edit tags
 - [ ] Allow items to be assigned to user (in project)
 - [ ] Create a new todo list (in a project)
-- [ ] Escolher foto de perfil
+- [ ] Choose a profile picture
 
 
 # Potential Extra
