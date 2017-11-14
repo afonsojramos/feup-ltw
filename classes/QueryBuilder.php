@@ -359,7 +359,7 @@
 		public function loadFromArray($array){
 			foreach ($array as $key => $value) {//iterate given array key=>values
 				if(in_array($key, $this->columns)){//if this key belongs to the valid columns
-					$this->$key = $value;//save it
+					$this->__set($key, $value);//save it
 				}
 			}
 		}
