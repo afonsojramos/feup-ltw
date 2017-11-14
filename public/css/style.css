@@ -1,0 +1,39 @@
+html {
+    background: url("../images/background.jpeg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font: roboto;
+}
+
+#menu {
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+
+#index {
+    visibility: collapse;
+}
+
+#menu a:link {
+    color: red;
+}
+
+#menu a:hover {
+    color: hotpink;
+}
+
+#loginMenu {
+    opacity: 0.6;
+    filter: alpha(opacity=50);
+    position: relative;
+    align-content: center;
+}
+
+#registerMenu {
+    opacity: 0.6;
+    filter: alpha(opacity=50);
+}
