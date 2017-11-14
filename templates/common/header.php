@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?= $PAGE["title"] ?>">
+<html lang="<?= $PAGE["lang"] ?>">
 <head>
 	<title><?= $PAGE["title"] ?></title>
 	<meta charset="UTF-8">
