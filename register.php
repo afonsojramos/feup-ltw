@@ -1,5 +1,5 @@
 <?php
-	require_once(dirname(__FILE__)."/includes/common/session.php");
+	require_once(dirname(__FILE__)."/includes/common/only_allow_logout.php");
 	require_once(dirname(__FILE__)."/includes/common/defaults.php");
 	$PAGE["title"] .= " : Register";
 	require_once(dirname(__FILE__)."/templates/common/header.php");
