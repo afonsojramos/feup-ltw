@@ -1,13 +1,14 @@
 <?php
 
 	require_once(dirname(__FILE__)."/../database/connection.php");
+	require_once(dirname(__FILE__)."/Validator.php");
 
 	/**
 	 * The order of the Class's attributes is important
 	 * . If no key is specified then the first attribute is used
 	 * . The order of the attributes must match the ORDER of the database values (for the load function)
 	 */
-	class QueryBuilder	{
+	class QueryBuilder extends Validator{
 		protected $class;
 		protected $parameters;//array of key-values to use for the binds, if needed
 		protected $keys = array();//a list of the columns composing the primary key
