@@ -30,9 +30,9 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
 # Tasks
  - [ ] Define the pages to use:
  	* index.php - the landing page, with links to `login.php` and `register.php`
-		* If no login -> display an image, and some text
+		* If no login -> display login and register forms with backgroun
 		* If login -> redirect to `dashboard.php`
-	* dashboard.php - man interface page tha shows the projects, the todo lists cards and other utilities
+	* dashboard.php - main interface page that shows the projects, the todo lists cards and other utilities
 	* register.php - display the register form in a single page
 		* calls the `actions/register.php` with post values.
 	* actions/register.php - receive a `POST` to try to register a user
@@ -40,9 +40,8 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
 		* redirect to `register.php` on failure, with the errors (as GET parameters or in a `$_SESSION` variable)
 	* login.php - display the login form in a single page, can receive an `email` as GET and fills it automatically, redirects to `actions/login.php`
 	* actions/login.php - receives a `POST` and tries to login a user
-		* redirect to `dashboard.php` on success
-		* redirect to `login.php` on failure, with the errors
-	* actions/logout.php -  log out the user and redirect to `login.php`
+		* return JSON response with boolean success and optional errors array
+	* actions/logout.php -  log out the user and redirect to `index.php`
 	* edit_profile.php - accessible only for looged users, displays a form to edit the user profile, calls `actions/edit_profile.php`
 	* actions/edit_profile.php - receives a `POST` request to edit a user's profile
 		* redirect to ?????.php on success
