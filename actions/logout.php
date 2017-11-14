@@ -1,6 +1,8 @@
 <?php
-	require_once(dirname(__FILE__)."/../includes/common/session.php");
-	require_once(dirname(__FILE__)."/../classes/User.php");
+	//Destroy the current user session
+	session_start();
+	$_SESSION = array(); // Destroy the variables.
+	session_destroy(); // Destroy the session itself.
+	setcookie('PHPSESSID',null, time()-7200,'', 0, 0);//Destroy the cookie
 
-	User::logout();
-	header("Location: ../index.php");
+	header("Location: ../index.php");//redirect to index
