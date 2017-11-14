@@ -6,21 +6,26 @@ abstract class Validator {//requires $this->class
 	/**
 	 * User static $validationRules to validate this classes properties and fill $this->errors
 	 */
-	public function validate(){
-		$this->errors = array();
-		if(!isset($this->class)){
-			throw new Exception('Cannot use Validator class without setting $this->class', 1);
-		}
+	public function validate($overideRules = null){
+		if($overideRules==null){
+			if(!isset($this->class)){
+				throw new Exception('Cannot use Validator class without setting $this->class', 1);
+			}
 
-		$reflector = new ReflectionClass($this->class);
-		$staticProperties = $reflector->getStaticProperties();
-		if(!isset($staticProperties["validationRules"])){
-			throw new Exception("Cannot validate a class without having static property 'validationRules'", 1);
+			$reflector = new ReflectionClass($this->class);
+			$staticProperties = $reflector->getStaticProperties();
+
+			if(!isset($staticProperties["validationRules"])){
+				throw new Exception("Cannot validate a class without having static property 'validationRules'", 1);
+			}
+			$overideRules = $staticProperties["validationRules"];
+
 		}
-		$validationRules = $staticProperties["validationRules"];
+		$this->errors = array();
+
 		foreach ($this as $key => $value) {
-			if (isset($validationRules[$key])) {//if this is a property to validate
-				$this->validateProperty($key, $value, $validationRules[$key]);
+			if (isset($overideRules[$key])) {//if this is a property to validate
+				$this->validateProperty($key, $value, $overideRules[$key]);
 			}
 		}
 		return count($this->errors) == 0;//true if no errors
