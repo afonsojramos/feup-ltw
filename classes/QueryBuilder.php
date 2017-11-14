@@ -131,7 +131,7 @@
 		 */
 		static public function execute($query, $parameters = array()){
 			global $connection;
-			echo "<br>$query<br>";
+			//echo "<br>$query<br>";
 			//var_dump($parameters);
 			//PDO query building and execution
 			try {
@@ -350,6 +350,17 @@
 
 			$this->table = $table;
 			return $this;
+		}
+
+		/**
+		 * Load the value of the columns from a key=>value array
+		 */
+		public function loadFromArray($array){
+			foreach ($array as $key => $value) {//iterate given array key=>values
+				if(in_array($key, $this->columns)){//if this key belongs to the valid columns
+					$this->$key = $value;//save it
+				}
+			}
 		}
 
 		/**
