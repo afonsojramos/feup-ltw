@@ -1,39 +1,121 @@
+.align {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
 html {
     background: url("../images/background.jpeg") no-repeat center center fixed;
+    background-color: rgb(49, 80, 141);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    font: roboto;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    height: 100%;
+    display: table;
+    margin: 0 auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    height: 100%;
 }
 
 #menu {
     color: #ffffff;
     display: flex;
     justify-content: space-between;
-    width: 200px;
+    vertical-align: middle;
+    margin-bottom: 30px;
 }
 
-#index {
-    visibility: collapse;
-}
 
-#menu a:link {
-    color: red;
-}
+/* MENU SELECTION */
 
-#menu a:hover {
-    color: hotpink;
-}
-
-#loginMenu {
-    opacity: 0.6;
-    filter: alpha(opacity=50);
+#index,
+#login,
+#register,
+#deleteUsers {
+    visibility: visible;
+    border-radius: 40px;
+    background: rgb(177, 118, 24);
+    padding: 10px 20px 10px 20px;
+    font-size: 20px;
     position: relative;
-    align-content: center;
+    transition: all 500ms ease;
+}
+
+#index:hover,
+#login:hover,
+#deleteUsers:hover,
+#register:hover {
+    background: rgba(0, 0, 0, 0);
+    color: #756025;
+    box-shadow: inset 0 0 7px 10px rgb(177, 118, 24);
+}
+
+#menu a {
+    text-decoration: none;
+    font-size: large;
+    font-weight: bold;
+    color: rgb(82, 40, 160);
+}
+
+#register:hover {
+    color: rgb(105, 158, 255);
 }
 
 #registerMenu {
     opacity: 0.6;
-    filter: alpha(opacity=50);
+    filter: alpha(opacity=60);
+    position: relative;
+    align-content: center;
+}
+
+.grid {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 24em;
+    width: 90%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    -webkit-transition: color 0.3s;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #1dabb8;
+}
+
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    font: inherit;
+    margin: 0;
+    outline: none;
+    padding: 0;
+}
+
+input[type='submit'] {
+    cursor: pointer;
 }
