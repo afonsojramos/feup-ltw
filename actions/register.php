@@ -7,7 +7,11 @@ $user = new User();
 $user->loadFromArray($_POST);//load user properties from post
 
 if($user->validate()){
-	if($user->insert()){
+	if($user->duplicateUsername()){
+		$result["errors"] = array("username already exists");
+	}elseif($user->duplicateEmail()){
+		$result["errors"] = array("email already exists");
+	}elseif($user->insert()){
 		$result["success"] = true;
 	}
 }else{
