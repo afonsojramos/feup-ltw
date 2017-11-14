@@ -22,7 +22,6 @@ CREATE TABLE `members` (
   PRIMARY KEY (`userId`, `projectId`)
 );
 
-
 CREATE TABLE `todoLists` (
   `todoListId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   `title` TEXT NOT NULL,
