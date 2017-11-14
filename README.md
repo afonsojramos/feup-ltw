@@ -77,9 +77,9 @@ require_once(dirname(__FILE__)."/connection.php");
 
 <h2 align="center">Minimum</h2>
 
-- [ ] Register a new account
-- [ ] Login into an account
-- [ ] Logout of an account
+- [x] Register a new account
+- [x] Login into an account
+- [x] Logout of an account
 - [ ] Edit user profiles
 - [ ] List a user's todo lists
 - [ ] Create new todo list (that belongs to a user)
@@ -96,7 +96,7 @@ require_once(dirname(__FILE__)."/connection.php");
 - [ ] Edit tags
 - [ ] Allow items to be assigned to user (in project)
 - [ ] Create a new todo list (in a project)
-- [ ] Escolher foto de perfil
+- [ ] Choose a profile picture
 
 
 # Potential Extra
