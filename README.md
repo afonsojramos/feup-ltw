@@ -42,7 +42,7 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
 	* actions/login.php - receives a `POST` and tries to login a user
 		* return JSON response with boolean success and optional errors array
 	* actions/logout.php -  log out the user and redirect to `index.php`
-	* edit_profile.php - accessible only for looged users, displays a form to edit the user profile, calls `actions/edit_profile.php`
+	* edit_profile.php - accessible only for logged users, displays a form to edit the user profile, calls `actions/edit_profile.php`
 	* actions/edit_profile.php - receives a `POST` request to edit a user's profile
 		* redirect to ?????.php on success
 		* redirect to `edit_profile.php` on failure, with the errors
