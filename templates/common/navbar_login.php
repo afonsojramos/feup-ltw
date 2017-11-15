@@ -1,6 +1,10 @@
-<h1>Logged In</h1>
-<div class="flex-container" id="menu">
-	<div id="index"><a href="index.php">Index</a></div>
-	<div id="logout"><a href="actions/logout.php">Logout</a></div>
-	<div id="editProfile"><a href="edit_profile.php">Edit Profile</a></div>
-</div>
+<nav class="navbar">
+  <div class="container">
+    <h1 class="logo"><a href="#">Simple Navbar</a></h1>
+    <ul class="nav nav-right">
+		<li><a href="index.php">Index</a></li>
+		<li><a href="actions/logout.php">Logout</a></li>
+		<li><a href="edit_profile.php">Edit Profile</a></li>
+    </ul>
+  </div>
+</nav>
