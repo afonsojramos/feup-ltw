@@ -2,6 +2,7 @@
 	require_once(dirname(__FILE__)."/includes/common/only_allow_logout.php");
 	require_once(dirname(__FILE__)."/includes/common/defaults.php");
 	$PAGE["title"] .= " : Login";
+	$PAGE["styles"][]="login.css";
 	require_once(dirname(__FILE__)."/templates/common/header.php");
 	require_once(dirname(__FILE__)."/includes/common/choose_navbar.php");
 ?>
