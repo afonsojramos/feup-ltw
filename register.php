@@ -6,13 +6,36 @@
 	require_once(dirname(__FILE__)."/includes/common/choose_navbar.php");
 ?>
 
-<h1>Register page</h1>
+	<div class="grid">
 
-<form action="actions/register.php" method="post" id="registerMenu">
-	<input type="text" name="username" id="username" placeholder="username"><br/>
-	<input type="email" name="email" id="email" placeholder="email"><br/>
-	<input type="password" name="password" id="password" placeholder="password"><br/>
-	<input type="submit" value="Register">
-</form>
+      <form action="actions/register.php" method="post" id="registerMenu">
+
+        <header class="registerHeader">
+          <h3 class="registerTitle">Register</h3>
+        </header>
+
+        <div class="registerBody">
+
+          <div class="formField">
+            <input type="text" name="username" id="username" placeholder="Username" required>
+		  </div>
+
+		  <div class="formField">
+            <input type="email" name="email" id="email" placeholder="Email"><br/>
+		  </div>
+
+          <div class="formField">
+            <input type="password" name="password" id="password" placeholder="Password" required>
+          </div>
+
+        </div>
+
+        <footer class="registerFooter">
+          <input type="submit" value="Register">
+        </footer>
+
+      </form>
+
+    </div>
 
 <?php require_once(dirname(__FILE__)."/templates/common/footer.php"); ?>
