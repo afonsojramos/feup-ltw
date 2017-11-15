@@ -5,7 +5,7 @@
 	require_once(dirname(__FILE__)."/templates/common/header.php");
 	require_once(dirname(__FILE__)."/includes/common/choose_navbar.php");
 
-	require_once(dirname(__FILE__)."/includes/dashboard/sidebar.php");
+	require_once(dirname(__FILE__)."/templates/dashboard/sidebar.php");
 ?>
 
 
