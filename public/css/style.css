@@ -75,9 +75,10 @@ body {
     color: rgb(105, 158, 255);
 }
 
-#registerMenu {
-    opacity: 0.6;
-    filter: alpha(opacity=60);
+#registerMenu,
+#loginMenu {
+    opacity: 0.9;
+    filter: alpha(opacity=90);
     position: relative;
     align-content: center;
 }
@@ -204,5 +205,93 @@ input[type='submit'] {
     justify-content: space-between;
     padding-bottom: 1.5em;
     padding-left: 1.5em;
+    padding-right: 1.5em;
+}
+
+
+/* REGISTER MENU */
+
+#registerMenu input[type='text'],
+#registerMenu input[type='email'],
+#registerMenu input[type='password'] {
+    width: 100%;
+}
+
+.registerHeader {
+    background-color: #282830;
+    border-top-left-radius: 0.25em;
+    border-top-right-radius: 0.25em;
+    color: #fff;
+    padding: 1.5em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.registerTitle {
+    font-size: 16px;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.registerBody {
+    background-color: #fff;
+    padding: 1.5em;
+    position: relative;
+}
+
+.registerBody::before {
+    background-color: #fff;
+    content: '';
+    height: 0.5em;
+    left: 50%;
+    margin-left: -0.25em;
+    margin-top: -0.25em;
+    position: absolute;
+    top: 0;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 0.5em;
+}
+
+#registerMenu input[type='text'],
+#registerMenu input[type='email'],
+#registerMenu input[type='password'] {
+    border: 0.0625em solid #e5e5e5;
+    padding: 1em 1.25em;
+    border-top-left-radius: 0.25em;
+    border-top-right-radius: 0.25em;
+}
+
+#registerMenu input[type='submit'] {
+    background-color: #1dabb8;
+    border-radius: 0.25em;
+    color: #fff;
+    font-weight: 700;
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+    padding: 0.75em 1.25em;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+}
+
+#registerMenu input[type='submit']:hover {
+    background-color: #198d98;
+}
+
+.registerFooter {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    background-color: #fff;
+    border-bottom-left-radius: 0.25em;
+    border-bottom-right-radius: 0.25em;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: r;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding-bottom: 1.5em;
+    padding-left: 9em;
     padding-right: 1.5em;
 }
