@@ -44,11 +44,17 @@ class User extends QueryBuilder{
 	}
 
 	/**
-	 * Login a user given an array with at least "username" and "password" fields
+	 * Login a user given an array with at least "username" and "password" fields (tests if username is not the email address)
 	 */
 	public function login($params){
-		$this->select()->where("username = :username");
-		$this->username = $params["username"];
+		$key = "username";
+		$value = $params[$key];
+		if(strpos($value, "@") >= 0){//this is actually an email
+			$key = "email";
+		}
+
+		$this->select()->where("$key = :$key");
+		$this->$key = $value;
 
 		if($line = $this->get()){
 			if(password_verify($params["password"], $line["password"])){
