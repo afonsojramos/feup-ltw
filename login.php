@@ -14,7 +14,7 @@
 		</header>
 		<div class="formBody">
 			<div class="formField">
-				<input type="text" name="username" id="username" placeholder="Username" required>
+				<input type="text" name="username" id="username" placeholder="Username or Email" required>
 			</div>
 			<div class="formField">
 				<input type="password" name="password" id="password" placeholder="Password" required>
