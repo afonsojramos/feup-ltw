@@ -1,0 +1,46 @@
+.navbar {
+	padding: 20px 0;
+	margin-bottom: 20px;
+	width: 100%;
+	height: auto;
+	background-color: #FFC107;
+}
+
+.logo,
+.nav {
+	display: inline-block;
+	margin: 0;
+}
+
+
+/* nav links */
+
+.nav {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.nav li {
+	display: inline-block;
+	margin-left: 40px;
+}
+
+.navbar a {
+	color: #111;
+	text-decoration: none;
+}
+
+.navbar a:hover {
+	color: #000;
+	font-weight: 500;
+}
+
+
+/* right pull nav links */
+
+.nav-right {
+	float: right;
+	line-height: 39px;
+}
+
