@@ -12,7 +12,7 @@ class User extends QueryBuilder{
 	//public static $primaryKeys = array("userId", "questionId");//define this static variable for custom primary keys or see QueryBuilder->setKey();
 	//static properties are ignored
 	public static $validationRules = array(//validation rules for update method
-		"username"=>"length:1:30",
+		"username"=>"length:1:30|no:@",
 		"email"=>"email",
 		"password"=>"length:8:100"
 	);
@@ -48,8 +48,8 @@ class User extends QueryBuilder{
 	 */
 	public function login($params){
 		$key = "username";
-		$value = $params[$key];
-		if(strpos($value, "@") >= 0){//this is actually an email
+		$value = $params["username"];
+		if(strpos($value, "@") !== false){//this is actually an email
 			$key = "email";
 		}
 

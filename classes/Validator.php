@@ -94,11 +94,16 @@ abstract class Validator {//requires $this->class
 					}
 
 					break;
+				case "no"://no:stringNotIn
+					$notAllowed = $parts[1];
+					if(strpos($value, $notAllowed) !== false){
+						$this->addError("$name: cannot contain: '$notAllowed", $echo);
+					}
+					break;
 
 				case "email":
 					if(!filter_var($value, FILTER_VALIDATE_EMAIL)){
 						$this->addError("$name: invalid email address: '$value", $echo);
-						break;
 					}
 					break;
 
