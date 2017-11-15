@@ -1,12 +1,11 @@
-/* LOGIN MENU */
-
-#loginMenu input[type='text'],
-#loginMenu input[type='password'] {
+.cardForm input[type='text'],
+.cardForm input[type='email'],
+.cardForm input[type='password'] {
 	width: 100%;
 }
 
-.loginHeader {
-	background-color: #282830;
+.cardForm .formHeader {
+	background-color: var(--default-accent-color);
 	border-top-left-radius: 0.25em;
 	border-top-right-radius: 0.25em;
 	color: #fff;
@@ -15,19 +14,19 @@
 	text-transform: uppercase;
 }
 
-.loginTitle {
+.formTitle {
 	font-size: 16px;
 	font-size: 1rem;
 	margin: 0;
 }
 
-.loginBody {
+.formBody {
 	background-color: #fff;
 	padding: 1.5em;
 	position: relative;
 }
 
-.loginBody::before {
+.formBody::before {
 	background-color: #fff;
 	content: '';
 	height: 0.5em;
@@ -41,18 +40,21 @@
 	width: 0.5em;
 }
 
-#loginMenu input[type='text'],
-#loginMenu input[type='password'] {
-	border: 0.0625em solid #e5e5e5;
+.cardForm input[type='text'],
+.cardForm input[type='email'],
+.cardForm input[type='password'] {
+	border: 0.0625em solid var(--divider-color);
 	padding: 1em 1.25em;
 	border-top-left-radius: 0.25em;
 	border-top-right-radius: 0.25em;
 }
 
-#loginMenu input[type='submit'] {
-	background-color: #1dabb8;
+.cardForm input[type='submit'] {
+	margin-left: auto;
+	display: block;
+	background-color: var(--default-accent-color);
+	color: var(--text-accent-color);
 	border-radius: 0.25em;
-	color: #fff;
 	font-weight: 700;
 	-webkit-box-ordinal-group: 2;
 	-ms-flex-order: 1;
@@ -62,24 +64,23 @@
 	transition: background-color 0.3s;
 }
 
-#loginMenu input[type='submit']:hover {
-	background-color: #198d98;
+.cardForm input[type='submit']:hover {
+	background-color: var(--dark-accent-color);
 }
 
-.loginFooter {
+.formFooter {
 	-webkit-box-align: center;
 	-ms-flex-align: center;
-	align-items: center;
 	background-color: #fff;
 	border-bottom-left-radius: 0.25em;
 	border-bottom-right-radius: 0.25em;
 	display: -webkit-box;
 	display: -ms-flexbox;
-	display: flex;
+	display: r;
 	-webkit-box-pack: justify;
 	-ms-flex-pack: justify;
 	justify-content: space-between;
 	padding-bottom: 1.5em;
-	padding-left: 1.5em;
+	padding-left: 9em;
 	padding-right: 1.5em;
 }

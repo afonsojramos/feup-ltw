@@ -8,12 +8,13 @@
 	require_once(dirname(__FILE__)."/includes/common/choose_navbar.php");
 ?>
 
-<h1>Hello World</h1>
-
-<?php
-	require_once(dirname(__FILE__)."/classes/User.php");
-	$query = new QueryBuilder(User::class);
-	var_dump($query->select()->getAll());
-?>
+<div class="container">
+	<h1>Hello World</h1>
+	<?php
+		require_once(dirname(__FILE__)."/classes/User.php");
+		$query = new QueryBuilder(User::class);
+		var_dump($query->select()->getAll());
+	?>
+</div>
 
 <?php require_once(dirname(__FILE__)."/templates/common/footer.php"); ?>

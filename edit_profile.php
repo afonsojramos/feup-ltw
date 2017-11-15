@@ -6,7 +6,9 @@
 	require_once(dirname(__FILE__)."/includes/common/choose_navbar.php");
 ?>
 
-<h1>Edit Profile</h1>
+<div class="container">
+	<h1>Edit Profile</h1>
+</div>
 
 
 <?php require_once(dirname(__FILE__)."/templates/common/footer.php"); ?>
