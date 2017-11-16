@@ -13,7 +13,8 @@ INSERT INTO `users` VALUES (NULL, "dd", "dd@dd.com", "lolIsHashed"); */
 CREATE TABLE `projects` (
   `projectId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   `title` TEXT NOT NULL,
-  `description` TEXT NOT NULL
+  `description` TEXT NOT NULL,
+  `colour` TEXT NOT NULL
 );
 
 CREATE TABLE `members` (
