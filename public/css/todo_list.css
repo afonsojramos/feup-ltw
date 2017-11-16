@@ -1,0 +1,62 @@
+/* todo cards */
+
+.todos {
+	margin: 0 auto;
+	position: relative;
+	column-count: 1;
+}
+
+.todo {
+	width: 100%;
+	display: -webkit-inline-box;
+	margin: 15px;
+	padding: 10px 20px;
+	transition: box-shadow 0.3s ease-in-out;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	box-sizing: border-box;
+}
+
+.todo:hover {
+	transition: box-shadow 0.3s ease-in-out;
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+@media screen and (min-width: 560px) {
+	.todos {
+		transition: column-count 3s ease-in-out;
+		column-count: 1;
+	}
+	.todo{
+		width: 20em;
+	}
+}
+
+@media screen and (min-width: 816px) {
+	.todos {
+		transition: column-count 3s ease-in-out;
+		column-count: 2;
+	}
+	.todo{
+		width: 20em;
+	}
+}
+
+@media screen and (min-width: 1072px) {
+	.todos {
+		transition: column-count 3s ease-in-out;
+		column-count: 3;
+	}
+	.todo{
+		width: 20em;
+	}
+}
+
+@media screen and (min-width: 1500px) {
+	.todos {
+		column-count: 4;
+		transition: column-count 0.3s ease-in-out;
+	}
+	.todo{
+		width: 18em;
+	}
+}
