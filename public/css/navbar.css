@@ -4,7 +4,7 @@
 	width: 100%;
 	height: auto;
 	background-color: var(--default-primary-color);
-	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 	font-size: 18px;
 }
 
@@ -13,9 +13,11 @@
 	display: inline-block;
 	margin: 0;
 }
-.logo{
+
+.logo {
 	font-size: 24px;
 }
+
 
 /* nav links */
 
@@ -43,8 +45,63 @@
 
 /* right pull nav links */
 
-.nav-right {
+.navRight {
 	float: right;
 	line-height: 39px;
 }
 
+
+/* Search bar */
+
+.nav.search {
+	margin-left: 30px;
+	position: relative;
+	display: inline-grid;
+	transition: width 0.3s ease-in-out;
+	width: 20%;
+}
+
+.nav.search:focus-within {
+	transition: width 0.3s ease-in-out;
+	width: 50%;
+}
+
+.nav.search input {
+	border-radius: 3px;
+	display: inline-block;
+	text-indent: 40px;
+	background: rgba(0, 0, 0, 0.04);
+	padding: 0.4em;
+}
+
+.nav.search input:focus {
+	border-radius: 5px;
+	background: white;
+}
+
+.nav.search .material-icons.search {
+	position: absolute;
+	top: 11px;
+	left: 14px;
+}
+
+
+/* Close button */
+
+.nav.search .material-icons.close {
+	cursor: pointer;
+	display: none;
+	position: absolute;
+	top: 11px;
+	right: 10px;
+}
+
+.nav.search:focus-within .material-icons.close {
+	display: inline-block;
+}
+.nav.search .material-icons.close:hover{
+	color: #000;
+	border-radius: 99em;
+	background: rgba(0, 0, 0, 0.1);
+
+}

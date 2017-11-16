@@ -10,6 +10,7 @@
 
 <div class="container">
 	<h1>Hello World</h1>
+	<h3>Maybe some statistics about this application...</h3>
 	<?php
 		require_once(dirname(__FILE__)."/classes/User.php");
 		$query = new QueryBuilder(User::class);
