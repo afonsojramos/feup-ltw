@@ -12,3 +12,4 @@
 		</ul>
 	</div>
 </nav>
+<span class="afterNav"></span>
