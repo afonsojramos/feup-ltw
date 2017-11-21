@@ -188,7 +188,7 @@
 		/**
 		 * Load an object into this instance or return a new instance of the class if QueryBuilder is used directly
 		 * @param ids
-		 * 		1. a number if ther is a single column in the primary key
+		 * 		1. a number if there is a single column in the primary key
 		 * 		2. an array of $key=>$value where $key matches every key in the primary key
 		 * 		3. an ordered array of values that match the multiple columns in the primary key
 		 * 		4. nothing if this is an extended class results in loading from the current primaryKey

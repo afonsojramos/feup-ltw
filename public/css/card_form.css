@@ -4,6 +4,18 @@
 	width: 100%;
 }
 
+.cardForm.split input[type='text'],
+.cardForm.split input[type='email'],
+.cardForm.split input[type='password'] {
+	width: 70%;
+	right:0;
+}
+.cardForm.split span{
+	width:30%;
+	font-weight: bold;
+	display:inline-block;
+}
+
 .cardForm .formHeader {
 	background-color: var(--default-accent-color);
 	border-top-left-radius: 0.25em;
