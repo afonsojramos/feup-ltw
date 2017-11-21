@@ -1,9 +1,8 @@
 <?php
     require_once(dirname(__FILE__)."/includes/common/only_allow_login.php");
     require_once(dirname(__FILE__)."/includes/common/defaults.php");
-    $PAGE["title"] .= " : Dashboard for " . $_SESSION["username"];
-    $PAGE["styles"][] = "modal.css";
-    $PAGE["styles"][] = "todo_list.css";
+	$PAGE["title"] .= " : Dashboard for " . $_SESSION["username"];
+	$PAGE["styles"] = array_merge($PAGE["styles"], ["modal.css", "todo_list.css", "fab.css"]);
     $PAGE["scripts"][] = "modal.js";
 
     require_once(dirname(__FILE__)."/templates/common/header.php");
@@ -36,23 +35,8 @@
     	<div class="todo"> asafasdf assag sfd hgd hgd  hfh fhfdasd </div>
     </div>
 
+	<?php require_once(dirname(__FILE__)."/templates/dashboard/modal_add_list.php"); ?>
 
-    <div class="modal" opener="openModal">
-        <div class="modalContent">
-            <div class="modalHeader">
-                <span class="closeModal"><i class="material-icons">close</i></span>
-                <h2>Modal Header</h2>
-            </div>
-            <div class="modalBody">
-                <p>Some text in the Modal Body</p>
-                <p>Some other text...</p>
-            </div>
-                <div class="modalFooter">
-                <h3>Modal Footer</h3>
-            </div>
-        </div>
-    </div>
-    <a id="openModal">Open Modal</a>
 </div><!--/.container-->
 
 
