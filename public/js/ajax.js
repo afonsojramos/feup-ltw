@@ -10,11 +10,11 @@ function request(page, onReady, data = {}, type = "get", onError = null, onProgr
 	let request = new XMLHttpRequest();
 
 	request.addEventListener("progress", onProgress);
-	request.addEventListener("load", onReady);
+	request.onreadystatechange = onReady;
 	request.addEventListener("error", onError);
 	request.addEventListener("abort", onAbort);
 
 	request.open(type, page, true); //async
 	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	request.send(encodeForAjax(data));
+	request.send(data);
 }

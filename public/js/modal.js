@@ -16,9 +16,12 @@ for (const modal of modals) {//adds listeners and behaviour for every modal
 			btnThatOpens.onclick = function (e) {
 				modal.style.display = "block";
 			}
-			span.onclick = function () {
-				modal.style.display = "none";
+			if(span != undefined){
+				span.onclick = function () {
+					modal.style.display = "none";
+				}
 			}
+
 		}
 	}
 }

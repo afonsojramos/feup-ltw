@@ -1,7 +1,6 @@
 let body = document.getElementById("dashboardContainer");
 
 document.addEventListener('keydown', (e) => {//on keyboard press
-	console.log(e.keyCode);
 	if (e.keyCode == 27) { //Esc
 		closeSideBar();
 		clearSearch();
