@@ -21,10 +21,10 @@
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-@media screen and (min-width: 560px) {
+@media screen and (min-width: 690px) {
 	.todos {
-		transition: column-count 3s ease-in-out;
-		column-count: 1;
+		transition: column-count 0.3s ease-in-out;
+		column-count: 2;
 	}
 	.todo{
 		width: 20em;
@@ -33,17 +33,17 @@
 
 @media screen and (min-width: 816px) {
 	.todos {
-		transition: column-count 3s ease-in-out;
+		transition: column-count 0.3s ease-in-out;
 		column-count: 2;
 	}
 	.todo{
-		width: 20em;
+		width: 25em;
 	}
 }
 
 @media screen and (min-width: 1072px) {
 	.todos {
-		transition: column-count 3s ease-in-out;
+		transition: column-count 0.3s ease-in-out;
 		column-count: 3;
 	}
 	.todo{
