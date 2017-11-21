@@ -21,7 +21,7 @@ class User extends QueryBuilder{
 		$this->userId = $userId;
 		$this->username = $username;
 		$this->email = $email;
-		$this->$password = $password;
+		$this->password = $password;
 		parent::__construct();//call parent constructor, necessary for QueryBuilder
 	}
 
