@@ -57,10 +57,6 @@ a {
 	cursor: pointer;
 }
 
-a:hover {
-	background-color: #1dabb8;
-	color: #FFFFFF;
-}
 
 input {
 	-webkit-appearance: none;
@@ -131,6 +127,10 @@ input[type='submit'] {
 /* Color pickers colors */
 option:hover{
 	background:transparent;
+}
+option.white{
+	background-color: #FFFFFF;
+	color: #000000;
 }
 option.red{
 	background-color: #F44336;
