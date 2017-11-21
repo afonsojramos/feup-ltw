@@ -9,6 +9,17 @@
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 	font-size: 18px;
 }
+.navLeft{
+	position: absolute;
+	left: 1em;
+	top:0.9em;
+}
+.navLeft:hover{
+	border-radius: 200px;
+	transition: box-shadow 0.3s ease-in-out;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
 .afterNav{
 	display: block;
 	height: 80px;
@@ -119,7 +130,7 @@
     z-index: 1; /* Stay on top */
     top: 0;
     left: 0;
-    background-color: #111; /* Black*/
+    background-color: var(--dark-accent-color); /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 100px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
@@ -130,7 +141,7 @@
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: var(--text-accent-color);
     display: block;
     transition: 0.3s
 }
@@ -143,10 +154,12 @@
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
     position: absolute;
-    top: 60px;
-    right: 25px;
+    top: 50px;
+    right: 5px;
     font-size: 36px;
-    margin-left: 50px;
+	padding: 0;
+    color: var(--text-accent-color);
+	font-weight: 100;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
