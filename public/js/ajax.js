@@ -16,5 +16,5 @@ function request(page, onReady, data = {}, type = "get", onError = null, onProgr
 
 	request.open(type, page, true); //async
 	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	request.send(encodeForAjax({id: 1, name: 'John'}));
+	request.send(encodeForAjax(data));
 }
