@@ -38,6 +38,10 @@ body {
 	width: 90%;
 }
 
+.grid-long {
+	max-width: 35em;
+}
+
 *,
 *::before,
 *::after {
