@@ -13,13 +13,13 @@
 			<h3 class="formTitle">Register</h3>
 		</div>
 		<div class="formBody">
-			<div class="formField">
+			<div>
 				<input type="text" name="username" id="username" placeholder="Username" required>
 			</div>
-			<div class="formField">
+			<div>
 				<input type="email" name="email" id="email" placeholder="Email" required>
 			</div>
-			<div class="formField">
+			<div>
 				<input type="password" name="password" id="password" placeholder="Password" required>
 			</div>
 		</div>

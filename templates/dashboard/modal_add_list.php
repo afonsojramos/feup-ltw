@@ -5,10 +5,10 @@
 			<h3 class="formTitle">New Todo List</h3>
 		</div>
 		<div class="formBody">
-			<div class="formField">
+			<div>
 				<input type="text" name="title" id="title" placeholder="List title" required>
 			</div>
-			<div class="formField">
+			<div>
 				<input type="text" name="tags" id="tags" placeholder="Tags (Comma separate)">
 			</div>
 		</div>

@@ -25,10 +25,10 @@
 			<h3 class="formTitle">Edit User Details</h3>
 		</div>
 		<div class="formBody">
-			<div class="formField">
+			<div>
 				<span> User name: </span><input type="text" name="username" title="User name:" id="username" value="<?php echo $user->username;?>" placeholder="Username" required>
 			</div>
-			<div class="formField">
+			<div>
 				<span> Email: </span><input type="email" name="email" id="email" value="<?php echo $user->email;?>" placeholder="Email" required>
 			</div>
 		</div>

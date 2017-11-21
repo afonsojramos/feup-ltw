@@ -13,10 +13,10 @@
 			<h3 class="formTitle">Login</h3>
 		</header>
 		<div class="formBody">
-			<div class="formField">
+			<div>
 				<input type="text" name="username" id="username" placeholder="Username or Email" required>
 			</div>
-			<div class="formField">
+			<div>
 				<input type="password" name="password" id="password" placeholder="Password" required>
 			</div>
 		</div>
