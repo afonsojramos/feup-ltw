@@ -1,5 +1,5 @@
 
-<div class="modal" opener="openAddListModal">
+<form class="modal" opener="openAddListModal"id ="modalAddList">
 	<div class="modalContent cardForm grid">
 		<div class="formHeader">
 			<h3 class="formTitle">New Todo List</h3>
@@ -13,6 +13,7 @@
 			</div>
 			<div>
 				<select name="colour">
+					<option class="white" value="white">White</option>
 					<option class="red" value="red">Red</option>
 					<option class="orange" value="orange">Orange</option>
 					<option class="yellow" value="yellow">Yellow</option>
@@ -28,8 +29,8 @@
 			</div>
 		</div>
 		<footer class="formFooter">
-			<input class="closeModal" type="submit" value="Add">
+			<input class="_closeModal" type="submit" value="Add">
 		</footer>
 	</div>
-</div>
+</form>
 <button id="openAddListModal" class="fab fixed fabAccent">+</button>
