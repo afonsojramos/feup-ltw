@@ -20,7 +20,7 @@
 <div class="container">
 	<h1>Edit Profile</h1>
 	<div class="grid grid-long shadow-3">
-	<form class="cardForm split" action="actions/register.php" method="post">
+	<form class="cardForm split" action="actions/edit_profile.php" method="post">
 		<div class="formHeader">
 			<h3 class="formTitle">Edit User Details</h3>
 		</div>
