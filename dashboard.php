@@ -3,7 +3,8 @@
     require_once(dirname(__FILE__)."/includes/common/defaults.php");
 	$PAGE["title"] .= " : Dashboard for " . $_SESSION["username"];
 	$PAGE["styles"] = array_merge($PAGE["styles"], ["modal.css", "todo_list.css", "fab.css"]);
-    $PAGE["scripts"][] = "modal.js";
+	$PAGE["scripts"][] = "modal.js";
+	$PAGE["scripts"] = array("dashboard.js");	
 
     require_once(dirname(__FILE__)."/templates/common/header.php");
     require_once(dirname(__FILE__)."/includes/common/choose_navbar.php");
