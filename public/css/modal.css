@@ -29,7 +29,7 @@
 .modalContent {
 	background-color: var(--divider-color);
 	margin: auto;
-	border: 1px solid var(--default-accent-color);
+	/* border: 1px solid var(--default-accent-color); */
 	width: 50%;
 	position: relative;
 	padding: 0px;
@@ -37,13 +37,15 @@
 	-webkit-animation-name: animatetop;
 	-webkit-animation-duration: 0.4s;
 	animation-name: animatetop;
-	animation-duration: 0.4s
+	animation-duration: 0.4s;
+	border-radius: 5px;
 }
 
 .modalHeader {
 	padding: 2px 16px;
 	background-color: var(--dark-accent-color);
 	color: var(--text-accent-color);
+	border-radius: 5px 5px 0 0;
 }
 
 .modalBody {
@@ -53,7 +55,8 @@
 .modalFooter {
 	padding: 2px 16px;
 	background-color: var(--light-accent-color);
-	color: var(--text-accent-color);
+	color: var(--text-primary-color);
+	border-radius: 0 0 5px 5px;
 }
 
 
