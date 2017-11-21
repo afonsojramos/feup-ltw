@@ -97,7 +97,14 @@ abstract class Validator {//requires $this->class
 				case "no"://no:stringNotIn
 					$notAllowed = $parts[1];
 					if(strpos($value, $notAllowed) !== false){
-						$this->addError("$name: cannot contain: '$notAllowed", $echo);
+						$this->addError("$name: cannot contain: '$notAllowed'", $echo);
+					}
+					break;
+				case "in"://in:listItemAllowed1:listItemAllowed2:...
+					$allowedValues = array_splice($parts, 1);
+					if(!in_array($value, $allowedValues)){
+						$imploded = implode("', '", $allowedValues);
+						$this->addError("$name: must be on of : '$imploded'", $echo);
 					}
 					break;
 
