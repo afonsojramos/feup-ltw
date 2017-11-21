@@ -11,6 +11,21 @@
 			<div>
 				<input type="text" name="tags" id="tags" placeholder="Tags (Comma separate)">
 			</div>
+			<div>
+				<select name="colour">
+					<option class="red" value="red">Red</option>
+					<option class="orange" value="orange">Orange</option>
+					<option class="yellow" value="yellow">Yellow</option>
+					<option class="green" value="green">Green</option>
+					<option class="teal" value="teal">Teal</option>
+					<option class="blue" value="blue">Blue</option>
+					<option class="indigo" value="indigo">Dark Blue</option>
+					<option class="purple" value="purple">Purple</option>
+					<option class="pink" value="pink">Pink</option>
+					<option class="brown" value="brown">Brown</option>
+					<option class="grey" value="grey">Grey</option>
+				</select>
+			</div>
 		</div>
 		<footer class="formFooter">
 			<input class="closeModal" type="submit" value="Add">

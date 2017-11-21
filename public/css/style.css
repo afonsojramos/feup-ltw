@@ -49,7 +49,8 @@ body {
 }
 
 a {
-	color: inherit;
+	background-color: inherit;
+	color: #FFFFFF;
 	text-decoration: underline;
 	-webkit-transition: color 0.3s;
 	transition: color 0.3s;
@@ -57,7 +58,8 @@ a {
 }
 
 a:hover {
-	color: #1dabb8;
+	background-color: #1dabb8;
+	color: #FFFFFF;
 }
 
 input {
@@ -124,4 +126,53 @@ input[type='submit'] {
 
 .shadow-3 {
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+/* Color pickers colors */
+option:hover{
+	background:transparent;
+}
+option.red{
+	background-color: #F44336;
+	color: #FFFFFF;
+}
+option.orange{
+	background-color: #FF9800;
+	color: #FFFFFF;
+}
+option.yellow{
+	background-color: #FFEB3B;
+	color: #FFFFFF;
+}
+option.green{
+	background-color: #4CAF50;
+	color: #FFFFFF;
+}
+option.teal{
+	background-color: #009688;
+	color: #000000;
+}
+option.blue{
+	background-color: #2196F3;
+	color: #FFFFFF;
+}
+option.indigo{
+	background-color: #3F51B5;
+	color: #000000;
+}
+option.purple{
+	background-color: #9C27B0;
+	color: #000000;
+}
+option.pink{
+	background-color: #E91E63;
+	color: #000000;
+}
+option.brown{
+	background-color: #795548;
+	color: #000000;
+}
+option.grey{
+	background-color: #9E9E9E;
+	color: #FFFFFF;
 }

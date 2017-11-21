@@ -1,11 +1,13 @@
 .cardForm input[type='text'],
 .cardForm input[type='email'],
+.cardForm select,
 .cardForm input[type='password'] {
 	width: 100%;
 }
 
 .cardForm.split input[type='text'],
 .cardForm.split input[type='email'],
+.cardForm.split select,
 .cardForm.split input[type='password'] {
 	width: 70%;
 	right:0;
@@ -54,6 +56,7 @@
 
 .cardForm input[type='text'],
 .cardForm input[type='email'],
+.cardForm select,
 .cardForm input[type='password'] {
 	border: 0.0625em solid var(--divider-color);
 	padding: 1em 1.25em;
