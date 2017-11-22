@@ -133,17 +133,56 @@
     background-color: var(--dark-accent-color); /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 100px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+	transition: 0.5s;  /*0.5 second transition effect to slide in the sidenav */
+}
+
+.sidenav a:hover,
+.sidenav a:active,
+.sidenav a:focus,
+.sidenav li a:hover,
+.sidenav li a:active,
+.sidenav li a:focus,
+.sidenav li.open a:hover,
+.sidenav li.open a:active,
+.sidenav li.open a:focus{
+    color: var(--default-primary-color);
+    text-decoration: none;
+    background-color: transparent;
+}
+.sidenav .dropdown-menu{
+    position: relative;
+    width: 100%;
+    padding: 0px 0px 0px 10px ;
+    margin: 0;
+	border-radius: 0;
+    border: none;
+    background-color: var(--dark-accent-color);
+    box-shadow: none;
+}
+
+.sidenav .sidebar{
+    position: relative;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+	border-radius: 0;
+    border: none;
+    background-color: var(--dark-accent-color);
+    box-shadow: none;
+}
+
+.sidenav .dropdown-menu a{
+	font-size: 15px;
 }
 
 /* The navigation menu links */
 .sidenav a {
-    padding: 8px 8px 8px 32px;
+    padding: 0px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
     color: var(--text-accent-color);
     display: block;
-    transition: 0.3s
+	transition: 0.3s
 }
 
 /* When you mouse over the navigation links, change their color */
