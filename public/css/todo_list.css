@@ -8,9 +8,10 @@
 
 .todo {
 	width: 100%;
-	display: -webkit-inline-box;
+	display: inline-block;
 	margin: 15px;
-	padding: 10px 20px;
+	padding: 10px 20px 5px 20px;
+	border-radius: 2px;
 	transition: box-shadow 0.3s ease-in-out;
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 	box-sizing: border-box;
@@ -21,12 +22,82 @@
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
+.todo h3{
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+
+.listFooter {
+	display: flex;
+}
+
+.listFooter * {
+	flex-basis: 100%;
+	text-align: center;
+	color: var(--text-primary-color);
+}
+
+.listFooter i{
+	font-size: 18px;
+}
+.listFooter i:hover{
+	color: var(--dark-primary-color);
+}
+
+/* material Checkboxes */
+
+.checkbox {
+	position: relative;
+	top: -0.85rem;
+	margin: 0 1.3rem 0 0;
+	cursor: pointer;
+}
+
+.checkbox:before {
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	content: "";
+	position: absolute;
+	left: 0;
+	z-index: 1;
+	width: 1rem;
+	height: 1rem;
+	border: 2px solid var(--default-accent-color);
+}
+
+.checkbox:checked:before {
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	height: .5rem;
+	border-color: var(--default-primary-color);
+	border-top-style: none;
+	border-right-style: none;
+}
+
+.checkbox:after {
+	content: "";
+	position: absolute;
+	top: -0.125rem;
+	left: 0;
+	width: 1.1rem;
+	height: 1.1rem;
+	background: transparent;
+	cursor: pointer;
+}
+
+
+/* responsiveness bellow: */
+
 @media screen and (min-width: 690px) {
 	.todos {
 		transition: column-count 0.3s ease-in-out;
 		column-count: 2;
 	}
-	.todo{
+	.todo {
 		width: 20em;
 	}
 }
@@ -36,7 +107,7 @@
 		transition: column-count 0.3s ease-in-out;
 		column-count: 2;
 	}
-	.todo{
+	.todo {
 		width: 25em;
 	}
 }
@@ -46,7 +117,7 @@
 		transition: column-count 0.3s ease-in-out;
 		column-count: 3;
 	}
-	.todo{
+	.todo {
 		width: 20em;
 	}
 }
@@ -56,7 +127,7 @@
 		column-count: 4;
 		transition: column-count 0.3s ease-in-out;
 	}
-	.todo{
+	.todo {
 		width: 18em;
 	}
 }
