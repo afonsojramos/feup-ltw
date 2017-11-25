@@ -1,5 +1,5 @@
 
-<form class="modal" opener="openAddListModal"id ="modalAddList">
+<form class="modal" opener="openAddListModal" id ="modalAddList">
 	<div class="modalContent cardForm grid">
 		<div class="formHeader">
 			<h3 class="formTitle">New Todo List</h3>

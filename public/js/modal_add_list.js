@@ -1,12 +1,17 @@
 let form = document.getElementById("modalAddList");
 
-
-form.addEventListener("submit", function(){
-	var formData = new FormData(form);
+form.addEventListener("submit", function (e) {
+	let formData = new FormData(form);
+	let data = {};
 	for (let [key, value] of formData.entries()) {
-		console.log(key, value);
-	  }
-	request("actions/add_list.php", function(result){
-		console.log(result);
-	}, formData, "post");
+		data[key] = value;
+	}
+	request("actions/add_list.php", function (data) {
+		console.log(data); //TODO show the list directly
+		if(data.success){
+			form.style.display = "none";
+			form.reset();
+		}
+	}, data, "post");
+	e.preventDefault();
 }, false);

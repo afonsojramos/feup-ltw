@@ -6,15 +6,23 @@ function encodeForAjax(data) {
 	}).join('&');
 }
 
-function request(page, onReady, data = {}, type = "get", onError = null, onProgress = null, onAbort = null){
+function request(page, onReady, data = {}, type = "get", onError = null, onProgress = null, onAbort = null) {
 	let request = new XMLHttpRequest();
 
 	request.addEventListener("progress", onProgress);
-	request.onreadystatechange = onReady;
+	request.onreadystatechange = function (data) {
+		if (this.readyState == 4 && this.status == 200) {
+			let result = this.responseText;
+			try {
+				result = JSON.parse(result);
+			} catch (e) {}
+			onReady(result);
+		}
+	};
 	request.addEventListener("error", onError);
 	request.addEventListener("abort", onAbort);
 
 	request.open(type, page, true); //async
 	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	request.send(data);
+	request.send(encodeForAjax(data));
 }
