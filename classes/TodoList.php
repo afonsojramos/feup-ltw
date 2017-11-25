@@ -11,6 +11,9 @@ class TodoList extends QueryBuilder{
 	protected $userId;
 	protected $projectId;
 
+	public $items; // a list of Item
+
+	public static $ignoreProperties = array("items");//properties to ignore on the sql building
 	public static $validationRules = array(//validation rules for update method
 		"title"=>"length:3:200",
 		"colour"=>"in:white:red:orange:yellow:green:teal:blue:indigo:purple:pink:brown:grey"
@@ -25,6 +28,11 @@ class TodoList extends QueryBuilder{
 		$this->link = $link;
 		$this->userId = $userId;
 		$this->projectId = $projectId;
+		$this->items = array();
 		parent::__construct();//call parent constructor, necessary for QueryBuilder
+	}
+
+	public function loadItems(){
+		//TODO load this list's items
 	}
 }

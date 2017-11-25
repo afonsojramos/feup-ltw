@@ -13,6 +13,7 @@
 		protected $parameters;//array of key-values to use for the binds, if needed
 		protected $keys = array();//a list of the columns composing the primary key
 		protected $columns = array();
+		protected $toIgnore = array();
 		protected $table = "";
 		protected $isGeneric = false;
 		protected $toUpdate = false;//list of properties changed since last update
@@ -30,6 +31,7 @@
 		 */
 		function __construct($class = null, $keys = null){
 			$this->loadClass($class);//load the class
+			$this->loadToIgnore();//load the class columns
 			$this->loadColumns();//load the class columns
 			$this->setKey($keys);//set the default primary key value
 			$this->setTable();//set the default table name
@@ -217,7 +219,7 @@
 				$this->toUpdate = array();
 				if($this->isGeneric){//return an object of the generic type, argument order must match
 					$reflector = new ReflectionClass($this->class);
-					return $reflector->newInstanceArgs(array_values($objectLoad));
+					return $reflector->newInstanceArgs(array_diff(array_values($objectLoad), $this->toIgnore));
 				}
 				$allColumns = $this->getAllColumns();//the columns that are keys and not
 				foreach ($allColumns as $column) {
@@ -439,9 +441,23 @@
 			$reflector = new ReflectionClass($this->class);
 			$staticProperties = array_keys($reflector->getStaticProperties());
 			if($this->keys){
-				return array_merge(array_keys(get_class_vars(QueryBuilder::class)), $this->keys, $staticProperties);
+				return array_merge(
+						array_keys(get_class_vars(QueryBuilder::class)),
+						$this->keys,
+						$staticProperties,
+						$this->toIgnore);
 			}else{
-				return array_keys(get_class_vars(QueryBuilder::class), $staticProperties);
+				return array_merge(
+					array_keys(get_class_vars(QueryBuilder::class), $staticProperties),
+					$this->toIgnore);
+			}
+		}
+
+		//in case there are some static $ignoreProperties, load them into $this->toIgnore
+		protected function loadToIgnore(){
+			$this->toIgnore = array();
+			if(isset($this->class::$ignoreProperties) && is_array($this->class::$ignoreProperties)){
+				$this->toIgnore = $this->class::$ignoreProperties;
 			}
 		}
 
