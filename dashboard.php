@@ -23,11 +23,11 @@ require_once(dirname(__FILE__) . "/templates/dashboard/sidebar.php");
     <div class="todos">
 		<?php
 
-			/* $todos = TodoList::getAll(true);
+			$todos = TodoList::getAllByUser($_SESSION["userId"]);
 
 			foreach ($todos as $todo) {
 				include(dirname(__FILE__) . "/templates/dashboard/todo.php");
-			} */
+			}
 		?>
 
 	<div class="todo"><img src="public/images/logo_ltw.png" width="auto" height="200px"></div>

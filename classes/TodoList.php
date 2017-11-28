@@ -35,4 +35,15 @@ class TodoList extends QueryBuilder{
 	public function loadItems(){
 		//TODO load this list's items
 	}
+
+	public static function getAllByUser($userId){
+		$qb = new QueryBuilder(self::class);
+		$lines = $qb->select()->where("userId = :userId")->addParam("userId", $userId)->getAll();
+		var_dump($lines);
+		$lists = array();//an array of TodoList
+		foreach ($lines as $line) {
+			# code...
+		}
+
+	}
 }

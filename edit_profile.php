@@ -14,11 +14,11 @@
 ?>
 
 
-
 <div class="container">
 	<h1>Edit Profile</h1>
-	<div class="grid grid-long shadow-1">
+	<div class="grid grid-long grid-small-margins shadow-1">
 		<form class="cardForm split" action="actions/edit_profile.php" method="post">
+		<?php insertHiddenToken(); ?>
 			<div class="formHeader">
 				<h3 class="formTitle">Edit User Details</h3>
 			</div>
@@ -36,8 +36,9 @@
 		</form>
 	</div>
 
-	<div class="grid shadow-1">
+	<div class="grid grid-long grid-small-margins shadow-1">
 		<form class="cardForm split" action="actions/edit_profile.php" method="post">
+		<?php insertHiddenToken(); ?>
 			<div class="formHeader">
 				<h3 class="formTitle">Change Password</h3>
 			</div>
@@ -46,7 +47,7 @@
 					<input type="password" name="pwd1" placeholder="Password" required>
 				</div>
 				<div class="formField">
-					<input type="password" name="pwd2" placeholder="Password" required>
+					<input type="password" name="pwd2" placeholder="Repeat your password please!" required>
 				</div>
 			</div>
 			<footer class="formFooter">
