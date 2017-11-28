@@ -76,6 +76,25 @@
 	cursor: pointer;
 }
 
+.modal .errorMessage {
+	background: rgb(255, 0, 0);
+	color: white;
+	margin: 4px;
+	border-radius: 5px;
+	animation: hideAnimation 0s ease-in-out 3s forwards;
+	animation-fill-mode: forwards;
+}
+
+
+/* Hide animation */
+
+@keyframes hideAnimation {
+	to {
+		opacity: 0;
+		height: 0;
+	}
+}
+
 
 /* Modal Animation */
 

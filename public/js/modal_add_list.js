@@ -11,6 +11,8 @@ form.addEventListener("submit", function (e) {
 		if(data.success){
 			form.style.display = "none";
 			form.reset();
+		}else{
+			addErrorModalMessages(form, data.errors);
 		}
 	}, data, "post");
 	e.preventDefault();

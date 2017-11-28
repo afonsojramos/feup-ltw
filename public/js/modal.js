@@ -25,6 +25,19 @@ for (const modal of modals) {//adds listeners and behaviour for every modal
 		}
 	}
 }
+
+let addErrorModalMessages = function(modal, errors) {
+	let modalErrors = modal.getElementsByClassName("modalErrors")[0];
+	modalErrors.innerHTML = "";
+	if(errors){//not undefined
+		errors.forEach(error => {
+			let span = document.createElement('span');
+			span.className += " errorMessage center shadow-1";
+			span.innerHTML = error;
+			modalErrors.appendChild(span);
+		});
+	}
+};
 /*
 Example of modal html
 
