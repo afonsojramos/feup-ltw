@@ -27,7 +27,7 @@
 					<option class="grey" value="grey">Grey</option>
 				</select>
 			</div>
-			<div class="modalErrors"></div>
+			<div class="errors"></div>
 		</div>
 		<footer class="formFooter">
 			<input class="_closeModal" type="submit" value="Add">

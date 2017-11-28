@@ -5,5 +5,5 @@
 	$PAGE["lang"] = "en";
 	$PAGE["title"] = "4Me2Do";
 	$PAGE["styles"] = array("style.css", "navbar.css", "material-icons.css");
-	$PAGE["scripts"] = array();
+	$PAGE["scripts"] = array("scripts.js");
 ?>

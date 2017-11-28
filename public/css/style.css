@@ -40,8 +40,8 @@ body {
 
 .grid-long {
 	max-width: 35em;
-	margin-top:0em;
-	margin-bottom:2em;
+	margin-top: 0em;
+	margin-bottom: 2em;
 }
 
 *,
@@ -88,16 +88,25 @@ input[type='submit'] {
 	display: block;
 }
 
+.error {
+	background: rgb(255, 0, 0);
+	color: white;
+	margin: 4px;
+	border-radius: 5px;
+	animation: hideAnimation 0s ease-in-out 3s forwards;
+	animation-fill-mode: forwards;
+}
+
 .show-on-hover {
 	/*ocupa o espaço à mesma*/
-	opacity:0;
-	transition:opacity 0.3s ease-in-out;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
 }
 
 .show-on-hover-parent:hover .show-on-hover,
 .show-on-hover-parent:active .show-on-hover {
-	opacity:1;
-	transition:opacity 0.3s ease-in-out;
+	opacity: 1;
+	transition: opacity 0.3s ease-in-out;
 }
 
 

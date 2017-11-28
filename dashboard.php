@@ -3,7 +3,7 @@ require_once(dirname(__FILE__) . "/includes/common/only_allow_login.php");
 require_once(dirname(__FILE__) . "/includes/common/defaults.php");
 $PAGE["title"] .= " : Dashboard for " . $_SESSION["username"];
 $PAGE["styles"] = array_merge($PAGE["styles"], ["modal.css", "todo_list.css", "fab.css", "card_form.css"]);
-$PAGE["scripts"] = array("dashboard.js", "modal.js", "modal_add_list.js", "search.js", "ajax.js");
+$PAGE["scripts"] = array_merge($PAGE["scripts"], array("dashboard.js", "modal.js", "modal_add_list.js", "search.js", "ajax.js"));
 $PAGE["showSideBar"] = true;
 require_once(dirname(__FILE__) . "/templates/common/header.php");
 require_once(dirname(__FILE__) . "/includes/common/choose_navbar.php");
