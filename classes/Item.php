@@ -28,4 +28,28 @@ class Item extends QueryBuilder{
 	public function loadContent(){
 		//TODO load this item's content
 	}
+
+	public static function getAllForLists($listsIds){
+		//create sql parameter for list of items
+		$i = 0;
+		$kvIds = array();//key value array for the ids
+		$parameterIds = array();//key value array for the query
+		foreach ($listsIds as $id) {
+			$parameterIds[] = ":list_$i";
+			$kvIds["list_$i"] = $id;
+			$i++;
+		}
+		$parameterString = implode(", ", $parameterIds);
+
+		$qb = new QueryBuilder(self::class);
+		$lines = $qb->select()->where("todoListId IN ($parameterString)")->addParams($kvIds)->getAll();
+
+		$items = array();//an array of Items
+		foreach ($lines as $line) {
+			$item = new Item();
+			$item->loadFromArray($line);
+			$items[] = $item;
+		}
+		return $items;
+	}
 }
