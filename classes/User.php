@@ -36,11 +36,27 @@ class User extends QueryBuilder{
 	function duplicateUsername(){
 		return $this->select()->where("username = :username")->get() != false;
 	}
+
+	/**
+	 * Test if a username can be changed
+	 */
+	function duplicateUsernameOnEditProfile(){
+		return $this->select()->where("username = :username and userId!=:userId")->get() != false;
+	}
+
 	/**
 	 * Test if an account with a given email already exists
 	 */
 	function duplicateEmail(){
 		return $this->select()->where("email = :email")->get() != false;
+	}
+
+
+	/**
+	 * Test if an email can be changed
+	 */
+	function duplicateEmailOnEditProfile(){
+		return $this->select()->where("email = :email and userId!=:userId")->get() != false;
 	}
 
 	/**
