@@ -134,8 +134,8 @@
 		 */
 		static public function execute($query, $parameters = array()){
 			global $connection;
-			//echo "<br>$query<br>";
-			//var_dump($parameters);
+			// echo "<br>$query<br>";
+			// var_dump($parameters);
 			//PDO query building and execution
 			try {
 				$stmt = $connection->prepare($query);
@@ -360,7 +360,7 @@
 		 */
 		public function loadFromArray($array){
 			foreach ($array as $key => $value) {//iterate given array key=>values
-				if(in_array($key, $this->columns)){//if this key belongs to the valid columns
+				if(in_array($key, $this->columns) || in_array($key, $this->keys)){//if this key belongs to the valid columns
 					$this->__set($key, $value);//save it
 				}
 			}
@@ -401,8 +401,10 @@
 		//------------MAGICK METHODS (to improve the overall behaviour)
 
 		public function __set($name, $value){
-			$this->$name = $value;
-			$this->toUpdate[] = $name;
+			if($this->$name != $value){
+				$this->$name = $value;
+				$this->toUpdate[] = $name;
+			}
 			return $value;
 		}
 
