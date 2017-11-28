@@ -17,17 +17,18 @@ class User extends QueryBuilder{
 		"password"=>"length:8:100"
 	);
 
-	public function __construct($userId = null, $username = "", $email = "", $password = ""){
+	public function __construct($userId = null, $username = "", $email = ""){
 		$this->userId = $userId;
 		$this->username = $username;
 		$this->email = $email;
-		$this->password = $password;
 		parent::__construct();//call parent constructor, necessary for QueryBuilder
 	}
 
-	public function insert($autoIncrement = true, $columnsToInsert = NULL){
-		$this->password = password_hash($this->password, PASSWORD_DEFAULT);
-		return parent::insert($autoIncrement, $columnsToInsert);
+	public function __set($name, $value){
+		if($name == "password"){
+			$value = password_hash($value, PASSWORD_DEFAULT);
+		}
+		return parent::__set($name, $value);
 	}
 
 	/**
