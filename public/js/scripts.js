@@ -12,3 +12,8 @@ let addErrorModalMessages = function (parent, errors) {
 		});
 	}
 };
+
+function findParentByClass(child, cls) {
+	while ((child = child.parentElement) && !child.classList.contains(cls));
+	return child;
+}
