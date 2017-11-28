@@ -3,6 +3,7 @@
 	require_once(dirname(__FILE__) . "/includes/common/defaults.php");
 	$PAGE["title"] .= " : Edit Profile for" . $_SESSION["username"];
 	$PAGE["styles"][] = "card_form.css";
+	$PAGE["scripts"] = array_merge($PAGE["scripts"], array("change_password.js", "ajax.js"));
 	require_once(dirname(__FILE__) . "/templates/common/header.php");
 	require_once(dirname(__FILE__) . "/includes/common/choose_navbar.php");
 	require_once(dirname(__FILE__) . "/classes/User.php");
@@ -31,13 +32,14 @@
 				</div>
 			</div>
 			<footer class="formFooter">
+				<div class="errors"></div>
 				<input type="submit" value="Submit">
 			</footer>
 		</form>
 	</div>
 
 	<div class="grid grid-long grid-small-margins shadow-1">
-		<form class="cardForm split" action="actions/edit_profile.php" method="post">
+		<form class="cardForm split" id="changePassword" action="actions/edit_profile.php" method="post">
 		<?php insertHiddenToken(); ?>
 			<div class="formHeader">
 				<h3 class="formTitle">Change Password</h3>
@@ -50,6 +52,7 @@
 					<input type="password" name="pwd2" placeholder="Repeat your password please!" required>
 				</div>
 			</div>
+			<div class="errors"></div>
 			<footer class="formFooter">
 				<input type="submit" value="Submit">
 			</footer>

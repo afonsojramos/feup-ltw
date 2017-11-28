@@ -12,11 +12,18 @@
 	width: 70%;
 	right:0;
 }
-.cardForm.split span{
+.cardForm.split span:not(.error){
 	width:30%;
 	font-weight: bold;
 	display:inline-block;
 }
+
+
+.cardForm.split span.error{
+	width:90%;
+}
+
+
 
 .cardForm .formHeader {
 	background-color: var(--default-accent-color);

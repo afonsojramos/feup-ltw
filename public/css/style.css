@@ -94,7 +94,9 @@ input[type='submit'] {
 .error {
 	background: rgb(255, 0, 0);
 	color: white;
-	margin: 4px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	width:100%;
 	border-radius: 5px;
 	animation: hideAnimation 0s ease-in-out 3s forwards;
 	animation-fill-mode: forwards;
