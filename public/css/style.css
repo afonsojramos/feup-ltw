@@ -40,8 +40,11 @@ body {
 
 .grid-long {
 	max-width: 35em;
-	margin-top: 0em;
-	margin-bottom: 2em;
+}
+
+.grid-small-margins{
+	margin-top:0em;
+	margin-bottom:2em;
 }
 
 *,
