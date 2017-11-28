@@ -2,7 +2,7 @@
 
 let addErrorModalMessages = function (parent, errors) {
 	let errorsDiv = parent.getElementsByClassName("errors")[0];
-	errors.innerHTML = "";
+	errorsDiv.innerHTML = "";
 	if (errors) { //not undefined
 		errors.forEach(error => {
 			let span = document.createElement('span');
