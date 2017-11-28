@@ -8,6 +8,7 @@
 		$user = new User();
 		if($user->login($_POST)){
 			$result["success"] = true;
+			header("Location: ../index.php");
 		}
 	}
 
