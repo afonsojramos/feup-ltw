@@ -8,6 +8,11 @@ class Item extends QueryBuilder{
 	protected $dueDate;
 	protected $todoListId;
 
+	public static $validationRules = array(//validation rules for update method
+		"content"=>"length:3:200",
+		"dueDate"=>"date"
+	);
+
 	public function __construct($itemId = null, $completed = false, $content = "", $dueDate = null, $todoListId = -1){
 		$this->itemId = $itemId;
 		$this->completed = $completed;

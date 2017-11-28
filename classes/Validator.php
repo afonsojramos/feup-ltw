@@ -110,7 +110,15 @@ abstract class Validator {//requires $this->class
 
 				case "email":
 					if(!filter_var($value, FILTER_VALIDATE_EMAIL)){
-						$this->addError("$name: invalid email address: '$value", $echo);
+						$this->addError("$name: invalid email address: '$value'", $echo);
+					}
+					break;
+
+				case "date":
+					$format = 'Y-m-d H:i:s';
+					$d = DateTime::createFromFormat($format, $value);
+					if(!($d && $d->format($format) == $value)){
+						$this->addError("$name: invalid date: '$value'", $echo);
 					}
 					break;
 
