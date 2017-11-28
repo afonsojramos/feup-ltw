@@ -1,8 +1,10 @@
 let search = document.getElementById("search");
 
 function clearSearch(){
-	search.value = "";
-	search.blur();
+	if(search == document.activeElement){
+		search.value = "";
+		search.blur();
+	}
 }
 
 function enterSearch(e){

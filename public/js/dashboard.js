@@ -4,8 +4,11 @@ document.addEventListener('keydown', (e) => {//on keyboard press
 	if (e.keyCode == 27) { //Esc
 		closeSideBar();
 		clearSearch();
-	}else if(e.keyCode == 70 && e.ctrlKey){//Ctrl+f
+	}else if(e.ctrlKey && e.keyCode == 70){//Ctrl+f
 		enterSearch(e);
+	}else if(e.ctrlKey && e.keyCode == 83){//Ctrl+s
+		toggleSideBar();
+		e.preventDefault();
 	}else if(e.keyCode == 13){//Enter
 		doSearch();
 	}

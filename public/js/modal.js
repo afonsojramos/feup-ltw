@@ -12,14 +12,19 @@ for (const modal of modals) {//adds listeners and behaviour for every modal
 				if (event.target == modal) {
 					modal.style.display = "none";
 				}
-			}
+			};
+			document.addEventListener('keydown', (e) => {//on keyboard press
+				if (e.keyCode == 27) { //Esc
+					modal.style.display = "none";
+				}
+			});
 			btnThatOpens.onclick = function (e) {
 				modal.style.display = "block";
-			}
+			};
 			if(span != undefined){
 				span.onclick = function () {
 					modal.style.display = "none";
-				}
+				};
 			}
 
 		}
