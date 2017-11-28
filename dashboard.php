@@ -13,16 +13,10 @@ require_once(dirname(__FILE__) . "/templates/dashboard/sidebar.php");
 
 
 <div class="container" id="dashboardContainer">
-	<?php
-		require_once(dirname(__FILE__) . "/classes/TodoList.php");
-		$query = new QueryBuilder(TodoList::class);
-		var_dump($query->select()->getAll());
-		$td = new TodoList();
-	?>
 
     <div class="todos">
 		<?php
-
+			require_once(dirname(__FILE__) . "/classes/TodoList.php");
 			$todos = TodoList::getAllByUser($_SESSION["userId"]);
 
 			foreach ($todos as $todo) {
@@ -30,7 +24,7 @@ require_once(dirname(__FILE__) . "/templates/dashboard/sidebar.php");
 			}
 		?>
 
-	<div class="todo"><img src="public/images/logo_ltw.png" width="auto" height="200px"></div>
+		<!-- <div class="todo"><img src="public/images/logo_ltw.png" width="auto" height="200px"></div>
     	<div class="todo"> asdasd </div>
     	<div class="todo"> asafasdf assag sfd hgd hgd  hfh fhfdasd </div>
     	<div class="todo"><img src="public/images/logo_ltw.png" width="auto" height="200px"></div>
@@ -43,7 +37,7 @@ require_once(dirname(__FILE__) . "/templates/dashboard/sidebar.php");
     	<div class="todo"> asdasd </div>
     	<div class="todo"><img src="public/images/background.jpeg" width="200px" height="auto"></div>
     	<div class="todo"> asdasd </div>
-    	<div class="todo"> asafasdf assag sfd hgd hgd  hfh fhfdasd </div>
+    	<div class="todo"> asafasdf assag sfd hgd hgd  hfh fhfdasd </div> -->
     </div>
 
 	<?php require_once(dirname(__FILE__) . "/templates/dashboard/modal_add_list.php"); ?>
