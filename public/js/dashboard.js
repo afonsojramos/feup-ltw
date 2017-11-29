@@ -49,10 +49,10 @@ Array.prototype.forEach.call(todoItems, function (checkbox) {
 		let parentTodo = findParentByClass(checkbox, "todo");//get the <div class="todo"> above
 		let data = {
 			itemId: checkbox.getAttribute("data-itemId"),
-			todoListId: checkbox.getAttribute("data-todoListId"),
+			// todoListId: checkbox.getAttribute("data-todoListId"),
 			completed: checkbox.checked
 		};
-		request("actions/add_item.php", function (data) {
+		request("actions/edit_item_checked.php", function (data) {
 			console.log(data);
 			if (!data.success) {
 				addErrorModalMessages(parentTodo, data.errors);
