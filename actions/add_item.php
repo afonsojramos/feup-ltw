@@ -4,8 +4,16 @@ require_once(dirname(__FILE__)."/../classes/Item.php");
 
 $result = array("success"=>false);
 
-//TODO: afonso
+$item = new Item();
+$item->todoListId = $_SESSION["todoListId"];
+$item->loadFromArray($_POST);
 
-$result["errors"] = array("afonso vem fazer o actions/add_item.php ");
+if($item->validate()){
+	if($item->insert()){
+		$result["success"] = true;
+	}
+}else{
+	$result["errors"] = $item->errors;
+}
 
 echo json_encode($result);
