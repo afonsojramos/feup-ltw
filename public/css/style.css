@@ -91,6 +91,9 @@ input[type='submit'] {
 	display: block;
 }
 
+.hidden{
+	display:none!important;
+}
 .error {
 	background: rgb(255, 0, 0);
 	color: white;
