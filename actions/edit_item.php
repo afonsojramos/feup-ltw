@@ -13,7 +13,11 @@ if($item->load($_POST["itemId"])){
 	$todoList = new todoList();
 	if($todoList->load($item->todoListId)){
 		if ($todoList->verifyOwnership($_SESSION["userId"]){
-			$item->completed = $_POST["completed"]=="false"?0:1;
+			if($_POST["action"] == "completed"){
+				$item->completed = $_POST["completed"]=="false"?0:1;
+			} else if($_POST["action"] == "content"){
+				$item->content = $_POST["content"];
+			}
 			if ($item->update() !== false{
 				$result["success"] = true;
 			} else{
