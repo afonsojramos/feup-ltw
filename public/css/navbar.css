@@ -190,6 +190,14 @@
     color: #f1f1f1;
 }
 
+.sidenav .sidebar .dropdown .material-icons{
+	margin-top:-7px;
+}
+
+.sidenav .sidebar .dropdown .archived{
+	margin-top:-5px;
+}
+
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
     position: absolute;
