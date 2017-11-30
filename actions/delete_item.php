@@ -10,17 +10,17 @@ $item = new Item();
 if($item->load($_POST["itemId"])){
 	$item->todoListId;
 
-	$todoList = new todoList();
+	$todoList = new TodoList();
+
 	if($todoList->load($item->todoListId)){
 		if ($todoList->verifyOwnership($_SESSION["userId"]){
-			$item->completed = $_POST["completed"]=="false"?0:1;
-			if ($item->update() !== false{
+			if ($item->delete() !== false){
 				$result["success"] = true;
 			} else{
-				$result["errors"]= array("Could not update item");
+				$result["errors"]= array("Could not delete item");
 			}
 		} else{
-			$result["errors"]= array("No match for userId");
+			$result["errors"]= array("User is not the owner of the todoList");
 		}
 	}else {
 		$result["errors"] = array("Could not load todoListId");

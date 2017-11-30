@@ -275,7 +275,7 @@
 				$this->toUpdate = false;
 				return $result->rowCount();
 			}
-			return -1;
+			return false;
 		}
 
 		/**
