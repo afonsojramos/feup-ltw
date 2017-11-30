@@ -43,20 +43,66 @@ sidebar.addEventListener("click", function (e) { //if the click is in the same
 
 
 //----------------------------------------------todoItems
-let todoItems = document.getElementsByClassName("todoItem");
-Array.prototype.forEach.call(todoItems, function (checkbox) {
-	checkbox.addEventListener("change", function (e) {//when a checkbox state changes
-		let parentTodo = findParentByClass(checkbox, "todo");//get the <div class="todo"> above
+//change checked state of an item
+let todoCheckboxes = document.getElementsByClassName("todoItem");
+Array.prototype.forEach.call(todoCheckboxes, function (checkbox) {
+	checkbox.addEventListener("change", function (e) { //when a checkbox state changes
+		let parentTodo = findParentByClass(checkbox, "todo"); //get the <div class="todo"> above
 		let data = {
 			itemId: checkbox.getAttribute("data-itemId"),
-			// todoListId: checkbox.getAttribute("data-todoListId"),
-			completed: checkbox.checked
+			completed: checkbox.checked,
+			action: "completed"
 		};
-		request("actions/edit_item_checked.php", function (data) {
+		request("actions/edit_item.php", function (data) {
 			console.log(data);
 			if (!data.success) {
 				addErrorModalMessages(parentTodo, data.errors);
 			}
 		}, data, "post");
+	});
+});
+//add a new item to a TodoList
+let todoItemLabels = document.getElementsByClassName("todoItemLabel");
+Array.prototype.forEach.call(todoItemLabels, function (item) {
+	item.addEventListener("click", function (e) { //when a checkbox state changes
+		//create and display the input:text
+		let textBox = document.getElementById("editItem_" + item.getAttribute("data-itemId")).cloneNode();
+		textBox.edit = true;
+		item.parentNode.insertBefore(textBox, item.nextSibling);
+		textBox.classList.remove("hidden");
+		item.className += " hidden";
+		textBox.value = item.innerHTML;
+		textBox.focus();
+		//ad event listener for blur on the textbox
+		textBox.addEventListener("blur", function (a) {
+			textBox.className += " hidden";
+			item.classList.remove("hidden");
+			if (textBox.edit)
+				textBox.updateText();
+		});
+		//add event listener for keydown on the textbox
+		textBox.addEventListener('keydown', function (e) {
+			if (e.keyCode == 13) { //enter
+				textBox.blur();
+			} else if (e.keyCode == 27) { //ESC
+				textBox.edit = false;
+				textBox.blur();
+			}
+		});
+		//ajax request to update the text
+		textBox.updateText = function () {
+			let parentTodo = findParentByClass(item, "todo"); //get the <div class="todo"> above
+			let data = {
+				itemId: item.getAttribute("data-itemId"),
+				content: textBox.value,
+				action: "content"
+			};
+			request("actions/edit_item.php", function (data) {
+				console.log(data);
+				if (!data.success) {
+					addErrorModalMessages(parentTodo, data.errors);
+				}
+			}, data, "post");
+		};
 	});
 });
