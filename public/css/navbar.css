@@ -105,17 +105,19 @@
 /* Close button */
 
 .nav.search .material-icons.close {
-	cursor: pointer;
 	display: none;
 	position: absolute;
 	top: 11px;
 	right: 10px;
 }
+.material-icons.close {
+	cursor: pointer;
+}
 
 .nav.search:focus-within .material-icons.close {
 	display: inline-block;
 }
-.nav.search .material-icons.close:hover{
+.material-icons.close:hover{
 	color: #000;
 	border-radius: 99em;
 	background: rgba(0, 0, 0, 0.1);
