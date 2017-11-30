@@ -71,8 +71,9 @@ Array.prototype.forEach.call(todoItemLabels, function (item) {
 		item.parentNode.insertBefore(textBox, item.nextSibling);
 		textBox.classList.remove("hidden");
 		item.className += " hidden";
-		textBox.value = item.innerHTML;
+		textBox.value = "";
 		textBox.focus();
+		textBox.value = item.innerHTML;
 		//ad event listener for blur on the textbox
 		textBox.addEventListener("blur", function (a) {
 			textBox.className += " hidden";
@@ -106,3 +107,6 @@ Array.prototype.forEach.call(todoItemLabels, function (item) {
 		};
 	});
 });
+//remove todo list item
+let removeListItems = document.getElementsByClassName("removeListItem");
+console.log(removeListItems);
