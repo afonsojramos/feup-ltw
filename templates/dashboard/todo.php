@@ -4,7 +4,7 @@
 		<div class="todoListItem">
 			<input class="checkbox todoItem" id = "todoItem_<?= $item->itemId ?>" data-itemId="<?= $item->itemId ?>" type="checkbox"  <?= $item->completed ? "checked" : "" ?>><label class="todoItemLabel" data-itemId="<?= $item->itemId ?>" ><?= $item->content ?></label>
 			<input type="text" class="addItemTextBox hidden" id="editItem_<?= $item->itemId ?>">
-			<i class="material-icons close removeListItem">close</i>
+			<i class="material-icons close removeListItem show-on-hover">close</i>
 		</div>
 	<?php endforeach ?>
 	<div class="addItemContainer">
