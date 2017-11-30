@@ -11,10 +11,9 @@ if($item->load($_POST["itemId"])){
 	$item->todoListId;
 
 	$todoList = new todoList();
-
 	if($todoList->load($item->todoListId)){
 		if ($todoList->userId == $_SESSION["userId"]){
-			$item->completed = $_POST["completed"];
+			$item->completed = $_POST["completed"]=="false"?0:1;
 			if ($item->update() != -1){
 				$result["success"] = true;
 			} else{
