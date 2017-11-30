@@ -15,4 +15,5 @@ if($todoList->validate()){
 }else{
 	$result["errors"] = $todoList->errors;
 }
+
 echo json_encode($result);

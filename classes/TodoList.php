@@ -79,4 +79,8 @@ class TodoList extends QueryBuilder{
 		}
 		return $todos;
 	}
+
+	public function verifyOwnership($userId){
+		return $this->userId == $userId;
+	}
 }
