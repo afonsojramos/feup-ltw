@@ -30,7 +30,7 @@
 .todoItemLabel {
 	cursor: text;
 	margin-left: 5px;
-	min-width: 92%;
+	min-width: 80%;
     display: -webkit-inline-box;
 }
 
@@ -76,6 +76,10 @@
     display: -webkit-inline-box;
 }
 
+.todoListItem .close{
+	font-size: 18px;
+	float: right;
+}
 /* material Checkboxes */
 
 .checkbox {
