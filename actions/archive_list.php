@@ -12,13 +12,13 @@ if($todoList->load($_POST["todoListId"])){
 		if ($todoList->update !== false){
 			$result["success"] = true;
 		} else{
-			$result["errors"]= array("Could not archive todoList");
+			$result["errors"]= array("Could not archive Todo List");
 		}
 	} else{
-		$result["errors"]= array("User is not the owner of the todoList");
+		$result["errors"]= array("User has no permission to access Todo List");
 	}
 }else {
-	$result["errors"] = array("Could not load todoListId");
+	$result["errors"] = array("Could not load Todo List");
 }
 
 echo json_encode($result);

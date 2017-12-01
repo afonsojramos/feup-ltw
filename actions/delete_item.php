@@ -20,13 +20,13 @@ if ($item->load($_POST["itemId"])) {
 				$result["errors"] = array("Could not delete item");
 			}
 		} else {
-			$result["errors"] = array("User is not the owner of the todoList");
+			$result["errors"]= array("User has no permission to access Todo List");
 		}
 	} else {
-		$result["errors"] = array("Could not load todoListId");
+		$result["errors"] = array("Could not load Todo List");
 	}
 } else {
-	$result["errors"] = array("Could not load itemId");
+	$result["errors"] = array("Could not load Item");
 }
 
 echo json_encode($result);
