@@ -95,8 +95,8 @@ Array.prototype.forEach.call(todoItemLabels, function (item) {
 			let parentTodo = findParentByClass(item, "todo"); //get the <div class="todo"> above
 			let data = {
 				itemId: item.getAttribute("data-itemId"),
-				content: textBox.value,
-				action: "content"
+				action: "content",				
+				content: textBox.value
 			};
 			request("actions/edit_item.php", function (data) {
 				console.log(data);
@@ -107,6 +107,53 @@ Array.prototype.forEach.call(todoItemLabels, function (item) {
 		};
 	});
 });
-//remove todo list item
+//Remove Todo List Item
 let removeListItems = document.getElementsByClassName("removeListItem");
-console.log(removeListItems);
+Array.prototype.forEach.call(removeListItems, function (item) {
+	item.addEventListener("click", function (e) {
+		let parentTodo = findParentByClass(item, "todo"); 
+		let data = {
+			itemId: item.getAttribute("data-itemId")
+		};
+		request("actions/delete_item.php", function (data) {
+			console.log(data);
+			if (!data.success) {
+				addErrorModalMessages(parentTodo, data.errors);
+			}
+		}, data, "post");
+	});
+});
+//Remove Todo List
+let removeList = document.getElementsByClassName("delete");
+Array.prototype.forEach.call(removeList, function (list) {
+	list.addEventListener("click", function (e) {
+		let parentTodo = findParentByClass(list, "todo"); 
+		let data = {
+			todoListId: list.getAttribute("data-todoListId")
+		};		
+		request("actions/delete_list.php", function (data) {
+			console.log(data);
+			if (!data.success) {
+				addErrorModalMessages(parentTodo, data.errors);
+			}
+		}, data, "post");
+	});
+});
+//Archive Todo List
+let archiveList = document.getElementsByClassName("archive");
+Array.prototype.forEach.call(archiveList, function (list) {
+	list.addEventListener("click", function (e) {
+		let parentTodo = findParentByClass(list, "todo"); 
+		let data = {
+			todoListId: list.getAttribute("data-todoListId")
+		};		
+		console.log(data);
+		
+		request("actions/archive_list.php", function (data) {
+			console.log(data);
+			if (!data.success) {
+				addErrorModalMessages(parentTodo, data.errors);
+			}
+		}, data, "post");
+	});
+});
