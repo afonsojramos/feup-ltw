@@ -1,6 +1,6 @@
 'use strict';
 class editableOnClick {
-	constructor(element, textBox, updateText) {
+	constructor(element, textBox, updateText, startEmpty = false) {
 		this.element = element;
 		this.textBox = textBox;
 		this.updateText = updateText;
@@ -11,7 +11,7 @@ class editableOnClick {
 		this.element.className += " hidden";
 		this.textBox.value = "";
 		this.textBox.focus();
-		this.textBox.value = this.element.innerHTML;
+		this.textBox.value = startEmpty?"":this.element.innerHTML;
 		let self = this;
 		//ad event listener for blur on the textbox
 		this.textBox.addEventListener("blur", function (a) {

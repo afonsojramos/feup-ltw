@@ -17,9 +17,3 @@ form.addEventListener("submit", function (e) {
 	}, data, "post");
 	e.preventDefault();
 }, false);
-
-function displayNewTodoList(id){
-	request("templates/dashboard/todo.php", function (html) {
-		document.getElementsByClassName("todos")[0].appendChild(nodeFromHtml(html));
-	}, {todoListId: id});
-}
