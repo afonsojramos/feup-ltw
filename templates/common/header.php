@@ -14,4 +14,9 @@
 	<?php endforeach; ?>
 
 </head>
-<body>
+<?php
+	if ($PAGE["includeCSRF"])
+		echo "<body data-csrf='" . $_SESSION["csrf"] . "'>";
+	else
+		echo "<body>";
+?>

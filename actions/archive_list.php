@@ -2,6 +2,8 @@
 require_once(dirname(__FILE__)."/../includes/common/only_allow_login.php");
 require_once(dirname(__FILE__)."/../classes/TodoList.php");
 
+verifyCSRF($_POST['csrf']);
+
 $result = array("success"=>false);
 
 $todoList = new TodoList();
