@@ -1,12 +1,9 @@
 <?php
-
-require_once('token.php');
+require_once 'token.php';
 
 sessionStart();
 
-
-function sessionStart()
-{
+function sessionStart() {
 	if (session_status() != PHP_SESSION_ACTIVE) {
 		session_start();
 		session_regenerate_id(true);
@@ -16,7 +13,6 @@ function sessionStart()
 	}
 }
 
-function loggedIn()
-{
+function loggedIn() {
 	return isset($_SESSION['userId']);
 }
