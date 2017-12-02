@@ -42,9 +42,9 @@ body {
 	max-width: 35em;
 }
 
-.grid-small-margins{
-	margin-top:0em;
-	margin-bottom:2em;
+.grid-small-margins {
+	margin-top: 0em;
+	margin-bottom: 2em;
 }
 
 *,
@@ -91,18 +91,31 @@ input[type='submit'] {
 	display: block;
 }
 
-.hidden{
-	display:none!important;
+.hidden {
+	display: none!important;
 }
-.error {
-	background: rgb(255, 0, 0);
-	color: white;
-	margin-top: 4px;
-	margin-bottom: 4px;
-	width:100%;
+
+.error,
+.success {
+	position: absolute;
+    margin-top: -40px;
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	display: block;
 	border-radius: 5px;
-	animation: hideAnimation 0s ease-in-out 3s forwards;
+	animation: hideAnimation 0s ease-in-out 2s forwards;
 	animation-fill-mode: forwards;
+}
+
+.error {
+	background: red;
+	color: white;
+}
+
+.success {
+	background: green;
+	color: white;
 }
 
 .show-on-hover {
@@ -115,6 +128,16 @@ input[type='submit'] {
 .show-on-hover-parent:active .show-on-hover {
 	opacity: 1;
 	transition: opacity 0.3s ease-in-out;
+}
+
+
+/* Hide animation */
+
+@keyframes hideAnimation {
+	to {
+		opacity: 0;
+		height: 0;
+	}
 }
 
 

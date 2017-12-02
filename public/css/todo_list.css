@@ -31,7 +31,7 @@
 	cursor: text;
 	margin-left: 5px;
 	min-width: 80%;
-    display: -webkit-inline-box;
+	display: -webkit-inline-box;
 }
 
 .listFooter {
@@ -56,30 +56,35 @@
 /* Add items */
 
 .addItemContainer {
-	margin-top:5px;
-	cursor:pointer;
+	margin-top: 5px;
+	cursor: pointer;
 }
 
-.addItemContainer i.material-icons{
-	font-size:22px;
-	margin-left:-4px;
-}
-.addItemText{
-	color:#868686;
+.addItemContainer i.material-icons {
+	font-size: 22px;
+	margin-left: -4px;
 }
 
-.addItemTextBox{
+.addItemText {
+	color: #868686;
+	width: 90%;
+	display: inline-block;
+}
+
+.editItemTextBox {
 	border-radius: 2px;
 	padding-left: 5px;
 	margin-left: 2px;
 	min-width: 80%;
-    display: -webkit-inline-box;
+	display: -webkit-inline-box;
 }
 
-.todoListItem .close{
+.todoListItem .close {
 	font-size: 18px;
 	float: right;
 }
+
+
 /* material Checkboxes */
 
 .checkbox {

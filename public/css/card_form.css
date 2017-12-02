@@ -10,20 +10,19 @@
 .cardForm.split select,
 .cardForm.split input[type='password'] {
 	width: 70%;
-	right:0;
+	right: 0;
 }
-.cardForm.split span:not(.error){
-	width:30%;
+
+.cardForm.split span:not(.error):not(.success) {
+	width: 30%;
 	font-weight: bold;
-	display:inline-block;
+	display: inline-block;
 }
 
-
-.cardForm.split span.error{
-	width:90%;
+.cardForm.split span.error,
+.cardForm.split span.success {
+	width: 90%;
 }
-
-
 
 .cardForm .formHeader {
 	background-color: var(--default-accent-color);
