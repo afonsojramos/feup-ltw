@@ -7,6 +7,7 @@ $user = new User();
 $user->loadFromArray($_POST);//load user properties from post
 
 if($user->validate()){
+	$user->hashPassword();
 	if($user->duplicateUsername()){
 		$result["errors"] = array("username already exists");
 	}elseif($user->duplicateEmail()){
