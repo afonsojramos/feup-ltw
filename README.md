@@ -65,7 +65,7 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
  * Pages file names are _underscore_ separared, example: `produt_edit_members.php`;
  * Pages must have specific titles assigned, in the html title tag;
  * Use [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig);
- * Always use `'use strict';` at the beginning of all **javascript** files;
+ * Always use `'use strict';` at the beginning of **javascript** files;
  * Use `defer` in script tags inside the html, at the head, like so: `<script = "script.js" defer></script>`, or `async` if necessary;
  * Use `dirname(__FILE__)` when including/requiring files, example in the classes folder files:
 
@@ -80,12 +80,12 @@ require_once(dirname(__FILE__)."/connection.php");
 - [x] Register a new account
 - [x] Login into an account
 - [x] Logout of an account
-- [ ] Edit user profiles
-- [ ] List a user's todo lists
-- [ ] Create new todo list (that belongs to a user)
-- [ ] Add items to a todo list
-- [ ] Mark an item as complete
-- [ ] Delete a todo list
+- [x] Edit user profiles
+- [x] List a user's todo lists
+- [x] Create new todo list (that belongs to a user)
+- [x] Add items to a todo list
+- [x] Mark an item as complete
+- [x] Delete a todo list
 
 <h2 align="center">Extra</h2>
 
