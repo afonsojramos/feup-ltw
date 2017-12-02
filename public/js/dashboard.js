@@ -64,6 +64,7 @@ Array.prototype.forEach.call(todoCheckboxes, function (checkbox) {
 		}, data, "post");
 	});
 });
+
 //---------using editableOnClick start
 //add a new item to a TodoList
 let todoItemLabels = document.getElementsByClassName("todoItemLabel");
@@ -78,7 +79,7 @@ Array.prototype.forEach.call(todoItemLabels, function (item) {
 			};
 			myItem.doRequest("actions/edit_item.php", data, parentTodo);
 		};
-		let textBox = document.getElementById("editTitle_" + item.getAttribute("data-itemId")).cloneNode();
+		let textBox = document.getElementById("editItem_" + item.getAttribute("data-itemId")).cloneNode();
 		myItem = new editableOnClick(item, textBox, updateText);
 	});
 });

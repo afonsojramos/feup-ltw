@@ -19,6 +19,7 @@ class editableOnClick {
 			self.element.classList.remove("hidden");
 			if (self.textBox.edit)
 				self.updateText(self.textBox);
+			self.textBox.remove();
 		});
 		//add event listener for keydown on the textbox
 		this.textBox.addEventListener('keydown', function (e) {
