@@ -1,6 +1,7 @@
 <?php
-
 require_once(dirname(__FILE__)."/QueryBuilder.php");
+require_once(dirname(__FILE__)."/TodoList.php");
+
 class Item extends QueryBuilder{
 	public $itemId;//attributes that do not require update can be public
 	protected $completed;
@@ -51,5 +52,15 @@ class Item extends QueryBuilder{
 			$items[] = $item;
 		}
 		return $items;
+	}
+
+	public function verifyOwnership($userId){
+		$todoList = new TodoList();
+		if ($todoList->load($this->todoListId)) {
+			if ($todoList->verifyOwnership($userId)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

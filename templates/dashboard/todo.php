@@ -10,7 +10,7 @@ if (!isset($todo)) {
 			die("Unable to find list");
 		if (!$todo->verifyOwnership($_SESSION["userId"]))
 			die("No permission to see list");
-	}else {
+	} else {
 		die("Missing parameters");
 	}
 }
@@ -19,20 +19,18 @@ if (!isset($todo)) {
 
 <div class="todo show-on-hover-parent color-<?= $todo->colour ?>" id = "todo_<?= $todo->todoListId; ?>"  data-todoListId="<?= $todo->todoListId ?>" >
 	<h3 class="noMargin"><span class="todoTitle"><?= htmlentities($todo->title) ?></span></h3>
+	<div class="errors"></div>
 	<input type="text" class="hidden" id="editTitle_<?= $todo->todoListId ?>">
-	<?php foreach ($todo->items as $item) : ?>
-		<div class="todoListItem">
-			<input class="checkbox todoItem" id = "todoItem_<?= $item->itemId ?>" data-itemId="<?= $item->itemId ?>" type="checkbox"  <?= $item->completed ? "checked" : "" ?>><label class="todoItemLabel" data-itemId="<?= $item->itemId ?>" ><?= htmlentities($item->content) ?></label>
-			<input type="text" class="editItemTextBox hidden" id="editItem_<?= $item->itemId ?>">
-			<i class="material-icons close removeListItem show-on-hover" type="button">close</i>
-		</div>
-	<?php endforeach ?>
+	<div class="items">
+		<?php foreach ($todo->items as $item){
+			include("item.php");
+		} ?>
+	</div>
 	<div class="addItemContainer">
 		<i class="material-icons floatLeft">add</i>
 		<span class="addItemText"> Add a new item</span>
 		<input type="text" class="addItemText hidden" id="addItem_<?= $todo->todoListId ?>">
 	</div>
-	<div class="errors"></div>
 	<hr/>
 	<span class="listFooter show-on-hover">
 		<span class="archive"><a href="#"><i class="material-icons"><?= $todo->archived ? "unarchive" : "archive" ?></i></a></span>
