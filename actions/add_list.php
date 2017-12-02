@@ -4,16 +4,17 @@ require_once(dirname(__FILE__)."/../classes/TodoList.php");
 
 $result = array("success"=>false);
 
-$todoList = new TodoList();
-$todoList->userId = $_SESSION["userId"];
-$todoList->loadFromArray($_POST);//load todoList properties from post
+$todo = new TodoList();
+$todo->userId = $_SESSION["userId"];
+$todo->loadFromArray($_POST);//load todo properties from post
 
-if($todoList->validate()){
-	if($todoList->insert()){
+if($todo->validate()){
+	if($todo->insert()){
 		$result["success"] = true;
+		$result["todoListId"] = $todo->todoListId;
 	}
 }else{
-	$result["errors"] = $todoList->errors;
+	$result["errors"] = $todo->errors;
 }
 
 echo json_encode($result);
