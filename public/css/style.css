@@ -95,6 +95,10 @@ input[type='submit'] {
 	display: none!important;
 }
 
+.floatLeft {
+	float:left;
+}
+
 .error,
 .success {
 	position: absolute;
