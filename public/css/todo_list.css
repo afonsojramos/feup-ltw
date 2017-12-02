@@ -62,7 +62,8 @@ addItemContainer>* {
 
 .todoListItem .close {
 	font-size: 18px;
-	float: right;
+	position: absolute;
+	/* float: right; */
 }
 
 .addItemContainer {
