@@ -24,11 +24,11 @@ class User extends QueryBuilder{
 		parent::__construct();//call parent constructor, necessary for QueryBuilder
 	}
 
-	public function __set($name, $value){
-		if($name == "password"){
-			$value = password_hash($value, PASSWORD_DEFAULT);
-		}
-		return parent::__set($name, $value);
+	/**
+	 * Hash the current password, to be called befor insert and such
+	 */
+	public function hashPassword(){
+		$this->password = password_hash($this->password, PASSWORD_DEFAULT);
 	}
 
 	/**
