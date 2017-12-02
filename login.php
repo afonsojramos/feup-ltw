@@ -9,6 +9,7 @@
 
 <div class="grid shadow-2">
 	<form class="cardForm" action="actions/user/login.php" method="post">
+		<?php insertCsrfToken(); ?>
 		<header class="formHeader">
 			<h3 class="formTitle">Login</h3>
 		</header>

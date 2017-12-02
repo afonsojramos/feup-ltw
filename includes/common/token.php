@@ -8,7 +8,7 @@ function generate_random_token(){
 	return bin2hex(openssl_random_pseudo_bytes(32));
 }
 
-function insertHiddenToken(){
+function insertCsrfToken(){
 	echo '<input type="hidden" name="csrf" value="' . $_SESSION["csrf"] . '">';
 }
 

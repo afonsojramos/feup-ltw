@@ -18,7 +18,7 @@ $user = $user->load($_SESSION['userId']);
 <div class="container">
 	<div class="grid grid-long grid-small-margins shadow-1">
 		<form class="cardForm split" action="actions/user/edit_profile.php" method="post">
-		<?php insertHiddenToken(); ?>
+		<?php insertCsrfToken(); ?>
 			<div class="formHeader">
 				<h3 class="formTitle">Edit User Details</h3>
 			</div>
@@ -39,7 +39,7 @@ $user = $user->load($_SESSION['userId']);
 
 	<div class="grid grid-long grid-small-margins shadow-1">
 		<form class="cardForm split" id="changePassword" action="actions/user/edit_profile.php" method="post">
-		<?php insertHiddenToken(); ?>
+		<?php insertCsrfToken(); ?>
 			<div class="formHeader">
 				<h3 class="formTitle">Change Password</h3>
 			</div>
