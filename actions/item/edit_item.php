@@ -1,5 +1,10 @@
 <?php
 require_once(dirname(__FILE__) . "/../../includes/common/only_allow_login.php");
+verifyCSRF();
+
+require_once(dirname(__FILE__) . "/../../includes/common/check_request.php");
+verifyAttributes($_POST, ["itemId", "action"]);
+
 require_once(dirname(__FILE__) . "/../../classes/Item.php");
 require_once(dirname(__FILE__) . "/../../classes/TodoList.php");
 
@@ -15,8 +20,10 @@ if (!in_array($_POST["action"], ["completed", "content"])) {
 		if ($item->verifyOwnership($_SESSION["userId"])) {
 			//validate the answer
 			if ($_POST["action"] == "completed") {
+				verifyAttributes($_POST, ["completed"]);
 				$item->completed = $_POST["completed"] == "false" ? 0 : 1;
 			} else if ($_POST["action"] == "content") {
+				verifyAttributes($_POST, ["content"]);
 				$item->content = $_POST["content"];
 			}
 			//update the correct parameter

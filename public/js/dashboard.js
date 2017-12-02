@@ -123,6 +123,7 @@ let listAddItem = function (newItem) {
 			};
 			let itemsList = parentTodo.getElementsByClassName("items")[0];
 			request("actions/item/add_item.php", function (result) {
+				console.log(result);
 				if (result.success) {
 					displayNewTodoListItem(itemsList, result.itemId);
 				} else {

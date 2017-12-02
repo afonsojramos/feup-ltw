@@ -1,6 +1,12 @@
 <?php
 require_once(dirname(__FILE__) . "/../../includes/common/only_allow_login.php");
+verifyCSRF();
+
+require_once(dirname(__FILE__) . "/../../includes/common/check_request.php");
+verifyAttributes($_POST, ["content", "todoListId"]);
+
 require_once(dirname(__FILE__) . "/../../classes/TodoList.php");
+
 
 $result = array("success" => false);
 

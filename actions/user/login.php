@@ -1,15 +1,18 @@
 <?php
-	require_once(dirname(__FILE__)."/../../includes/common/session.php");
-	require_once(dirname(__FILE__)."/../../classes/User.php");
+require_once(dirname(__FILE__) . "/../../includes/common/session.php");
+verifyCSRF();
 
-	$result = array("success"=>false);
+require_once(dirname(__FILE__) . "/../../includes/common/check_request.php");
+verifyAttributes($_POST, ["username", "password"]);
 
-	if(isset($_POST["username"]) && isset($_POST["password"])){
-		$user = new User();
-		if($user->login($_POST)){
-			$result["success"] = true;
-			header("Location: ../../index.php");
-		}
-	}
+require_once(dirname(__FILE__) . "/../../classes/User.php");
 
-	echo json_encode($result);
+$result = array("success" => false);
+
+$user = new User();
+if ($user->login($_POST)) {
+	$result["success"] = true;
+	header("Location: ../../index.php");
+}
+
+echo json_encode($result);

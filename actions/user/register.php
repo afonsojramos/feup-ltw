@@ -1,4 +1,10 @@
 <?php
+require_once(dirname(__FILE__) . "/../../includes/common/session.php");
+verifyCSRF();
+
+require_once(dirname(__FILE__) . "/../../includes/common/check_request.php");
+verifyAttributes($_POST, ["username", "email", "password"]);
+
 require_once(dirname(__FILE__)."/../../classes/User.php");
 
 $result = array("success"=>false);

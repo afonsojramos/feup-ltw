@@ -10,13 +10,15 @@
  */
 
 require_once(dirname(__FILE__) . "/../../includes/common/only_allow_login.php");
-require_once(dirname(__FILE__) . "/../../classes/User.php");
+verifyCSRF();
 
-verifyCSRF($_POST['csrf']);
+require_once(dirname(__FILE__) . "/../../includes/common/check_request.php");
+require_once(dirname(__FILE__) . "/../../classes/User.php");
 
 $result = array("success" => false);
 
-if (isset($_POST['pwd1']) && isset($_POST['pwd2']) && $_POST['pwd1'] != "" && $_POST['pwd2'] != "") {
+if (isset($_POST['pwd1'])) {
+	verifyAttributes($_POST, ["pwd1", "pwd2"]);
 	/**
 	 * This is a password change. Let's treat it acordingly.
 	 */
@@ -45,6 +47,7 @@ if (isset($_POST['pwd1']) && isset($_POST['pwd2']) && $_POST['pwd1'] != "" && $_
 	/**
 	 * This is a username/email change.
 	 */
+	verifyAttributes($_POST, ["username", "email"]);
 
 	$user = new User();
 	if (!$user->load($_SESSION['userId'])) { //load user

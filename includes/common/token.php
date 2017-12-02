@@ -1,4 +1,5 @@
 <?php
+require_once(dirname(__FILE__) . "/check_request.php");
 
 /**
  * Token support functions
@@ -11,8 +12,9 @@ function insertHiddenToken(){
 	echo '<input type="hidden" name="csrf" value="' . $_SESSION["csrf"] . '">';
 }
 
-function verifyCSRF($arg){
-	if ($_SESSION['csrf'] !== $arg) {
+function verifyCSRF(){
+	verifyAttributes($_POST, ["csrf"]);
+	if ($_SESSION['csrf'] !== $_POST["csrf"]) {
 		$result = array("success" => false);
 		$result["errors"] = array("token mismatch.");
 		echo json_encode($result);

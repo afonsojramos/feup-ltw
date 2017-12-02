@@ -1,8 +1,11 @@
 <?php
 require_once(dirname(__FILE__)."/../../includes/common/only_allow_login.php");
-require_once(dirname(__FILE__)."/../../classes/TodoList.php");
+verifyCSRF();
 
-verifyCSRF($_POST['csrf']);
+require_once(dirname(__FILE__) . "/../../includes/common/check_request.php");
+verifyAttributes($_POST, ["todoListId", "archived"]);
+
+require_once(dirname(__FILE__)."/../../classes/TodoList.php");
 
 $result = array("success"=>false);
 
