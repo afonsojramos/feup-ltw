@@ -7,13 +7,19 @@ form.addEventListener("submit", function (e) {
 		data[key] = value;
 	}
 	request("actions/add_list.php", function (data) {
-		console.log(data); //TODO show the list directly
 		if(data.success){
 			form.style.display = "none";
 			form.reset();
+			displayNewTodoList(data.todoListId);
 		}else{
-			addErrorModalMessages(form, data.errors);
+			addErrorMessage(form, data.errors);
 		}
 	}, data, "post");
 	e.preventDefault();
 }, false);
+
+function displayNewTodoList(id){
+	request("templates/dashboard/todo.php", function (html) {
+		document.getElementsByClassName("todos")[0].appendChild(nodeFromHtml(html));
+	}, {todoListId: id});
+}

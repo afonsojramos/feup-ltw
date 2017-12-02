@@ -1,9 +1,29 @@
+<?php
+require_once(dirname(__FILE__) . "/../../includes/common/only_allow_login.php");
+require_once(dirname(__FILE__) . "/../../classes/TodoList.php");
+$todo;
+if (!isset($todo)) {
+	if (isset($_GET["todoListId"])) {
+		global $todo;
+		$todo = new TodoList();
+		if (!$todo->load($_GET["todoListId"]))
+			die("Unable to find list");
+		if (!$todo->verifyOwnership($_SESSION["userId"]))
+			die("No permission to see list");
+	}else {
+		die("Missing parameters");
+	}
+}
+?>
+
+
 <div class="todo show-on-hover-parent color-<?= $todo->colour ?>" id = "todo_<?= $todo->todoListId; ?>"  data-todoListId="<?= $todo->todoListId ?>" >
-	<h3 class="noMargin"><?= htmlentities($todo->title) ?></h3>
+	<h3 class="noMargin"><span class="todoTitle"><?= htmlentities($todo->title) ?></span></h3>
+	<input type="text" class="hidden" id="editTitle_<?= $todo->todoListId ?>">
 	<?php foreach ($todo->items as $item) : ?>
 		<div class="todoListItem">
-			<input class="checkbox todoItem" id = "todoItem_<?= $item->itemId ?>" data-itemId="<?= $item->itemId ?>" type="checkbox"  <?= $item->completed ? "checked" : "" ?>><label class="todoItemLabel" data-itemId="<?= $item->itemId ?>" ><?= $item->content ?></label>
-			<input type="text" class="addItemTextBox hidden" id="editItem_<?= $item->itemId ?>">
+			<input class="checkbox todoItem" id = "todoItem_<?= $item->itemId ?>" data-itemId="<?= $item->itemId ?>" type="checkbox"  <?= $item->completed ? "checked" : "" ?>><label class="todoItemLabel" data-itemId="<?= $item->itemId ?>" ><?= htmlentities($item->content) ?></label>
+			<input type="text" class="editItemTextBox hidden" id="editItem_<?= $item->itemId ?>">
 			<i class="material-icons close removeListItem show-on-hover" type="button">close</i>
 		</div>
 	<?php endforeach ?>
@@ -11,6 +31,7 @@
 		<span>
 			<i class="material-icons">add</i>
 			<span class="addItemText"> Add a new item</span>
+			<input type="text" class="addItemText hidden" id="addItem_<?= $todo->todoListId ?>">
 		</span>
 	</div>
 	<div class="errors"></div>

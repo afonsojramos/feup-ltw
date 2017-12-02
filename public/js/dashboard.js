@@ -56,104 +56,124 @@ Array.prototype.forEach.call(todoCheckboxes, function (checkbox) {
 		request("actions/edit_item.php", function (data) {
 			console.log(data);
 			if (!data.success) {
-				addErrorModalMessages(parentTodo, data.errors);
+				addErrorMessage(parentTodo, data.errors);
 			}
 		}, data, "post");
 	});
 });
+//---------using editableOnClick start
 //add a new item to a TodoList
 let todoItemLabels = document.getElementsByClassName("todoItemLabel");
 Array.prototype.forEach.call(todoItemLabels, function (item) {
-	item.addEventListener("click", function (e) { //when a checkbox state changes
-		//create and display the input:text
-		let textBox = document.getElementById("editItem_" + item.getAttribute("data-itemId")).cloneNode();
-		textBox.edit = true;
-		item.parentNode.insertBefore(textBox, item.nextSibling);
-		textBox.classList.remove("hidden");
-		item.className += " hidden";
-		textBox.value = "";
-		textBox.focus();
-		textBox.value = item.innerHTML;
-		//ad event listener for blur on the textbox
-		textBox.addEventListener("blur", function (a) {
-			textBox.className += " hidden";
-			item.classList.remove("hidden");
-			if (textBox.edit)
-				textBox.updateText();
-		});
-		//add event listener for keydown on the textbox
-		textBox.addEventListener('keydown', function (e) {
-			if (e.keyCode == 13) { //enter
-				textBox.blur();
-			} else if (e.keyCode == 27) { //ESC
-				textBox.edit = false;
-				textBox.blur();
-			}
-		});
-		//ajax request to update the text
-		textBox.updateText = function () {
-			let parentTodo = findParentByClass(item, "todo"); //get the <div class="todo"> above
+	let myItem, parentTodo = findParentByClass(item, "todo"); //get the <div class="todo"> above
+	item.addEventListener("click", function (e) {
+		let updateText = function (textBox) {
 			let data = {
 				itemId: item.getAttribute("data-itemId"),
-				action: "content",				
+				action: "content",
 				content: textBox.value
 			};
-			request("actions/edit_item.php", function (data) {
-				console.log(data);
-				if (!data.success) {
-					addErrorModalMessages(parentTodo, data.errors);
-				}
-			}, data, "post");
+			myItem.doRequest("actions/edit_item.php", data, parentTodo);
 		};
+		let textBox = document.getElementById("editTitle_" + item.getAttribute("data-itemId")).cloneNode();
+		myItem = new editableOnClick(item, textBox, updateText);
 	});
 });
+//edit the TodoLists' title
+let todolistsTitles = document.getElementsByClassName("todoTitle");
+Array.prototype.forEach.call(todolistsTitles, function (title) {
+	title.addEventListener("click", function (e) { //when a checkbox state changes
+		let myItem, parentTodo = findParentByClass(title, "todo"); //get the <div class="todo"> above
+		let updateText = function (textBox) {
+			let data = {
+				todoListId: title.getAttribute("data-todoListId"),
+				title: textBox.value
+			};
+			myItem.doRequest("actions/edit_list.php", data, parentTodo);
+		};
+		let textBox = document.getElementById("editTitle_" + parentTodo.getAttribute("data-todoListId")).cloneNode();
+		myItem = new editableOnClick(title, textBox, updateText);
+	});
+});
+let todoListNewItems = document.getElementsByClassName("addItemText");
+Array.prototype.forEach.call(todoListNewItems, function (newItem) {
+	newItem.addEventListener("click", function (e) { //when a checkbox state changes
+		let myItem, parentTodo = findParentByClass(newItem, "todo"); //get the <div class="todo"> above
+		let updateText = function (textBox) {
+			let data = {
+				todoListId: newItem.getAttribute("data-todoListId"),
+				content: textBox.value
+			};
+			myItem.doRequest("actions/add_item.php", data, parentTodo, function(data){
+				console.log("here");
+				parentTodo.appendChild(nodeFromHtml("<h3>TODO add to the right place</h3>"));
+			});
+		};
+		let textBox = document.getElementById("addItem_" + parentTodo.getAttribute("data-todoListId")).cloneNode();
+		myItem = new editableOnClick(newItem, textBox, updateText);
+	});
+});
+//---------using editableOnClick end
+
 //Remove Todo List Item
 let removeListItems = document.getElementsByClassName("removeListItem");
 Array.prototype.forEach.call(removeListItems, function (item) {
 	item.addEventListener("click", function (e) {
-		let parentTodo = findParentByClass(item, "todo"); 
+		let parentTodo = findParentByClass(item, "todo");
 		let data = {
 			itemId: item.getAttribute("data-itemId")
 		};
 		request("actions/delete_item.php", function (data) {
 			console.log(data);
 			if (!data.success) {
-				addErrorModalMessages(parentTodo, data.errors);
+				addErrorMessage(parentTodo, data.errors);
 			}
 		}, data, "post");
 	});
 });
-//Remove Todo List
-let removeList = document.getElementsByClassName("delete");
-Array.prototype.forEach.call(removeList, function (list) {
-	list.addEventListener("click", function (e) {
-		let parentTodo = findParentByClass(list, "todo"); 
-		let data = {
-			todoListId: list.getAttribute("data-todoListId")
-		};		
-		request("actions/delete_list.php", function (data) {
-			console.log(data);
-			if (!data.success) {
-				addErrorModalMessages(parentTodo, data.errors);
-			}
-		}, data, "post");
-	});
-});
-//Archive Todo List
-let archiveList = document.getElementsByClassName("archive");
-Array.prototype.forEach.call(archiveList, function (list) {
-	list.addEventListener("click", function (e) {
-		let parentTodo = findParentByClass(list, "todo"); 
-		let data = {
-			todoListId: list.getAttribute("data-todoListId")
-		};		
-		console.log(data);
-		
-		request("actions/archive_list.php", function (data) {
-			console.log(data);
-			if (!data.success) {
-				addErrorModalMessages(parentTodo, data.errors);
-			}
-		}, data, "post");
+//Handle AJAX for remove, archive and share buttons/actions
+//callbacks
+let listDeleted = function (parentTodo, actionBtn, data) {
+	parentTodo.remove();
+};
+let listArchived = function (parentTodo, actionBtn, data) {
+	parentTodo.remove();
+};
+let listShared = function (parentTodo, actionBtn, data) {
+	parentTodo.remove();
+};
+//enumeration
+let todoListActions = [{
+		name: "delete",
+		callback: listDeleted
+	},
+	{
+		name: "archive",
+		callback: listArchived
+	},
+	{
+		name: "share",
+		callback: listShared
+	}
+];
+//creation of listeners
+todoListActions.forEach(action => {
+	let actionList = document.getElementsByClassName(action.name); //get all the action buttons for every list
+	Array.prototype.forEach.call(actionList, function (actionBtn) {
+		actionBtn.addEventListener("click", function (e) { //add listener to each action button
+			let parentTodo = findParentByClass(actionBtn, "todo"); //get the parent <div class="todo"
+			let data = {
+				todoListId: parentTodo.getAttribute("data-todoListId")
+			}; //ajax post data
+			//send ajax request
+			request("actions/" + action.name + "_list.php", function (result) {
+				console.log(result);
+				if (!result.success) { //on errors
+					addErrorMessage(parentTodo, result.errors);
+				} else {
+					action.callback(parentTodo, actionBtn, data); //invoke callback
+				}
+			}, data, "post");
+		});
 	});
 });

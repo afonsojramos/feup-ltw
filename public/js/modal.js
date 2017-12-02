@@ -20,6 +20,7 @@ for (const modal of modals) {//adds listeners and behaviour for every modal
 			});
 			btnThatOpens.onclick = function (e) {
 				modal.style.display = "block";
+				modal.getElementsByTagName("input")[0].focus();
 			};
 			if(span != undefined){
 				span.onclick = function () {
