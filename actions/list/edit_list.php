@@ -12,17 +12,17 @@ $result = array("success" => false);
 $todoList = new TodoList();
 
 if($todoList->load($_POST["todoListId"])){
-	if ($todoList->verifyOwnership($_SESSION["userId"])){
+	if ($todoList->verifyOwnership($_SESSION["userId"])) {
 		$todoList->title = $_POST["title"];
-		if ($todoList->update() !== false){
+		if ($todoList->update() !== false) {
 			$result["success"] = true;
-		} else{
+		} else {
 			$result["errors"]= array("Could not delete Todo List");
 		}
-	} else{
+	} else {
 		$result["errors"]= array("User has no permission to access Todo List");
 	}
-}else {
+} else {
 	$result["errors"] = array("Could not load Todo List");
 }
 
