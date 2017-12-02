@@ -1,5 +1,6 @@
 
 <form class="modal" opener="openAddListModal" id ="modalAddList">
+	<div class="errors"></div>
 	<div class="modalContent cardForm grid">
 		<div class="formHeader">
 			<h3 class="formTitle">New Todo List</h3>
@@ -27,7 +28,6 @@
 					<option class="grey" value="grey">Grey</option>
 				</select>
 			</div>
-			<div class="errors"></div>
 		</div>
 		<footer class="formFooter">
 			<input class="_closeModal" type="submit" value="Add">
