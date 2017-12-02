@@ -1,6 +1,6 @@
 <nav class="navbar">
 	<div class="container">
-		<?php if (isset($PAGE["showSideBar"])): ?>
+		<?php if ($PAGE["showSideBar"]): ?>
 			<a class="navLeft" onclick="toggleSideBar()"><i class="material-icons">menu</i></a>
 		<?php endif ?>
 		<h1 class="logo"><a href="index.php"><i class="material-icons md-36">dashboard</i> 4Me2Do</a></h1>
