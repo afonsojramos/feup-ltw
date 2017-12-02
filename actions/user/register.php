@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__)."/../classes/User.php");
+require_once(dirname(__FILE__)."/../../classes/User.php");
 
 $result = array("success"=>false);
 

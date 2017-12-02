@@ -56,7 +56,7 @@ let itemChangeCompleted = function (checkbox) { //when a checkbox state changes
 			completed: checkbox.checked,
 			action: "completed"
 		};
-		request("actions/edit_item.php", function (data) {
+		request("actions/item/edit_item.php", function (data) {
 			if (!data.success) {
 				addErrorMessage(parentTodo, data.errors);
 			}
@@ -74,7 +74,7 @@ let itemChangeContent = function (item) {
 				action: "content",
 				content: textBox.value
 			};
-			myItem.doRequest("actions/edit_item.php", data, parentTodo);
+			myItem.doRequest("actions/item/edit_item.php", data, parentTodo);
 		};
 		let textBox = document.getElementById("editItem_" + parentItem.getAttribute("data-itemId")).cloneNode();
 		myItem = new editableOnClick(item, textBox, updateText);
@@ -88,7 +88,7 @@ let itemDeleteItem = function (item) {
 		let data = {
 			itemId: parentItem.getAttribute("data-itemId")
 		};
-		request("actions/delete_item.php", function (data) {
+		request("actions/item/delete_item.php", function (data) {
 			if (data.success) {
 				parentItem.remove();
 			} else {
@@ -106,7 +106,7 @@ let listEditTitle = function (title) {
 				todoListId: title.getAttribute("data-todoListId"),
 				title: textBox.value
 			};
-			myItem.doRequest("actions/edit_list.php", data, parentTodo);
+			myItem.doRequest("actions/list/edit_list.php", data, parentTodo);
 		};
 		let textBox = document.getElementById("editTitle_" + parentTodo.getAttribute("data-todoListId")).cloneNode();
 		myItem = new editableOnClick(title, textBox, updateText);
@@ -122,7 +122,7 @@ let listAddItem = function (newItem) {
 				content: textBox.value
 			};
 			let itemsList = parentTodo.getElementsByClassName("items")[0];
-			request("actions/add_item.php", function (result) {
+			request("actions/item/add_item.php", function (result) {
 				if (result.success) {
 					displayNewTodoListItem(itemsList, result.itemId);
 				} else {
@@ -152,7 +152,7 @@ let simpleRequestListener = function (actionBtn, action) {
 		let data = {
 			todoListId: parentTodo.getAttribute("data-todoListId")
 		}; //ajax post data
-		request("actions/" + action.class + "_list.php", function (result) { //send ajax request
+		request("actions/list/" + action.class + "_list.php", function (result) { //send ajax request
 			if (!result.success) { //on errors
 				addErrorMessage(parentTodo, result.errors);
 			} else {

@@ -8,7 +8,7 @@
 ?>
 
 <div class="grid shadow-2">
-	<form class="cardForm" action="actions/login.php" method="post">
+	<form class="cardForm" action="actions/user/login.php" method="post">
 		<header class="formHeader">
 			<h3 class="formTitle">Login</h3>
 		</header>

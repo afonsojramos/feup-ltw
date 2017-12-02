@@ -1,7 +1,7 @@
 <?php
-require_once(dirname(__FILE__) . "/../includes/common/only_allow_login.php");
-require_once(dirname(__FILE__) . "/../classes/Item.php");
-require_once(dirname(__FILE__) . "/../classes/TodoList.php");
+require_once(dirname(__FILE__) . "/../../includes/common/only_allow_login.php");
+require_once(dirname(__FILE__) . "/../../classes/Item.php");
+require_once(dirname(__FILE__) . "/../../classes/TodoList.php");
 
 $result = array("success" => false);
 

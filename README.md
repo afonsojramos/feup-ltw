@@ -34,16 +34,16 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
 		* If login -> redirect to `dashboard.php`
 	* dashboard.php - main interface page that shows the projects, the todo lists cards and other utilities
 	* register.php - display the register form in a single page
-		* calls the `actions/register.php` with post values.
-	* actions/register.php - receive a `POST` to try to register a user
+		* calls the `actions/user/register.php` with post values.
+	* actions/user/register.php - receive a `POST` to try to register a user
 		* redirect to `login.php` on success
 		* redirect to `register.php` on failure, with the errors (as GET parameters or in a `$_SESSION` variable)
-	* login.php - display the login form in a single page, can receive an `email` as GET and fills it automatically, redirects to `actions/login.php`
-	* actions/login.php - receives a `POST` and tries to login a user
+	* login.php - display the login form in a single page, can receive an `email` as GET and fills it automatically, redirects to `actions/user/login.php`
+	* actions/user/login.php - receives a `POST` and tries to login a user
 		* return JSON response with boolean success and optional errors array
-	* actions/logout.php -  log out the user and redirect to `index.php`
-	* edit_profile.php - accessible only for logged users, displays a form to edit the user profile, calls `actions/edit_profile.php`
-	* actions/edit_profile.php - receives a `POST` request to edit a user's profile
+	* actions/user/logout.php -  log out the user and redirect to `index.php`
+	* edit_profile.php - accessible only for logged users, displays a form to edit the user profile, calls `actions/user/edit_profile.php`
+	* actions/user/edit_profile.php - receives a `POST` request to edit a user's profile
 		* redirect to ?????.php on success
 		* redirect to `edit_profile.php` on failure, with the errors
 	* user.php?id={userId} - accessible only for logged users, displays a user profile that is "readonly"

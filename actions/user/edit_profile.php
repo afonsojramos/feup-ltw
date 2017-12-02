@@ -9,8 +9,8 @@
  *
  */
 
-require_once(dirname(__FILE__) . "/../includes/common/only_allow_login.php");
-require_once(dirname(__FILE__) . "/../classes/User.php");
+require_once(dirname(__FILE__) . "/../../includes/common/only_allow_login.php");
+require_once(dirname(__FILE__) . "/../../classes/User.php");
 
 verifyCSRF($_POST['csrf']);
 

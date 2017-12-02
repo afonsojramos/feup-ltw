@@ -1,6 +1,8 @@
 <?php
-require_once(dirname(__FILE__)."/../includes/common/only_allow_login.php");
-require_once(dirname(__FILE__)."/../classes/TodoList.php");
+require_once(dirname(__FILE__)."/../../includes/common/only_allow_login.php");
+require_once(dirname(__FILE__)."/../../classes/TodoList.php");
+
+verifyCSRF($_POST['csrf']);
 
 $result = array("success"=>false);
 
@@ -8,10 +10,11 @@ $todoList = new TodoList();
 
 if($todoList->load($_POST["todoListId"])){
 	if ($todoList->verifyOwnership($_SESSION["userId"])){
-		if ($todoList->delete() !== false){
+		$todoList->archived = $_POST["archived"]=="false"?0:1;
+		if ($todoList->update !== false){
 			$result["success"] = true;
 		} else{
-			$result["errors"]= array("Could not delete Todo List");
+			$result["errors"]= array("Could not archive Todo List");
 		}
 	} else{
 		$result["errors"]= array("User has no permission to access Todo List");

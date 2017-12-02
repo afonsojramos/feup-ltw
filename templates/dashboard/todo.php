@@ -32,6 +32,11 @@ if (!isset($todo)) {
 		<input type="text" class="addItemText hidden" id="addItem_<?= $todo->todoListId ?>">
 	</div>
 	<hr/>
+	<div class="tags">
+	<?php foreach ($todo->getTags() as $tag) :?>
+		<a href="search.php?tag=<?= urlencode($tag) ?>"class="tag"><?= htmlentities($tag) ?></a>
+	<?php endforeach ?>
+	</div>
 	<span class="listFooter show-on-hover">
 		<span class="archive"><a href="#"><i class="material-icons"><?= $todo->archived ? "unarchive" : "archive" ?></i></a></span>
 		<span class="delete"><a href="#"><i class="material-icons">delete</i></a></span>

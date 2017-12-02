@@ -1,6 +1,6 @@
 <?php
-	require_once(dirname(__FILE__)."/../includes/common/session.php");
-	require_once(dirname(__FILE__)."/../classes/User.php");
+	require_once(dirname(__FILE__)."/../../includes/common/session.php");
+	require_once(dirname(__FILE__)."/../../classes/User.php");
 
 	$result = array("success"=>false);
 
@@ -8,7 +8,7 @@
 		$user = new User();
 		if($user->login($_POST)){
 			$result["success"] = true;
-			header("Location: ../index.php");
+			header("Location: ../../index.php");
 		}
 	}
 

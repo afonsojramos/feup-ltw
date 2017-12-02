@@ -6,7 +6,7 @@ form.addEventListener("submit", function (e) {
 	for (let [key, value] of formData.entries()) {
 		data[key] = value;
 	}
-	request("actions/add_list.php", function (data) {
+	request("actions/list/add_list.php", function (data) {
 		if(data.success){
 			form.style.display = "none";
 			form.reset();

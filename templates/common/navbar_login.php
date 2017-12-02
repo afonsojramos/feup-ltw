@@ -11,7 +11,7 @@
 		</div>
 		<ul class="nav navRight">
 			<li><a href="edit_profile.php"><i class="material-icons">account_circle</i> Edit Profile</a></li>
-			<li><a href="actions/logout.php"><i class="material-icons">exit_to_app</i> Logout</a></li>
+			<li><a href="actions/user/logout.php"><i class="material-icons">exit_to_app</i> Logout</a></li>
 		</ul>
 	</div>
 </nav>

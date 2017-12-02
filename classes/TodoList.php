@@ -83,4 +83,8 @@ class TodoList extends QueryBuilder{
 	public function verifyOwnership($userId){
 		return $this->userId == $userId;
 	}
+
+	public function getTags(){
+		return array_filter(explode(",", trim($this->tags)));
+	}
 }
