@@ -52,7 +52,15 @@
 	color: var(--dark-primary-color);
 }
 
-
+.tag{
+	font-weight: 300;
+}
+.tag::after{
+	content: " |";
+}
+.todo.colour-white .tag{
+	color:#535353
+}
 /* Add items */
 
 .todoListItem>*,
