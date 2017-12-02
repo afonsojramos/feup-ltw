@@ -80,12 +80,12 @@ require_once(dirname(__FILE__)."/connection.php");
 - [x] Register a new account
 - [x] Login into an account
 - [x] Logout of an account
-- [ ] Edit user profiles
-- [ ] List a user's todo lists
-- [ ] Create new todo list (that belongs to a user)
-- [ ] Add items to a todo list
-- [ ] Mark an item as complete
-- [ ] Delete a todo list
+- [x] Edit user profiles
+- [x] List a user's todo lists
+- [x] Create new todo list (that belongs to a user)
+- [x] Add items to a todo list
+- [x] Mark an item as complete
+- [x] Delete a todo list
 
 <h2 align="center">Extra</h2>
 
