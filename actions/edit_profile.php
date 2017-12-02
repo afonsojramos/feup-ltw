@@ -12,9 +12,9 @@
 require_once(dirname(__FILE__) . "/../includes/common/only_allow_login.php");
 require_once(dirname(__FILE__) . "/../classes/User.php");
 
-$result = array("success" => false);
-
 verifyCSRF($_POST['csrf']);
+
+$result = array("success" => false);
 
 if (isset($_POST['pwd1']) && isset($_POST['pwd2']) && $_POST['pwd1'] != "" && $_POST['pwd2'] != "") {
 	/**
@@ -33,6 +33,7 @@ if (isset($_POST['pwd1']) && isset($_POST['pwd2']) && $_POST['pwd1'] != "" && $_
 	}
 
 	if ($user->validate()) {
+		$user->hashPassword();
 		if ($user->clear()->update() == 1) {
 			$result["success"] = true;
 		}
