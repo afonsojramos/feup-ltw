@@ -17,7 +17,7 @@ class TodoList extends QueryBuilder{
 	public static $ignoreProperties = array("items");//properties to ignore on the sql building
 	public static $validationRules = array(//validation rules for update method
 		"title"=>"length:3:200",
-		"colour"=>"in:white:red:orange:yellow:green:teal:blue:indigo:purple:pink:brown:grey"
+		"colour"=>"in:white:red:orange:yellow:green:teal:blue:purple:pink:brown"
 	);
 
 	public function __construct($todoListId = null, $title = "", $tags = "", $colour = "white", $archived = false, $link = "", $userId = -1, $projectId = 0){

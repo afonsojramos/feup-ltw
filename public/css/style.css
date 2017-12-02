@@ -96,14 +96,14 @@ input[type='submit'] {
 }
 
 .floatLeft {
-	float:left;
+	float: left;
 }
 
 .error,
 .success {
 	position: relative;
-    margin-top: 10px;
-    margin-bottom: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	width: 100%;
 	margin-right: auto;
 	margin-left: auto;
@@ -134,6 +134,7 @@ input[type='submit'] {
 	opacity: 1;
 	transition: opacity 0.3s ease-in-out;
 }
+
 
 /* responsive container */
 
@@ -226,11 +227,6 @@ option.teal {
 option.blue {
 	background-color: #2196F3;
 	color: #FFFFFF;
-}
-
-option.indigo {
-	background-color: #3F51B5;
-	color: #000000;
 }
 
 option.purple {

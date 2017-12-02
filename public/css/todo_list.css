@@ -82,6 +82,10 @@ addItemContainer>* {
 	display: inline-block;
 }
 
+input.addItemText {
+	box-shadow: 1px 0px 1px 0px black;
+}
+
 .editItemTextBox {
 	border-radius: 2px;
 	padding-left: 5px;
@@ -134,6 +138,99 @@ addItemContainer>* {
 	height: 1.1rem;
 	background: transparent;
 	cursor: pointer;
+}
+
+
+/* Todo Colors */
+
+.todo.colour-red,
+.todo.colour-red input.addItemText {
+	background-color: #E57373;
+}
+
+.todo.colour-orange,
+.todo.colour-orange input.addItemText {
+	background-color: #FFB74D;
+}
+
+.todo.colour-yellow,
+.todo.colour-yellow input.addItemText {
+	background-color: #FFF176;
+}
+
+.todo.colour-green,
+.todo.colour-green input.addItemText {
+	background-color: #81C784;
+}
+
+.todo.colour-purple,
+.todo.colour-purple input.addItemText {
+	background-color: #CE93D8;
+}
+
+.todo.colour-blue,
+.todo.colour-blue input.addItemText {
+	background-color: #64B5F6;
+}
+
+.todo.colour-teal,
+.todo.colour-teal input.addItemText {
+	background-color: #4DB6AC;
+}
+
+.todo.colour-pink,
+.todo.colour-pink input.addItemText {
+	background-color: #F06292;
+}
+
+.todo.colour-brown,
+.todo.colour-brown input.addItemText {
+	background-color: #BCAAA4;
+}
+
+.todo.colour-red hr,
+.todo.colour-orange hr,
+.todo.colour-yellow hr,
+.todo.colour-green hr,
+.todo.colour-blue hr,
+.todo.colour-teal hr,
+.todo.colour-pink hr,
+.todo.colour-brown hr,
+.todo.colour-purple hr {
+	border-color: black;
+}
+
+.todo.colour-red .checkbox:before,
+.todo.colour-pink .checkbox:before {
+	border: 2px solid black;
+}
+
+.todo.colour-red .addItemText,
+.todo.colour-green .addItemText,
+.todo.colour-yellow .addItemText,
+.todo.colour-orange .addItemText,
+.todo.colour-blue .addItemText,
+.todo.colour-teal .addItemText,
+.todo.colour-pink .addItemText,
+.todo.colour-brown .addItemText,
+.todo.colour-purple .addItemText {
+	color: black;
+}
+
+.todo.colour-red .checkbox:checked:before,
+.todo.colour-orange .checkbox:checked:before,
+.todo.colour-pink .checkbox:checked:before {
+	border-top-style: none;
+	border-right-style: none;
+}
+
+.todo.colour-red .checkbox:checked:before,
+.todo.colour-pink .checkbox:checked:before {
+	border-color: var(--default-primary-color);
+}
+
+.todo.colour-orange .checkbox:checked:before {
+	border-color: var(--default-text-color);
 }
 
 

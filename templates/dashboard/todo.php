@@ -17,7 +17,7 @@ if (!isset($todo)) {
 ?>
 
 
-<div class="todo show-on-hover-parent color-<?= $todo->colour ?>" id = "todo_<?= $todo->todoListId; ?>"  data-todoListId="<?= $todo->todoListId ?>" >
+<div class="todo show-on-hover-parent colour-<?= $todo->colour ?>" id = "todo_<?= $todo->todoListId; ?>"  data-todoListId="<?= $todo->todoListId ?>" >
 	<h3 class="noMargin"><span class="todoTitle"><?= htmlentities($todo->title) ?></span></h3>
 	<div class="errors"></div>
 	<input type="text" class="hidden" id="editTitle_<?= $todo->todoListId ?>">

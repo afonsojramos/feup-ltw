@@ -17,7 +17,7 @@ CREATE TABLE `projects` (
 );
 
 --insert projects
-INSERT INTO `projects` VALUES (NULL, "Best Project", " really good <script>alert('xss');</script>", "indigo");
+INSERT INTO `projects` VALUES (NULL, "Best Project", " really good <script>alert('xss');</script>", "yellow");
 
 CREATE TABLE `members` (
   `userId` INTEGER NOT NULL,
