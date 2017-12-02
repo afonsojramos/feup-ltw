@@ -28,11 +28,9 @@ if (!isset($todo)) {
 		</div>
 	<?php endforeach ?>
 	<div class="addItemContainer">
-		<span>
-			<i class="material-icons">add</i>
-			<span class="addItemText"> Add a new item</span>
-			<input type="text" class="addItemText hidden" id="addItem_<?= $todo->todoListId ?>">
-		</span>
+		<i class="material-icons floatLeft">add</i>
+		<span class="addItemText"> Add a new item</span>
+		<input type="text" class="addItemText hidden" id="addItem_<?= $todo->todoListId ?>">
 	</div>
 	<div class="errors"></div>
 	<hr/>
