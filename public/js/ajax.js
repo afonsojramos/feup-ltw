@@ -17,7 +17,7 @@ function encodeForAjax(data) {
 function request(page, onReady, data = {}, type = "get", onError = null, onProgress = null, onAbort = null) {
 	type = type.toLowerCase();
 	let request = new XMLHttpRequest();
-	// data.csrf = document.body.getAttribute("data-csrf");
+	data.csrf = document.body.getAttribute("data-csrf");
 	request.addEventListener("progress", onProgress);
 	request.onreadystatechange = function (data) {
 		if (this.readyState == 4 && this.status == 200) {
