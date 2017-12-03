@@ -3,7 +3,7 @@ require_once(dirname(__FILE__)."/../../includes/common/only_allow_login.php");
 verifyCSRF();
 
 require_once(dirname(__FILE__) . "/../../includes/common/check_request.php");
-verifyAttributes($_POST, ["todoListId");
+verifyAttributes($_POST, ["todoListId", "title"]);
 
 require_once(dirname(__FILE__)."/../../classes/TodoList.php");
 
