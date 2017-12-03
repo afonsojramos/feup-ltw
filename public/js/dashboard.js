@@ -103,7 +103,7 @@ let listEditTitle = function (title) {
 		let myItem, parentTodo = findParentByClass(title, "todo"); //get the <div class="todo"> above
 		let updateText = function (textBox) {
 			let data = {
-				todoListId: title.getAttribute("data-todoListId"),
+				todoListId: parentTodo.getAttribute("data-todoListId"),
 				title: textBox.value
 			};
 			myItem.doRequest("actions/list/edit_list.php", data, parentTodo);
