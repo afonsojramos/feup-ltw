@@ -30,7 +30,7 @@
 .logo,
 .nav {
 	display: inline-block;
-	margin: 0;
+	margin: 0 0 0 3rem;
 }
 
 .logo {
@@ -67,6 +67,7 @@
 .navRight {
 	float: right;
 	line-height: 39px;
+	text-align: top;
 }
 
 
@@ -217,5 +218,32 @@
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
+	.sidenav a {font-size: 18px;}
+}
+
+@media screen and (max-width: 677px) {
+	.nav.search {
+		position: relative;
+		display: inline-grid;
+		transition: width 0.3s ease-in-out;
+		width: 10%;
+		margin-top: 0.5rem;
+		margin-right: 20rem;		
+	}
+
+	.nav.search:focus-within {
+		margin-right: 20rem;
+		transition: width 0.3s ease-in-out;
+		width: 80%;
+	}
+	
+	.nav.navRight.text{
+		display: none;
+	}
+
+	.nav.navRight{
+		position: absolute;
+		top: 8px;
+		right: 20px;
+	}
 }
