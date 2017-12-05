@@ -142,7 +142,12 @@ let listDeleted = function (parentTodo, actionBtn, data) {
 	parentTodo.remove();
 };
 let listArchived = function (parentTodo, actionBtn, data) {
-	parentTodo.remove(); //TODO: replace with correct
+	let icon = parentTodo.getElementsByClassName("archive")[0].getElementsByClassName("material-icons")[0];
+	if (icon.innerHTML == "archive") {
+		icon.innerHTML = "unarchive";
+	} else if(icon.innerHTML == "unarchive"){
+		icon.innerHTML = "archive";
+	}
 };
 let listShared = function (parentTodo, actionBtn, data) {
 	parentTodo.remove(); //TODO: replace with correct
