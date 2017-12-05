@@ -3,7 +3,7 @@ require_once(dirname(__FILE__)."/../../includes/common/only_allow_login.php");
 verifyCSRF();
 
 require_once(dirname(__FILE__) . "/../../includes/common/check_request.php");
-verifyAttributes($_POST, ["todoListId", "title"]);
+verifyAttributes($_POST, ["todoListId", "title", "tags", "colour"]);
 
 require_once(dirname(__FILE__)."/../../classes/TodoList.php");
 
@@ -14,6 +14,10 @@ $todoList = new TodoList();
 if($todoList->load($_POST["todoListId"])){
 	if ($todoList->verifyOwnership($_SESSION["userId"])) {
 		$todoList->title = $_POST["title"];
+		if ($_POST["colour"] != null){
+			$todoList->colour = $_POST["colour"];
+			$todoList->tags = $_POST["tags"];
+		}
 		if ($todoList->update() !== false) {
 			$result["success"] = true;
 		} else {
