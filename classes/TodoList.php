@@ -33,10 +33,6 @@ class TodoList extends QueryBuilder{
 		parent::__construct();//call parent constructor, necessary for QueryBuilder
 	}
 
-	public function loadItems(){
-		//TODO load this list's items
-	}
-
 	//all the lists this user can see
 	public static function getAllByUser($userId, $loadItemsAsWell = true){
 		$qb = new QueryBuilder(self::class);
@@ -80,8 +76,15 @@ class TodoList extends QueryBuilder{
 		return $todos;
 	}
 
+	/**
+	 * Returns true if the supplied user has access to this list, wither it's his or it belongs to a project of which he is a member
+	 */
 	public function verifyOwnership($userId){
-		return $this->userId == $userId;
+		if($this->userId == $userId){//the user is the owner
+			return true;
+		}
+		//check if the user has permission for the list
+		return $this->select()->where("todoListId = :todoListId AND projectId IN (SELECT m.projectId FROM members as m where userId = :userId)")->addParam("userId", $userId)->get() !== false;
 	}
 
 	public function getTags(){
