@@ -20,7 +20,7 @@ class TodoList extends QueryBuilder{
 		"colour"=>"in:white:red:orange:yellow:green:teal:blue:purple:pink:brown"
 	);
 
-	public function __construct($todoListId = null, $title = "", $tags = "", $colour = "white", $archived = false, $link = "", $userId = -1, $projectId = 0){
+	public function __construct($todoListId = null, $title = "", $tags = "", $colour = "white", $archived = 0, $link = "", $userId = -1, $projectId = 0){
 		$this->todoListId = $todoListId;
 		$this->title = $title;
 		$this->tags = $tags;
