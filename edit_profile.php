@@ -3,7 +3,8 @@ require_once(dirname(__FILE__) . "/includes/common/only_allow_login.php");
 require_once(dirname(__FILE__) . "/includes/common/defaults.php");
 $PAGE["title"] .= " : Edit Profile for" . $_SESSION["username"];
 $PAGE["styles"][] = "card_form.css";
-$PAGE["scripts"] = array_merge($PAGE["scripts"], array("change_password.js", "ajax.js"));
+$PAGE['includeCSRF']=true;
+$PAGE["scripts"] = array_merge($PAGE["scripts"], array("change_password.js", "edit_profile.js", "ajax.js"));
 require_once(dirname(__FILE__) . "/templates/common/header.php");
 require_once(dirname(__FILE__) . "/includes/common/choose_navbar.php");
 require_once(dirname(__FILE__) . "/classes/User.php");
@@ -17,7 +18,7 @@ $user = $user->load($_SESSION['userId']);
 
 <div class="container">
 	<div class="grid grid-long grid-small-margins shadow-1">
-		<form class="cardForm split" action="actions/user/edit_profile.php" method="post">
+		<form class="cardForm split" action="actions/user/edit_profile.php" id="editProfile" method="post">
 		<?php insertCsrfToken(); ?>
 			<div class="formHeader">
 				<h3 class="formTitle">Edit User Details</h3>
