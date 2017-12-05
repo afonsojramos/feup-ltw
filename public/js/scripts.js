@@ -9,7 +9,7 @@ let addErrorMessage = function (parent, errors) {
 		});
 		setInterval(function(){
 			errorsDiv.innerHTML = "";
-		},2000);
+		},3500);
 	}
 };
 let addSuccessMessage = function (parent) {
@@ -17,7 +17,7 @@ let addSuccessMessage = function (parent) {
 	errorsDiv.appendChild(nodeFromHtml('<span class="success center shadow-1">success!</span>'));
 	setInterval(function(){
 		errorsDiv.innerHTML = "";
-	},2000);
+	},3500);
 };
 
 let findParentByClass = function (child, cls) {
