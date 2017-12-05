@@ -78,6 +78,7 @@ class User extends QueryBuilder{
 				//session creation
 				ini_set('session.cookie_lifetime', 60 * 60 * 24 * 7);  // 7 day cookie lifetime
 				sessionStart();
+				session_regenerate_id(true);
 				$_SESSION['userId'] = $line["userId"];
 				$_SESSION['username'] = $line["username"];
 				return true;
