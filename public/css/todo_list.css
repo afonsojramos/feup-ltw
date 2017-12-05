@@ -30,8 +30,7 @@
 .todoItemLabel {
 	cursor: text;
 	margin-left: 5px;	
-	min-width: 80%;
-	max-width: 90%;
+	width: 80%;
 	word-wrap: break-word;
 	display: -webkit-inline-box;
 }
@@ -71,6 +70,7 @@ addItemContainer>* {
 }
 
 .todoListItem .close {
+	padding-top: .1rem;
 	font-size: 18px;
 	position: absolute;
 	/* float: right; */
