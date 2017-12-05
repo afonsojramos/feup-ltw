@@ -39,6 +39,7 @@ if (!isset($todo)) {
 	</div>
 	<span class="listFooter show-on-hover">
 		<span class="archive"><a href="#"><i class="material-icons"><?= $todo->archived ? "unarchive" : "archive" ?></i></a></span>
+		<span class="colour"><a href="#"><i class="material-icons">color_lens</i></a></span>
 		<span class="delete"><a href="#"><i class="material-icons">delete</i></a></span>
 		<span class="share"><a href="#"><i class="material-icons">share</i></a></span>
 	</span>
