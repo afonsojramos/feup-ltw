@@ -33,6 +33,13 @@ class TodoList extends QueryBuilder{
 		parent::__construct();//call parent constructor, necessary for QueryBuilder
 	}
 
+	public function __set($name, $value){
+		if($name == "tags"){//REGEX to remove all whitespaces from the tags
+			$value = preg_replace('/\s+/', '', $value);
+		}
+		return parent::__set($name, $value);
+	}
+
 	//all the lists this user can see
 	public static function getAllByUser($userId, $loadItemsAsWell = true){
 		$qb = new QueryBuilder(self::class);
