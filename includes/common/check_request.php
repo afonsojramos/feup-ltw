@@ -7,7 +7,7 @@
 function verifyAttributes($array, $attributes) {
 	$notFound = array();
 	foreach ($attributes as $attr) {
-		if (!isset($array[$attr]) || $array[$attr] == "") {
+		if (!isset($array[$attr])) {
 			$notFound[] = "Request requires index $attr, which was not supplied";
 		}
 	}
