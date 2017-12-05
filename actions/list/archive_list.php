@@ -3,7 +3,7 @@ require_once(dirname(__FILE__)."/../../includes/common/only_allow_login.php");
 verifyCSRF();
 
 require_once(dirname(__FILE__) . "/../../includes/common/check_request.php");
-verifyAttributes($_POST, ["todoListId", "archived"]);
+verifyAttributes($_POST, ["todoListId"]);
 
 require_once(dirname(__FILE__)."/../../classes/TodoList.php");
 
@@ -13,8 +13,8 @@ $todoList = new TodoList();
 
 if($todoList->load($_POST["todoListId"])) {
 	if ($todoList->verifyOwnership($_SESSION["userId"])) {
-		$todoList->archived = $_POST["archived"]=="false"?0:1;
-		if ($todoList->update !== false) {
+		$todoList->archived = $todoList->archived?0:1;
+		if ($todoList->update() !== false) {
 			$result["success"] = true;
 		} else {
 			$result["errors"]= array("Could not archive Todo List");
