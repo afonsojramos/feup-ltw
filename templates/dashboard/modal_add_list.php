@@ -1,5 +1,13 @@
 
+<?php
+/* Set the correct projectId if it is not set. */
+	if(!isset($_GET['projectId'])){
+		$_GET['projectId']=0;
+	}
+?>
+
 <form class="modal" opener="openAddListModal" id ="modalAddList">
+	<input type="hidden" name="projectId" value="<?php echo $_GET['projectId'];?> " />
 	<div class="errors"></div>
 	<div class="modalContent cardForm grid">
 		<div class="formHeader">
