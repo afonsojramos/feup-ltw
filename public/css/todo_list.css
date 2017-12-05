@@ -55,9 +55,19 @@
 
 .tag{
 	font-weight: 300;
+	text-decoration: none;
 }
+
+.tag:hover{
+	font-weight: 600;
+}
+
 .tag::after{
 	content: " |";
+}
+
+.tag:last-of-type:after{
+	content: none;
 }
 .todo.colour-white .tag{
 	color:#535353
