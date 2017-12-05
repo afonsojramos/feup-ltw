@@ -17,7 +17,7 @@ class editableOnClick {
 		this.textBox.addEventListener("blur", function (a) {
 			self.textBox.className += " hidden";
 			self.element.classList.remove("hidden");
-			if (self.textBox.edit)
+			if (self.textBox.edit && self.textBox.value.length>0)
 				self.updateText(self.textBox);
 			self.textBox.remove();
 		});
