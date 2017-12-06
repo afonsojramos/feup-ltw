@@ -10,7 +10,8 @@
 			<i class="material-icons close">close</i>
 		</div>
 		<ul class="nav navRight">
-			<li><a href="edit_profile.php"><i class="material-icons">account_circle</i> <span class="nav navRight text">Edit Profile</a></span></li>
+			<li><a href="edit_profile.php">
+				<img class="navPicture" src="public/images/profile/thumb<?= $_SESSION["userId"]; ?>.jpg"/> <span class="nav navRight text">Edit Profile</a></span></li>
 			<li><a href="actions/user/logout.php"><i class="material-icons">exit_to_app</i> <span class="nav navRight text">  Logout</a></span></li>
 		</ul>
 	</div>

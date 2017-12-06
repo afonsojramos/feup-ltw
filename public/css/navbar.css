@@ -14,13 +14,13 @@
 	left: 0.5em;
 	top:0.5em;
 	padding: 0.5rem 0.6rem 0.5rem 0.6rem;
-	border-radius: 300px;	
-	transition: background-color 300ms ease-in-out 10ms;		
+	border-radius: 300px;
+	transition: background-color 300ms ease-in-out 10ms;
 }
 .navLeft:hover{
 	border-radius: 300px;
 	background-color: var(--dark-primary-color);
-	transition: background-color 300ms ease-in-out 10ms;	
+	transition: background-color 300ms ease-in-out 10ms;
 }
 
 .afterNav{
@@ -37,6 +37,13 @@
 	font-size: 24px;
 }
 
+.navPicture{
+	max-height: 30px;
+	max-width: 30px;
+	vertical-align: middle;
+	margin-right: 8px;
+	border-radius: 40px;
+}
 
 /* nav links */
 
@@ -228,7 +235,7 @@
 		transition: width 0.3s ease-in-out;
 		width: 10%;
 		margin-top: 0.5rem;
-		margin-right: 20rem;		
+		margin-right: 20rem;
 	}
 
 	.nav.search:focus-within {
@@ -236,7 +243,7 @@
 		transition: width 0.3s ease-in-out;
 		width: 80%;
 	}
-	
+
 	.nav.navRight.text{
 		display: none;
 	}

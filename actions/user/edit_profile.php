@@ -43,7 +43,7 @@ if (isset($_POST['pwd1'])) {
 		$result["errors"] = $user->errors;
 	}
 
-} else {
+} elseif (isset($_POST["username"])) {
 	/**
 	 * This is a username/email change.
 	 */
@@ -68,6 +68,96 @@ if (isset($_POST['pwd1'])) {
 	} else {
 		$result["errors"] = $user->errors;
 	}
+} else {
+    // Undefined | Multiple Files | $_FILES Corruption Attack, If this request falls under any of them, treat it invalid.
+	if (!isset($_FILES['profile']['error']) || is_array($_FILES['profile']['error'])) {
+		$result["errors"] = array("Invalid file parameters");
+	}
+
+    // Check $_FILES['profile']['error'] value.
+	switch ($_FILES['profile']['error']) {
+		case UPLOAD_ERR_OK:
+			break;
+		case UPLOAD_ERR_NO_FILE:
+			echo json_encode(array("No file received"));
+			die();
+		case UPLOAD_ERR_INI_SIZE:
+		case UPLOAD_ERR_FORM_SIZE:
+			echo json_encode(array("Exceeded filesize limit"));
+			die();
+		default:
+			echo json_encode(array("Unknown error occurred"));
+			die();
+	}
+
+    // Doublecheck filesize here.
+	if ($_FILES['profile']['size'] > 1000000) {
+		echo json_encode(array("Exceeded filesize limit"));
+		die();
+	}
+
+    // Check MIME Type, $_FILES['profile']['mime'] can be misleeading
+	$finfo = new finfo(FILEINFO_MIME_TYPE);
+	if (false === $ext = array_search(
+		$finfo->file($_FILES['profile']['tmp_name']),
+		array(
+			'jpg' => 'image/jpeg',
+			'png' => 'image/png',
+			'gif' => 'image/gif',
+		),
+		true
+	)) {
+		echo json_encode(array("Invalid file format"));
+		die();
+	}
+
+	//create thumbnail
+	generateThumbnail($_FILES['profile']['tmp_name'], "../../public/images/profile/thumb" . $_SESSION["userId"] . ".jpg", 100);
+
+	//create larger picture
+	generateThumbnail($_FILES['profile']['tmp_name'], "../../public/images/profile/" . $_SESSION["userId"] . ".jpg", 1000, true);
+
+
+	$result["success"] = true;
 }
 
 echo json_encode($result);
+
+
+//useful functions for image handling
+function generateThumbnail($src, $dest, $finalWidth, $orMax = false) {
+	$what = getimagesize($src);
+
+	//if the type is one of the allowed ones
+	switch (strtolower($what['mime'])) {
+		case 'image/png':
+			$srcImage = imagecreatefrompng($src);
+			break;
+		case 'image/jpeg':
+			$srcImage = imagecreatefromjpeg($src);
+			break;
+		case 'image/gif':
+			$srcImage = imagecreatefromgif($src);
+			break;
+		default:
+			return false;
+	}
+	$width = imagesx($srcImage);
+	$height = imagesy($srcImage);
+	if($orMax && $width < $finalWidth){//keep image size if it is not big enough
+		$finalWidth = $width;
+	}
+	// find the "desired height" of this thumbnail, relative to the desired width
+	$finalHeight = floor($height * ($finalWidth / $width));
+
+	// create a new, "virtual" image
+	$virtualImage = imagecreatetruecolor($finalWidth, $finalHeight);
+
+	// copy source image at a resized size
+	imagecopyresampled($virtualImage, $srcImage, 0, 0, 0, 0, $finalWidth, $finalHeight, $width, $height);
+
+	// create the physical thumbnail image to its destination
+	imagejpeg($virtualImage, $dest);
+	return true;
+}
+

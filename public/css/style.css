@@ -135,6 +135,17 @@ input[type='submit'] {
 	transition: opacity 0.3s ease-in-out;
 }
 
+.editProfileBackgroundParent {
+    text-align:center; /* center everything in the container */
+}
+
+.editProfileBackground {
+    display:inline-block; /* so the children on the same line */
+    height: auto;
+    margin: 20px;
+    width: auto;
+}
+
 
 /* responsive container */
 
