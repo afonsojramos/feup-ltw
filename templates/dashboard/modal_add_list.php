@@ -53,7 +53,7 @@ $projects = array_merge(array(new Project("0", "Private (No Project)")), $projec
 			</div>
 		</div>
 		<footer class="formFooter">
-			<input class="_closeModal" type="submit" value="Add">
+			<input type="submit" value="Add">
 		</footer>
 	</div>
 </form>
