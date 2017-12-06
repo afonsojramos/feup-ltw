@@ -15,6 +15,7 @@
 	transition: box-shadow 0.3s ease-in-out;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
 	box-sizing: border-box;
+	word-wrap: break-word;	
 }
 
 .todo:hover {
@@ -98,12 +99,14 @@ addItemContainer>* {
 
 .addItemText {
 	color: #868686;
-	width: 90%;
+	width: 80%;
 	display: inline-block;
+	margin-left: 5px;	
 }
 
 input.addItemText {
-	box-shadow: 1px 0px 1px 0px black;
+	padding-left: 5px;
+	box-shadow: 1px 1px 1px 1px black;
 }
 
 .editItemTextBox {
@@ -112,6 +115,7 @@ input.addItemText {
 	margin-left: 2px;
 	min-width: 80%;
 	display: -webkit-inline-box;
+	box-shadow: 1px 1px 1px 1px black;
 }
 
 
@@ -164,48 +168,53 @@ input.addItemText {
 /* Todo Colors */
 
 .todo.colour-red,
-.todo.colour-red input.addItemText {
+.todo.colour-red input.addItemText, .todo.colour-red input.editItemTextBox {
 	background-color: #E57373;
 }
 
 .todo.colour-orange,
-.todo.colour-orange input.addItemText {
+.todo.colour-orange input.addItemText, .todo.colour-orange input.editItemTextBox {
 	background-color: #FFB74D;
 }
 
 .todo.colour-yellow,
-.todo.colour-yellow input.addItemText {
+.todo.colour-yellow input.addItemText, .todo.colour-yellow input.editItemTextBox {
 	background-color: #FFF176;
 }
 
 .todo.colour-green,
-.todo.colour-green input.addItemText {
+.todo.colour-green input.addItemText, .todo.colour-green input.editItemTextBox {
 	background-color: #81C784;
 }
 
 .todo.colour-purple,
-.todo.colour-purple input.addItemText {
+.todo.colour-purple input.addItemText, .todo.colour-purple input.editItemTextBox {
 	background-color: #CE93D8;
 }
 
 .todo.colour-blue,
-.todo.colour-blue input.addItemText {
+.todo.colour-blue input.addItemText, .todo.colour-blue input.editItemTextBox {
 	background-color: #64B5F6;
 }
 
 .todo.colour-teal,
-.todo.colour-teal input.addItemText {
+.todo.colour-teal input.addItemText, .todo.colour-teal input.editItemTextBox {
 	background-color: #4DB6AC;
 }
 
 .todo.colour-pink,
-.todo.colour-pink input.addItemText {
+.todo.colour-pink input.addItemText, .todo.colour-pink input.editItemTextBox {
 	background-color: #F06292;
 }
 
 .todo.colour-brown,
-.todo.colour-brown input.addItemText {
+.todo.colour-brown input.addItemText, .todo.colour-brown input.editItemTextBox {
 	background-color: #BCAAA4;
+}
+
+.todo.colour-white,
+.todo.colour-white input.addItemText, .todo.colour-white input.editItemTextBox {
+	background-color: inherit;
 }
 
 .todo.colour-red hr,
@@ -233,7 +242,8 @@ input.addItemText {
 .todo.colour-teal .addItemText,
 .todo.colour-pink .addItemText,
 .todo.colour-brown .addItemText,
-.todo.colour-purple .addItemText {
+.todo.colour-purple .addItemText,
+.todo.colour-white .addItemText {
 	color: black;
 }
 
@@ -297,6 +307,6 @@ input.addItemText {
 		transition: column-count 0.3s ease-in-out;
 	}
 	.todo {
-		width: 18em;
+		width: 20em;
 	}
 }
