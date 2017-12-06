@@ -52,7 +52,6 @@ class User extends QueryBuilder{
 		return $this->select()->where("email = :email")->get() != false;
 	}
 
-
 	/**
 	 * Test if an email can be changed
 	 */
@@ -65,7 +64,7 @@ class User extends QueryBuilder{
 	 */
 	public function login($params){
 		$key = "username";
-		$value = $params["username"];
+		$value = strtolower($params["username"]);
 		if(strpos($value, "@") !== false){//this is actually an email
 			$key = "email";
 		}
