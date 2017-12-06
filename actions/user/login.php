@@ -12,7 +12,8 @@ $result = array("success" => false);
 $user = new User();
 if ($user->login($_POST)) {
 	$result["success"] = true;
-	header("Location: ../../index.php");
+}else{
+	$result["errors"] = array("Invalid credentials");
 }
 
 echo json_encode($result);
