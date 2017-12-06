@@ -157,6 +157,14 @@ input[type='submit'] {
 	.container {
 		width: 80%;
 	}
+
+	.editProfileBackground {
+		width: 90%;
+	}
+
+	body{
+		margin-top: 3em;		
+	}
 }
 
 @media screen and (max-width: 767px) {
