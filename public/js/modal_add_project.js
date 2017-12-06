@@ -13,7 +13,8 @@ newProjectForm.addEventListener("submit", function (e) {
 	for (let [key, value] of formData.entries()) {
 		data[key] = value;
 	}
-	request("actions/list/add_project.php", function (data) {
+	request("actions/project/add_project.php", function (data) {
+		console.log(data);
 		if (data.success) {
 			newProjectForm.style.display = "none";
 			newProjectForm.reset();
