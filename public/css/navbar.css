@@ -1,7 +1,7 @@
 .navbar {
 	position: fixed;
-    top: 0;
-    z-index: 10;
+	top: 0;
+	z-index: 10;
 	padding: 10px 0;
 	width: 100%;
 	height: auto;
@@ -9,24 +9,27 @@
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 	font-size: 18px;
 }
-.navLeft{
+
+.navLeft {
 	position: absolute;
 	left: 0.5em;
-	top:0.5em;
+	top: 0.5em;
 	padding: 0.5rem 0.6rem 0.5rem 0.6rem;
 	border-radius: 300px;
 	transition: background-color 300ms ease-in-out 10ms;
 }
-.navLeft:hover{
+
+.navLeft:hover {
 	border-radius: 300px;
 	background-color: var(--dark-primary-color);
 	transition: background-color 300ms ease-in-out 10ms;
 }
 
-.afterNav{
+.afterNav {
 	display: block;
 	height: 80px;
 }
+
 .logo,
 .nav {
 	display: inline-block;
@@ -37,13 +40,14 @@
 	font-size: 24px;
 }
 
-.navPicture{
+.navPicture {
 	max-height: 30px;
 	max-width: 30px;
 	vertical-align: middle;
 	margin-right: 8px;
 	border-radius: 40px;
 }
+
 
 /* nav links */
 
@@ -121,6 +125,7 @@
 	top: 11px;
 	right: 10px;
 }
+
 .material-icons.close {
 	cursor: pointer;
 }
@@ -128,25 +133,35 @@
 .nav.search:focus-within .material-icons.close {
 	display: inline-block;
 }
-.material-icons.close:hover{
+
+.material-icons.close:hover {
 	color: #000;
 	border-radius: 99em;
 	background: rgba(0, 0, 0, 0.1);
-
 }
 
+
 /* The side navigation menu */
+
 .sidenav {
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 8; /* Stay on top */
-    top: 0;
-    left: 0;
-    background-color: var(--dark-accent-color); /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 100px; /* Place content 60px from the top */
-	transition: 0.5s;  /*0.5 second transition effect to slide in the sidenav */
+	height: 100%;
+	/* 100% Full-height */
+	width: 0;
+	/* 0 width - change this with JavaScript */
+	position: fixed;
+	/* Stay in place */
+	z-index: 8;
+	/* Stay on top */
+	top: 0;
+	left: 0;
+	background-color: var(--dark-accent-color);
+	/* Black*/
+	overflow-x: hidden;
+	/* Disable horizontal scroll */
+	padding-top: 100px;
+	/* Place content 60px from the top */
+	transition: 0.5s;
+	/*0.5 second transition effect to slide in the sidenav */
 }
 
 .sidenav a:hover,
@@ -157,75 +172,89 @@
 .sidenav li a:focus,
 .sidenav li.open a:hover,
 .sidenav li.open a:active,
-.sidenav li.open a:focus{
-    color: var(--default-primary-color);
-    text-decoration: none;
-    background-color: transparent;
-}
-.sidenav .dropdown-menu{
-    position: relative;
-    width: 100%;
-    padding: 0px 0px 0px 10px ;
-    margin: 0;
-	border-radius: 0;
-    border: none;
-    background-color: var(--dark-accent-color);
-    box-shadow: none;
+.sidenav li.open a:focus {
+	color: var(--default-primary-color);
+	text-decoration: none;
+	background-color: transparent;
 }
 
-.sidenav .sidebar{
-    position: relative;
-    width: 100%;
+.sidenav .dropdown-menu {
+	position: relative;
+	width: 100%;
+	padding: 0px 0px 0px 10px;
+	margin: 0;
+	border-radius: 0;
+	border: none;
+	background-color: var(--dark-accent-color);
+	box-shadow: none;
+}
+
+.sidenav .sidebar {
+	position: relative;
+	width: 100%;
 	padding: 0;
 	margin: 0;
 	border-radius: 0;
-    border: none;
-    background-color: var(--dark-accent-color);
-    box-shadow: none;
+	border: none;
+	background-color: var(--dark-accent-color);
+	box-shadow: none;
 }
 
-.sidenav .dropdown-menu a{
+.sidenav .dropdown-menu a {
 	font-size: 15px;
 }
 
+
 /* The navigation menu links */
+
 .sidenav a {
-    padding: 0px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: var(--text-accent-color);
-    display: block;
+	padding: 0px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: var(--text-accent-color);
+	display: inline-block;
 	transition: 0.3s
 }
 
+
 /* When you mouse over the navigation links, change their color */
-.sidenav a:hover, .offcanvas a:focus{
-    color: #f1f1f1;
+
+.sidenav a:hover,
+.offcanvas a:focus {
+	color: #f1f1f1;
 }
 
-.sidenav .sidebar .dropdown .material-icons{
-	margin-top:-7px;
+.sidenav .sidebar .dropdown .material-icons {
+	margin-top: -7px;
 }
 
-.sidenav .sidebar .dropdown .archived{
-	margin-top:-5px;
+.sidenav .sidebar .dropdown .archived {
+	margin-top: -5px;
 }
+
 
 /* Position and style the close button (top right corner) */
+
 .sidenav .closebtn {
-    position: absolute;
-    top: 50px;
-    right: 5px;
-    font-size: 36px;
+	position: absolute;
+	top: 50px;
+	right: 5px;
+	font-size: 36px;
 	padding: 0;
-    color: var(--text-accent-color);
+	color: var(--text-accent-color);
 	font-weight: 100;
 }
 
+
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+
 @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-	.sidenav a {font-size: 18px;}
+	.sidenav {
+		padding-top: 15px;
+	}
+	.sidenav a {
+		font-size: 18px;
+	}
 }
 
 @media screen and (max-width: 677px) {
@@ -237,24 +266,20 @@
 		margin-top: 0.5rem;
 		margin-right: 20rem;
 	}
-
 	.nav.search:focus-within {
 		margin-right: 20rem;
 		transition: width 0.3s ease-in-out;
 		width: 80%;
 	}
-
-	.nav.navRight.text{
+	.nav.navRight.text {
 		display: none;
 	}
-
-	.nav.navRight{
+	.nav.navRight {
 		position: absolute;
 		top: 8px;
 		right: 20px;
 	}
-	
-	.sidenav .sidebar{
-		margin-top: 3em;		
+	.sidenav .sidebar {
+		margin-top: 3em;
 	}
 }
