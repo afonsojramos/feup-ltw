@@ -320,14 +320,15 @@
 		 *
 		 */
 		public function setKey($keys = null){
+			$otherClass=$this->class;
 			if(is_array($keys)){//multiple primary keys
 				$this->keys = $keys;
 			}elseif(is_string($keys)){//single primary key
 				$this->keys = array("$keys");
 			}elseif(is_numeric($keys) && count($this->columns) >= $keys){
 				$this->keys = array_slice($this->columns, 0, $keys);
-			}elseif(isset($this->class::$primaryKeys) && is_array($this->class::$primaryKeys)){//else if static primaryKeys is defined, those are the keys
-				$this->keys = $this->class::$primaryKeys;
+			}elseif(isset($otherClass::$primaryKeys) && is_array($otherClass::$primaryKeys)){//else if static primaryKeys is defined, those are the keys
+				$this->keys = $otherClass::$primaryKeys;
 			}elseif(isset($this->columns[0])){//default is the first property of the class
 				$this->keys = array($this->columns[0]);
 			}else{//else no primary key is given
@@ -457,9 +458,10 @@
 
 		//in case there are some static $ignoreProperties, load them into $this->toIgnore
 		protected function loadToIgnore(){
+			$otherClass=$this->class;
 			$this->toIgnore = array();
-			if(isset($this->class::$ignoreProperties) && is_array($this->class::$ignoreProperties)){
-				$this->toIgnore = $this->class::$ignoreProperties;
+			if(isset($otherClass::$ignoreProperties) && is_array($otherClass::$ignoreProperties)){
+				$this->toIgnore = $otherClass::$ignoreProperties;
 			}
 		}
 
