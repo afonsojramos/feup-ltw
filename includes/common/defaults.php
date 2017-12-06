@@ -10,4 +10,6 @@
 
 	$PAGE["includeCSRF"] = false;
 	$PAGE["showSideBar"] = false;
+
+	$PAGE["bodyClasses"] = array();
 ?>

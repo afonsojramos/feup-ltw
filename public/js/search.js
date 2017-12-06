@@ -22,7 +22,7 @@ function doSearch(){
 			if (m.index === regex.lastIndex) {
 				regex.lastIndex++;
 			}
-			
+
 			// The result can be accessed through the `m`-variable.
 			m.forEach((match, groupIndex) => {
 				if(match!=undefined && groupIndex!=0){
@@ -34,7 +34,7 @@ function doSearch(){
 						res[groupIndex].push(match)
 					}
 				}
-					
+
 			});
 		}
 		request("actions/user/search.php", function (result) {

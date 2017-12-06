@@ -14,9 +14,15 @@
 	<?php endforeach; ?>
 
 </head>
-<?php
+<body<?php
+	if (count($PAGE["bodyClasses"]) != 0) {
+		echo ' class = "';
+		foreach ($PAGE["bodyClasses"] as $c) {
+			echo  htmlentities($c);
+		}
+		echo '"';
+	}
 	if ($PAGE["includeCSRF"])
-		echo "<body data-csrf='" . $_SESSION["csrf"] . "'>";
-	else
-		echo "<body>";
+		echo " data-csrf='" . $_SESSION["csrf"] . "'";
 ?>
+>
