@@ -115,16 +115,15 @@ if (isset($_POST['pwd1'])) {
 	generateThumbnail($_FILES['profile']['tmp_name'], "../../public/images/profile/thumb" . $_SESSION["userId"] . ".jpg", 100);
 
 	//create larger picture
-	generateThumbnail($_FILES['profile']['tmp_name'], "../../public/images/profile/" . $_SESSION["userId"] . ".jpg", 1000, true);
+	generateThumbnail($_FILES['profile']['tmp_name'], "../../public/images/profile/" . $_SESSION["userId"] . ".jpg", 700, true);
 
-
-	$result["success"] = true;
+	header("Location: ../../index.php");
 }
 
 echo json_encode($result);
 
 
-//useful functions for image handling
+//generate a thumbnail given a finalWidth
 function generateThumbnail($src, $dest, $finalWidth, $orMax = false) {
 	$what = getimagesize($src);
 
@@ -144,7 +143,7 @@ function generateThumbnail($src, $dest, $finalWidth, $orMax = false) {
 	}
 	$width = imagesx($srcImage);
 	$height = imagesy($srcImage);
-	if($orMax && $width < $finalWidth){//keep image size if it is not big enough
+	if ($orMax && $width < $finalWidth) {//keep image size if it is not big enough
 		$finalWidth = $width;
 	}
 	// find the "desired height" of this thumbnail, relative to the desired width

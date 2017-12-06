@@ -58,9 +58,14 @@ $user = $user->load($_SESSION['userId']);
 		</form>
 	</div>
 	<hr/>
-	<div class="editProfileBackgroundParent">
-		<img class="editProfileBackground" src="public/images/profile/<?= $_SESSION["userId"]; ?>.jpg"/>
-	</div>
+
+	<?php
+		$filename = "public/images/profile/thumb" . $_SESSION["userId"] . ".jpg";
+		if (file_exists($filename)) :?>
+		<div class="editProfileBackgroundParent">
+			<img class="editProfileBackground" src="<?= $filename ?>"/>
+		</div>
+	<?php endif ?>
 	<div class="grid grid-long grid-small-margins shadow-1">
 		<form class="cardForm split" id="changePicture" action="actions/user/edit_profile.php" method="post" enctype="multipart/form-data">
 			<?php insertCsrfToken(); ?>
