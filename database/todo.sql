@@ -8,6 +8,8 @@ CREATE TABLE `users` (
 --insert users
 INSERT INTO `users` VALUES (NULL, "aa", "aa@aa.com", "$2y$10$1FPFN9Cm64LZArbRWLi2A.dx8OS0VxchRnwS9G1VqFID0JbdvV7t.");
 INSERT INTO `users` VALUES (NULL, "bb", "bb@bb.com", "$2y$10$jGSUjhhO3s1uvLVF2RNEROEm1lbRCpXx53jiSfsYXOoabjcgClQ2u");
+INSERT INTO `users` VALUES (NULL, "jcl", "jlopes@fe.up.pt", "$2y$10$1FPFN9Cm64LZArbRWLi2A.dx8OS0VxchRnwS9G1VqFID0JbdvV7t.");
+INSERT INTO `users` VALUES (NULL, "arestivo", "arestivo@fe.up.pt", "$2y$10$1FPFN9Cm64LZArbRWLi2A.dx8OS0VxchRnwS9G1VqFID0JbdvV7t.");
 
 CREATE TABLE `projects` (
   `projectId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -45,6 +47,7 @@ INSERT INTO `todolists` VALUES (NULL, "A minha lista 1", "", "red", 0, "", 1, 0)
 INSERT INTO `todolists` VALUES (NULL, "A minha lista 2", "", "white", 0, "", 2, 0);
 INSERT INTO `todolists` VALUES (NULL, "lista do projeto 1", "complicated, hardcore", "teal", 0, "", 1, 1);
 INSERT INTO `todolists` VALUES (NULL, "Segunda lista do projeto 1", "hardcore, awesome", "orange", 0, "", 1, 1);
+INSERT INTO `todolists` VALUES (NULL, "Xss List <script>alert('xss');</script>", "hardcore, awesome", "orange", 0, "", 1, 1);
 
 CREATE TABLE `items` (
   `itemId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
