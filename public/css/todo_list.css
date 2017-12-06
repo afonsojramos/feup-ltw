@@ -255,6 +255,11 @@ input.addItemText {
 
 
 /* responsiveness bellow: */
+@media screen and (max-width: 677px) {
+	.todo {
+		width: 90%;
+	}
+}
 
 @media screen and (min-width: 690px) {
 	.todos {
