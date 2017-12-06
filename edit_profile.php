@@ -60,7 +60,7 @@ $user = $user->load($_SESSION['userId']);
 	<hr/>
 
 	<?php
-		$filename = "public/images/profile/thumb" . $_SESSION["userId"] . ".jpg";
+		$filename = "public/images/profile/" . $_SESSION["userId"] . ".jpg";
 		if (file_exists($filename)) :?>
 		<div class="editProfileBackgroundParent">
 			<img class="editProfileBackground" src="<?= $filename ?>"/>
