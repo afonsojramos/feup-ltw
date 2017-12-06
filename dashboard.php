@@ -16,7 +16,7 @@ require_once(dirname(__FILE__) . "/templates/dashboard/sidebar.php");
     <div class="todos">
 		<?php
 			require_once(dirname(__FILE__) . "/classes/TodoList.php");
-			$todos = TodoList::getAllByUser($_SESSION["userId"]);
+			$todos = TodoList::getAllQuery($_GET, $_SESSION["userId"]);
 			foreach ($todos as $todo)
 				include(dirname(__FILE__) . "/templates/dashboard/todo.php");
 		?>

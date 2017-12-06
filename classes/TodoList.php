@@ -40,7 +40,16 @@ class TodoList extends QueryBuilder{
 		return parent::__set($name, $value);
 	}
 
-	//all the lists this user can see
+	//all the lists this user can see, query is an array of key values with the possible search values
+	//example ["tags"=>array("harcore", "tag1"), "search" => "aquela nota", "users" => array("maps", "dannyps")]
+	public static function getAllQuery($query, $userId, $loadItemsAsWell = true){
+		$qb = new QueryBuilder(self::class);
+	//TODO: maybe load project information and user
+		$lines = $qb->select()->where("userId = :userId OR (projectId IN (SELECT m.projectId FROM members as m where userId = :userId))")->addParam("userId", $userId)->getAll();
+		return self::loadTodoFromDatabase($lines, $loadItemsAsWell);
+	}
+
+/* 	//all the lists this user can see
 	public static function getAllByUser($userId, $loadItemsAsWell = true){
 		$qb = new QueryBuilder(self::class);
 	//TODO: maybe load project information
@@ -61,7 +70,7 @@ class TodoList extends QueryBuilder{
 		//TODO: maybe load project information
 		$lines = $qb->select()->where("userId = :userId and projectId = :projectId")->addParam("userId", $userId)->addParam("projectId", $projectId)->getAll();
 		return self::loadTodoFromDatabase($lines, $loadItemsAsWell);
-	}
+	} */
 
 	private static function loadTodoFromDatabase($lines, $loadItemsAsWell = true){
 		if ($loadItemsAsWell) {
