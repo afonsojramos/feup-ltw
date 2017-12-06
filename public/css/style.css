@@ -84,6 +84,10 @@ input[type='submit'] {
 	padding: 0;
 }
 
+.floatRight {
+	float: right;
+}
+
 .center {
 	text-align: center;
 	margin-left: auto;
@@ -136,14 +140,16 @@ input[type='submit'] {
 }
 
 .editProfileBackgroundParent {
-    text-align:center; /* center everything in the container */
+	text-align: center;
+	/* center everything in the container */
 }
 
 .editProfileBackground {
-    display:inline-block; /* so the children on the same line */
-    height: auto;
-    margin: 20px;
-    width: auto;
+	display: inline-block;
+	/* so the children on the same line */
+	height: auto;
+	margin: 20px;
+	width: auto;
 }
 
 
@@ -157,13 +163,11 @@ input[type='submit'] {
 	.container {
 		width: 80%;
 	}
-
 	.editProfileBackground {
 		width: 90%;
 	}
-
-	body{
-		margin-top: 3em;		
+	body {
+		margin-top: 3em;
 	}
 }
 
