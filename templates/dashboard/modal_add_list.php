@@ -1,13 +1,24 @@
 
 <?php
-/* Set the correct projectId if it is not set. */
-	if(!isset($_GET['projectId'])){
-		$_GET['projectId']=0;
-	}
+require_once(dirname(__FILE__) . "/../../includes/common/only_allow_login.php");
+require_once(dirname(__FILE__) . "/../../classes/Project.php");
+
+//if a get project id is set, that is the default one
+if (isset($_GET['projectId'])) {
+	$selectedProjectId = $_GET['projectId'];
+}else{
+	$selectedProjectId = 0;
+}
+//load projects if needed
+if(!isset($projects) && !is_array($projects)){
+	$projects = Project::getAllByUser($_SESSION["userId"]);
+}
+//create default project
+$projects = array_merge(array(new Project("0", "Private (No Project)")), $projects);
+var_dump($projects);
 ?>
 
 <form class="modal" opener="openAddListModal" id ="modalAddList">
-	<input type="hidden" name="projectId" value="<?php echo $_GET['projectId'];?> " />
 	<div class="errors"></div>
 	<div class="modalContent cardForm grid">
 		<div class="formHeader">
@@ -19,6 +30,13 @@
 			</div>
 			<div>
 				<input type="text" name="tags" id="tags" placeholder="Tags (Comma separate)">
+			</div>
+			<div>
+				<select name="projectId">
+					<?php foreach ($projects as $p): ?>
+						<option value="<?= $p->projectId ?>"><?= htmlentities($p->title) ?></option>
+					<?php endforeach ?>
+				</select>
 			</div>
 			<div>
 				<select name="colour">
