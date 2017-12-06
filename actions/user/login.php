@@ -12,7 +12,7 @@ $result = array("success" => false);
 $user = new User();
 if ($user->login($_POST)) {
 	$result["success"] = true;
-}else{
+} else {
 	$result["errors"] = array("Invalid credentials");
 }
 

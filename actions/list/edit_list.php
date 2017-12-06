@@ -1,30 +1,30 @@
 <?php
-require_once(dirname(__FILE__)."/../../includes/common/only_allow_login.php");
+require_once(dirname(__FILE__) . "/../../includes/common/only_allow_login.php");
 verifyCSRF();
 
 require_once(dirname(__FILE__) . "/../../includes/common/check_request.php");
 verifyAttributes($_POST, ["todoListId", "title", "tags", "colour"]);
 
-require_once(dirname(__FILE__)."/../../classes/TodoList.php");
+require_once(dirname(__FILE__) . "/../../classes/TodoList.php");
 
 $result = array("success" => false);
 
 $todoList = new TodoList();
 
-if($todoList->load($_POST["todoListId"])){
+if ($todoList->load($_POST["todoListId"])) {
 	if ($todoList->verifyOwnership($_SESSION["userId"])) {
 		$todoList->title = $_POST["title"];
-		if ($_POST["colour"] != null){
+		if ($_POST["colour"] != null) {
 			$todoList->colour = $_POST["colour"];
 			$todoList->tags = $_POST["tags"];
 		}
 		if ($todoList->update() !== false) {
 			$result["success"] = true;
 		} else {
-			$result["errors"]= array("Could not delete Todo List");
+			$result["errors"] = array("Could not delete Todo List");
 		}
 	} else {
-		$result["errors"]= array("User has no permission to access Todo List");
+		$result["errors"] = array("User has no permission to access Todo List");
 	}
 } else {
 	$result["errors"] = array("Could not load Todo List");

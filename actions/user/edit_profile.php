@@ -124,7 +124,8 @@ echo json_encode($result);
 
 
 //generate a thumbnail given a finalWidth
-function generateThumbnail($src, $dest, $finalWidth, $orMax = false) {
+function generateThumbnail($src, $dest, $finalWidth, $orMax = false)
+{
 	$what = getimagesize($src);
 
 	//if the type is one of the allowed ones
