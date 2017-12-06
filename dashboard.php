@@ -16,14 +16,14 @@ $todos = TodoList::getAllQuery($_GET, $_SESSION["userId"]);
 ?>
 
 <div class="container" id="dashboardContainer">
-	<?php if (count($todos == 0)) : ?>
+	<?php if (count($todos) == 0) : ?>
 		<h1 class="center">This page looks a bit empty <i class="material-icons">sentiment_very_dissatisfied</i></h1>
 	<?php endif ?>
     <div class="todos">
 		<?php
-	foreach ($todos as $todo)
-		include(dirname(__FILE__) . "/templates/dashboard/todo.php");
-	?>
+		foreach ($todos as $todo)
+			include(dirname(__FILE__) . "/templates/dashboard/todo.php");
+		?>
     </div>
 	<?php require_once(dirname(__FILE__) . "/templates/dashboard/modal_add_list.php"); ?>
 </div>
