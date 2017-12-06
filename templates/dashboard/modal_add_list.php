@@ -15,7 +15,6 @@ if(!isset($projects) && !is_array($projects)){
 }
 //create default project
 $projects = array_merge(array(new Project("0", "Private (No Project)")), $projects);
-var_dump($projects);
 ?>
 
 <form class="modal" opener="openAddListModal" id ="modalAddList">
