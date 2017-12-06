@@ -21,4 +21,19 @@ class Project extends QueryBuilder{
 		parent::__construct();//call parent constructor, necessary for QueryBuilder
 	}
 
+	public static function getAllByUser($userId){
+		$qb = new QueryBuilder(self::class);
+		$lines = $qb->select()->where("projectId in (SELECT m.projectId FROM members as m WHERE m.userId = :userId)")->addParam("userId", $userId)->getAll();
+
+		$projects = array();
+		foreach ($lines as $line) {
+			$p = new Project;
+			$p->loadFromArray($line);
+			$projects[] = $p;
+		}
+		return $projects;
+	}
+
+
+
 }
