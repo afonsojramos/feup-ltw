@@ -139,7 +139,8 @@ function generateThumbnail($src, $dest, $finalWidth, $orMax = false) {
 			$srcImage = imagecreatefromgif($src);
 			break;
 		default:
-			return false;
+			echo json_encode(array("Invalid file format"));
+			die();
 	}
 	$width = imagesx($srcImage);
 	$height = imagesy($srcImage);
