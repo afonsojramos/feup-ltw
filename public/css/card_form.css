@@ -3,10 +3,11 @@
 .cardForm select,
 .cardForm textarea,
 .cardForm input[type='password'] {
-	width: 100%;
+    width: 100%;
 }
-.cardForm textarea{
-	max-width: 100%;
+
+.cardForm textarea {
+    max-width: 100%;
 }
 
 .cardForm.split input[type='text'],
@@ -14,58 +15,59 @@
 .cardForm.split textarea,
 .cardForm.split select,
 .cardForm.split input[type='password'] {
-	width: 70%;
-	right: 0;
+    width: 70%;
+    right: 0;
 }
-.cardForm.split textarea{
-	max-width: 70%;
+
+.cardForm.split textarea {
+    max-width: 70%;
 }
 
 .cardForm.split span:not(.error):not(.success) {
-	width: 30%;
-	font-weight: bold;
-	display: inline-block;
+    width: 30%;
+    font-weight: bold;
+    display: inline-block;
 }
 
 .cardForm.split span.error,
 .cardForm.split span.success {
-	width: 90%;
+    width: 90%;
 }
 
 .cardForm .formHeader {
-	background-color: var(--default-accent-color);
-	border-top-left-radius: 0.25em;
-	border-top-right-radius: 0.25em;
-	color: #fff;
-	padding: 1.5em;
-	text-align: center;
-	text-transform: uppercase;
+    background-color: var(--default-accent-color);
+    border-top-left-radius: 0.25em;
+    border-top-right-radius: 0.25em;
+    color: #fff;
+    padding: 1.5em;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 .formTitle {
-	font-size: 16px;
-	font-size: 1rem;
-	margin: 0;
+    font-size: 16px;
+    font-size: 1rem;
+    margin: 0;
 }
 
 .formBody {
-	background-color: #fff;
-	padding: 1.5em;
-	position: relative;
+    background-color: #fff;
+    padding: 1.5em;
+    position: relative;
 }
 
 .formBody::before {
-	background-color: #fff;
-	content: '';
-	height: 0.5em;
-	left: 50%;
-	margin-left: -0.25em;
-	margin-top: -0.25em;
-	position: absolute;
-	top: 0;
-	-webkit-transform: rotate(45deg);
-	transform: rotate(45deg);
-	width: 0.5em;
+    background-color: #fff;
+    content: '';
+    height: 0.5em;
+    left: 50%;
+    margin-left: -0.25em;
+    margin-top: -0.25em;
+    position: absolute;
+    top: 0;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 0.5em;
 }
 
 .cardForm input[type='text'],
@@ -73,44 +75,44 @@
 .cardForm select,
 .cardForm textarea,
 .cardForm input[type='password'] {
-	border: 0.0625em solid var(--divider-color);
-	padding: 1em 1.25em;
-	border-top-left-radius: 0.25em;
-	border-top-right-radius: 0.25em;
+    border: 0.0625em solid var(--divider-color);
+    padding: 1em 1.25em;
+    border-top-left-radius: 0.25em;
+    border-top-right-radius: 0.25em;
 }
 
 .cardForm input[type='submit'] {
-	margin-left: auto;
-	display: block;
-	background-color: var(--default-accent-color);
-	color: var(--text-accent-color);
-	border-radius: 0.25em;
-	font-weight: 700;
-	-webkit-box-ordinal-group: 2;
-	-ms-flex-order: 1;
-	order: 1;
-	padding: 0.75em 1.25em;
-	-webkit-transition: background-color 0.3s;
-	transition: background-color 0.3s;
+    margin-left: auto;
+    display: block;
+    background-color: var(--default-accent-color);
+    color: var(--text-accent-color);
+    border-radius: 0.25em;
+    font-weight: 700;
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+    padding: 0.75em 1.25em;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s;
 }
 
 .cardForm input[type='submit']:hover {
-	background-color: var(--dark-accent-color);
+    background-color: var(--dark-accent-color);
 }
 
 .formFooter {
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	background-color: #fff;
-	border-bottom-left-radius: 0.25em;
-	border-bottom-right-radius: 0.25em;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: r;
-	-webkit-box-pack: justify;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
-	padding-bottom: 1.5em;
-	padding-left: 9em;
-	padding-right: 1.5em;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    background-color: #fff;
+    border-bottom-left-radius: 0.25em;
+    border-bottom-right-radius: 0.25em;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: r;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding-bottom: 1.5em;
+    padding-left: 9em;
+    padding-right: 1.5em;
 }

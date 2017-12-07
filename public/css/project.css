@@ -1,51 +1,51 @@
 .statistics {
-	font-size: large;
+    font-size: large;
 }
 
 .statistics td:first-of-type {
-	padding-right: 40px;
-	font-weight: 500;
+    padding-right: 40px;
+    font-weight: 500;
 }
 
 
 /* members */
 
 .members {
-	text-align: center;
+    text-align: center;
 }
 
 body {
-	margin-bottom: 50%;
+    margin-bottom: 50%;
 }
 
 a {
-	color: black;
+    color: black;
 }
 
 .memberContainer {
-	display: inline-block;
-	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-	padding: 10px;
-	margin-right: 20px;
-	margin-bottom: 20px;
-	width: 250px;
-	background-color: var(--divider-color);
+    display: inline-block;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    padding: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: 250px;
+    background-color: var(--divider-color);
 }
 
 .member {
-	border-radius: 500px;
-	max-width: 200px;
-	margin: auto;
-	display: block;
+    border-radius: 500px;
+    max-width: 200px;
+    margin: auto;
+    display: block;
 }
 
 
 /* colors */
 
 body.green {
-	background-color: #A5D6A7;
+    background-color: #A5D6A7;
 }
 
 body.yellow {
-	background-color: #FFF59D;
+    background-color: #FFF59D;
 }

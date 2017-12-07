@@ -1,167 +1,167 @@
 .navbar {
-	position: fixed;
-	top: 0;
-	z-index: 10;
-	padding: 10px 0;
-	width: 100%;
-	height: auto;
-	background-color: var(--default-primary-color);
-	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-	font-size: 18px;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    padding: 10px 0;
+    width: 100%;
+    height: auto;
+    background-color: var(--default-primary-color);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    font-size: 18px;
 }
 
 .navLeft {
-	position: absolute;
-	left: 0.5em;
-	top: 0.5em;
-	padding: 0.5rem 0.6rem 0.5rem 0.6rem;
-	border-radius: 300px;
-	transition: background-color 300ms ease-in-out 10ms;
+    position: absolute;
+    left: 0.5em;
+    top: 0.5em;
+    padding: 0.5rem 0.6rem 0.5rem 0.6rem;
+    border-radius: 300px;
+    transition: background-color 300ms ease-in-out 10ms;
 }
 
 .navLeft:hover {
-	border-radius: 300px;
-	background-color: var(--dark-primary-color);
-	transition: background-color 300ms ease-in-out 10ms;
+    border-radius: 300px;
+    background-color: var(--dark-primary-color);
+    transition: background-color 300ms ease-in-out 10ms;
 }
 
 .afterNav {
-	display: block;
-	height: 80px;
+    display: block;
+    height: 80px;
 }
 
 .logo,
 .nav {
-	display: inline-block;
-	margin: 0 0 0 3rem;
+    display: inline-block;
+    margin: 0 0 0 3rem;
 }
 
 .logo {
-	font-size: 24px;
+    font-size: 24px;
 }
 
 .navPicture {
-	max-height: 30px;
-	max-width: 30px;
-	vertical-align: middle;
-	margin-right: 8px;
-	border-radius: 40px;
+    max-height: 30px;
+    max-width: 30px;
+    vertical-align: middle;
+    margin-right: 8px;
+    border-radius: 40px;
 }
 
 
 /* nav links */
 
 .nav {
-	padding: 0;
-	margin: 0;
-	list-style: none;
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
 .nav li {
-	display: inline-block;
-	margin-left: 40px;
+    display: inline-block;
+    margin-left: 40px;
 }
 
 .navbar a {
-	color: #111;
-	text-decoration: none;
+    color: #111;
+    text-decoration: none;
 }
 
 .navbar a:hover {
-	color: #000;
-	font-weight: 500;
+    color: #000;
+    font-weight: 500;
 }
 
 
 /* right pull nav links */
 
 .navRight {
-	float: right;
-	line-height: 39px;
-	text-align: top;
+    float: right;
+    line-height: 39px;
+    text-align: top;
 }
 
 
 /* Search bar */
 
 .nav.search {
-	margin-left: 30px;
-	position: relative;
-	display: inline-grid;
-	transition: width 0.3s ease-in-out;
-	width: 20%;
+    margin-left: 30px;
+    position: relative;
+    display: inline-grid;
+    transition: width 0.3s ease-in-out;
+    width: 20%;
 }
 
 .nav.search:focus-within {
-	transition: width 0.3s ease-in-out;
-	width: 50%;
+    transition: width 0.3s ease-in-out;
+    width: 50%;
 }
 
 .nav.search input {
-	border-radius: 3px;
-	display: inline-block;
-	text-indent: 40px;
-	background: rgba(0, 0, 0, 0.04);
-	padding: 0.4em;
+    border-radius: 3px;
+    display: inline-block;
+    text-indent: 40px;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 0.4em;
 }
 
 .nav.search input:focus {
-	border-radius: 5px;
-	background: white;
+    border-radius: 5px;
+    background: white;
 }
 
 .nav.search .material-icons.search {
-	position: absolute;
-	top: 11px;
-	left: 14px;
+    position: absolute;
+    top: 11px;
+    left: 14px;
 }
 
 
 /* Close button */
 
 .nav.search .material-icons.close {
-	display: none;
-	position: absolute;
-	top: 11px;
-	right: 10px;
+    display: none;
+    position: absolute;
+    top: 11px;
+    right: 10px;
 }
 
 .material-icons.close {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .nav.search:focus-within .material-icons.close {
-	display: inline-block;
+    display: inline-block;
 }
 
 .material-icons.close:hover {
-	color: #000;
-	border-radius: 99em;
-	background: rgba(0, 0, 0, 0.1);
+    color: #000;
+    border-radius: 99em;
+    background: rgba(0, 0, 0, 0.1);
 }
 
 
 /* The side navigation menu */
 
 .sidenav {
-	height: 100%;
-	/* 100% Full-height */
-	width: 0;
-	/* 0 width - change this with JavaScript */
-	position: fixed;
-	/* Stay in place */
-	z-index: 8;
-	/* Stay on top */
-	top: 0;
-	left: 0;
-	background-color: var(--dark-accent-color);
-	/* Black*/
-	overflow-x: hidden;
-	/* Disable horizontal scroll */
-	padding-top: 100px;
-	/* Place content 60px from the top */
-	transition: 0.5s;
-	/*0.5 second transition effect to slide in the sidenav */
+    height: 100%;
+    /* 100% Full-height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    z-index: 8;
+    /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: var(--dark-accent-color);
+    /* Black*/
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    padding-top: 100px;
+    /* Place content 60px from the top */
+    transition: 0.5s;
+    /*0.5 second transition effect to slide in the sidenav */
 }
 
 .sidenav a:hover,
@@ -173,47 +173,47 @@
 .sidenav li.open a:hover,
 .sidenav li.open a:active,
 .sidenav li.open a:focus {
-	color: var(--default-primary-color);
-	text-decoration: none;
-	background-color: transparent;
+    color: var(--default-primary-color);
+    text-decoration: none;
+    background-color: transparent;
 }
 
 .sidenav .dropdown-menu {
-	position: relative;
-	width: 100%;
-	padding: 0px 0px 0px 10px;
-	margin: 0;
-	border-radius: 0;
-	border: none;
-	background-color: var(--dark-accent-color);
-	box-shadow: none;
+    position: relative;
+    width: 100%;
+    padding: 0px 0px 0px 10px;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    background-color: var(--dark-accent-color);
+    box-shadow: none;
 }
 
 .sidenav .sidebar {
-	position: relative;
-	width: 100%;
-	padding: 0;
-	margin: 0;
-	border-radius: 0;
-	border: none;
-	background-color: var(--dark-accent-color);
-	box-shadow: none;
+    position: relative;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    background-color: var(--dark-accent-color);
+    box-shadow: none;
 }
 
 .sidenav .dropdown-menu a {
-	font-size: 15px;
+    font-size: 15px;
 }
 
 
 /* The navigation menu links */
 
 .sidenav a {
-	padding: 0px 8px 8px 32px;
-	text-decoration: none;
-	font-size: 25px;
-	color: var(--text-accent-color);
-	display: inline-block;
-	transition: 0.3s
+    padding: 0px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: var(--text-accent-color);
+    display: inline-block;
+    transition: 0.3s
 }
 
 
@@ -221,65 +221,65 @@
 
 .sidenav a:hover,
 .offcanvas a:focus {
-	color: #f1f1f1;
+    color: #f1f1f1;
 }
 
 .sidenav .sidebar .dropdown .material-icons {
-	margin-top: -7px;
+    margin-top: -7px;
 }
 
 .sidenav .sidebar .dropdown .archived {
-	margin-top: -5px;
+    margin-top: -5px;
 }
 
 
 /* Position and style the close button (top right corner) */
 
 .sidenav .closebtn {
-	position: absolute;
-	top: 50px;
-	right: 5px;
-	font-size: 36px;
-	padding: 0;
-	color: var(--text-accent-color);
-	font-weight: 100;
+    position: absolute;
+    top: 50px;
+    right: 5px;
+    font-size: 36px;
+    padding: 0;
+    color: var(--text-accent-color);
+    font-weight: 100;
 }
 
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 
 @media screen and (max-height: 450px) {
-	.sidenav {
-		padding-top: 15px;
-	}
-	.sidenav a {
-		font-size: 18px;
-	}
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
 }
 
 @media screen and (max-width: 677px) {
-	.nav.search {
-		position: relative;
-		display: inline-grid;
-		transition: width 0.3s ease-in-out;
-		width: 10%;
-		margin-top: 0.5rem;
-		margin-right: 20rem;
-	}
-	.nav.search:focus-within {
-		margin-right: 20rem;
-		transition: width 0.3s ease-in-out;
-		width: 80%;
-	}
-	.nav.navRight.text {
-		display: none;
-	}
-	.nav.navRight {
-		position: absolute;
-		top: 8px;
-		right: 20px;
-	}
-	.sidenav .sidebar {
-		margin-top: 3em;
-	}
+    .nav.search {
+        position: relative;
+        display: inline-grid;
+        transition: width 0.3s ease-in-out;
+        width: 10%;
+        margin-top: 0.5rem;
+        margin-right: 20rem;
+    }
+    .nav.search:focus-within {
+        margin-right: 20rem;
+        transition: width 0.3s ease-in-out;
+        width: 80%;
+    }
+    .nav.navRight.text {
+        display: none;
+    }
+    .nav.navRight {
+        position: absolute;
+        top: 8px;
+        right: 20px;
+    }
+    .sidenav .sidebar {
+        margin-top: 3em;
+    }
 }
