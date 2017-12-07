@@ -161,6 +161,7 @@ input[type='submit'] {
 
 .container {
 	margin: 0 auto;
+	word-wrap: break-word;
 }
 
 @media screen and (max-width: 677px) {
