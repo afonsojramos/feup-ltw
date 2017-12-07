@@ -14,10 +14,10 @@ $todoList = new TodoList();
 if ($todoList->load($_POST["todoListId"])) {
 	if ($todoList->verifyOwnership($_SESSION["userId"])) {
 		$todoList->title = $_POST["title"];
-		if ($_POST["colour"] != null) {
+		if ($_POST["colour"] != "")
 			$todoList->colour = $_POST["colour"];
+		if ($_POST["tags"] != "")
 			$todoList->tags = $_POST["tags"];
-		}
 		if ($todoList->update() !== false) {
 			$result["success"] = true;
 		} else {
