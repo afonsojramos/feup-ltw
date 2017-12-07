@@ -13,9 +13,9 @@ Array.prototype.forEach.call(editForms, function(editListForm) {
                 let todoTitle = todo.getElementsByClassName("todoTitle")[0];
                 todoTitle.innerHTML = data.title;
 
-                /*TODO: change dinamically colour and tags
-                let todoColour = todo.getElementsByClassName("todo show-on-hover-parent colour-" + data.todoListId);
-                todoColour.innerHTML = data.colour; */
+                //TODO: change dinamically tags
+
+                todo.className = ("todo show-on-hover-parent colour-" + data.colour);
 
                 editListForm.style.display = "none";
 
