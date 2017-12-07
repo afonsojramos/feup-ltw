@@ -189,13 +189,11 @@ let baseListners = [{
 		class: "delete",
 		callback: simpleRequestListener,
 		onSuccess: listDeleted
-	},
-	{
+	}, {
 		class: "archive",
 		callback: simpleRequestListener,
 		onSuccess: listArchived
-	},
-	{
+	}, {
 		class: "share",
 		callback: simpleRequestListener,
 		onSuccess: listShared
