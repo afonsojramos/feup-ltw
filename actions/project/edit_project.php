@@ -17,10 +17,9 @@ if ($project->load($_POST["projectId"])) {
 		$project->description = $_POST["description"];
 		$project->colour = $_POST["colour"];
 		if ($project->validate()) {
-			if ($project->update()) {//update project
-				$result["success"] = true;
-				header("Location: ../../project.php?projectId=".$project->projectId);
-			}
+			$project->update();
+			$result["success"] = true;
+			header("Location: ../../project.php?projectId=".$project->projectId);
 		} else {
 			$result["errors"] = $project->errors;
 		}
