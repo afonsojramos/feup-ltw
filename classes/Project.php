@@ -34,5 +34,8 @@ class Project extends QueryBuilder{
 		return $projects;
 	}
 
-
+	public function verifyOwnership($userId){
+		$member = new Member($this->projectId, $userId);
+		return $member->load();
+	}
 }

@@ -75,13 +75,49 @@ $members = User::getAllByProject($project->projectId);
 		</tbody>
 	</table>
 
+	<h2 class="strong">Description</h2>
+	<div>
+		<?= htmlentities($project->description) ?>
+	</div>
+
+	<form class="grid" action="actions/project/edit_project.php" method="post">
+		<?php insertCsrfToken(); ?>
+		<div class="errors"></div>
+		<div class="modalContent cardForm grid">
+			<div class="formHeader">
+				<h3 class="formTitle">New Project</h3>
+			</div>
+			<div class="formBody">
+				<input type="hidden" name="projectId" value="<?= $project->projectId ?>">
+				<div>
+					<input type="text" name="title" placeholder="Project title" value="<?= htmlentities($project->title) ?>" required>
+				</div>
+				<div>
+					<textarea name="description" placeholder="Project Description"><?= htmlentities($project->description) ?></textarea>
+				</div>
+				<div>
+					<select name="colour">
+					<?php
+						$colours = array("white", "red", "orange", "yellow" , "green", "teal" , "blue", "purple", "pink", "brown");
+						foreach ($colours as $colour): ?>
+							<option class="<?= $colour ?>" value="<?= $colour ?>" <?= $project->colour==$colour?"selected":"" ?>><?= ucfirst($colour) ?></option>
+						<?php endforeach ?>
+					</select>
+				</div>
+			</div>
+			<footer class="formFooter">
+				<input type="submit" value="Save">
+			</footer>
+		</div>
+	</form>
+
 	<hr/>
 	<h1 class="center strong">Members</h1>
 	<div class="members">
 	<?php foreach ($members as $member) :
-		$base = "public/images/profile/";
-		$filename = $base . $member->userId . ".jpg";
-		if (!file_exists($filename)) $filename = $base . "default.png" ?>
+	$base = "public/images/profile/";
+$filename = $base . $member->userId . ".jpg";
+if (!file_exists($filename)) $filename = $base . "default.png" ?>
 		<div class="memberContainer">
 			<img class="member" src="<?= $filename ?>"/>
 			<h2 class="center"><?= $member->username; ?></h2>
@@ -107,7 +143,7 @@ $members = User::getAllByProject($project->projectId);
 	<h1 class="center strong">Actions</h1>
 
 	<ul>
-		<li class="strong"><a> DELETE</a></li>
+		<li class="strong"><a> Delete Project</a></li>
 		<li class="strong"><a> Add member</a></li>
 	</ul>
 </div>
