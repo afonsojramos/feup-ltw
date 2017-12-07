@@ -13,7 +13,7 @@ require_once(dirname(__FILE__) . "/../../classes/Project.php");
 		</div>
 		<div class="formBody">
 			<div>
-				<input type="text" name="title" placeholder="List title" required>
+				<input type="text" name="title" placeholder="Project title" required>
 			</div>
 			<div>
 				<textarea name="description" placeholder="Project Description"></textarea>
