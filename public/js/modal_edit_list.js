@@ -10,10 +10,19 @@ Array.prototype.forEach.call(editForms, function(editListForm) {
         request("actions/list/edit_list.php", function(result) {
             if (result.success) {
                 let todo = document.getElementById("todo_" + data.todoListId);
+
                 let todoTitle = todo.getElementsByClassName("todoTitle")[0];
                 todoTitle.innerHTML = data.title;
 
-                //TODO: change dinamically tags
+                let todoTags = todo.getElementsByClassName("tags")[0];
+
+                todoTags = data.tags;
+
+                /* let todoTagsSplit = data.tags.split(",");
+
+                for (let index = 0; index < todoTagsSplit.length; index++) {
+                    todoTags.insertAdjacentHTML('beforeend', todoTagsSplit[i]);
+				} */
 
                 todo.className = ("todo show-on-hover-parent colour-" + data.colour);
 

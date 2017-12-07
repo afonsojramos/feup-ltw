@@ -30,7 +30,7 @@ if(count($projects) == 0 || (count($projects) && $projects[0]->projectId != "0")
 				<input type="text" name="title" id="title" placeholder="List title" value="<?= htmlentities($todo->title) ?>" required>
 			</div>
 			<div>
-				<input type="text" name="tags" id="tags" placeholder="Tags (Comma separate)">
+				<input type="text" name="tags" id="tags" placeholder="Tags (Comma separate)" value="<?= $todo->tags ?>">
 			</div>
 			<div>
 				<select name="projectId">
@@ -40,7 +40,8 @@ if(count($projects) == 0 || (count($projects) && $projects[0]->projectId != "0")
 				</select>
 			</div>
 			<div>
-				<select name="colour">
+				<select name="colour" value="<?= $todo->colour ?>">
+					
 					<option class="white" value="white">White</option>
 					<option class="red" value="red">Red</option>
 					<option class="orange" value="orange">Orange</option>
