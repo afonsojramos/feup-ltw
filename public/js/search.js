@@ -1,5 +1,29 @@
 let search = document.getElementById("search");
 
+
+function getJsonFromUrl() {
+	let query = location.search.substr(1);
+	let result = {};
+	query.split("&").forEach(function(part) {
+	  let item = part.split("=");
+	  result[item[0]] = decodeURIComponent(item[1]);
+	});
+	return result;
+}
+function populateSearchBar() {
+/*	let js = getJsonFromUrl();
+	console.log(js);
+	if(js.hasOwnProperty(members)){
+		js[members].forEach(element, function(){
+			search.value= search.value.concat("@"+element);
+		})
+	}
+	console.log(result);*/ //currently erroring
+}
+
+window.onload = populateSearchBar;
+
+
 function clearSearch(){
 	if(search == document.activeElement){
 		search.value = "";
@@ -14,7 +38,7 @@ function enterSearch(e){
 
 function doSearch(){
 	if(search == document.activeElement){
-		const regex = /(?:@(\w+))|(?:!(\w+))|(?:#(\w+))|([a-zA-ZÀ-ÖØ-öø-ÿ]+)|(?:\"(.*)\")/g;
+		const regex = /(?:@(\w+))|(?:!(\w+))|(?:#(\w+))|([a-zA-ZÀ-ÖØ-öø-ÿ]+)|(?:\"(.*?)\")/g;
 		let m;
 		let res={};
 		while ((m = regex.exec(search.value)) !== null) {
@@ -37,9 +61,20 @@ function doSearch(){
 
 			});
 		}
-		request("actions/user/search.php", function (result) {
-			/* treat result here */
-		}, res, "post");
+		// build the url
 
+		let url="";
+		if(res.hasOwnProperty(1))
+			url=url.concat("?members=").	concat(res[1].join(','));
+		if(res.hasOwnProperty(2))
+			url=url.concat("&tags=").		concat(res[2].join(','));
+		if(res.hasOwnProperty(3))
+			url=url.concat("&projects=").	concat(res[3].join(','));
+		if(res.hasOwnProperty(4))
+			url=url.concat("&words=").		concat(res[4].join(','));
+		if(res.hasOwnProperty(5))
+			url=url.concat("&expressions=").concat(res[5].join(','));
+
+		document.location.href=window.location.href.replace(window.location.search,'').concat(url);
 	}
 }
