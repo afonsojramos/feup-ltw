@@ -82,7 +82,6 @@ $members = User::getAllByProject($project->projectId);
 
 	<form class="grid" action="actions/project/edit_project.php" method="post">
 		<?php insertCsrfToken(); ?>
-		<div class="errors"></div>
 		<div class="modalContent cardForm grid">
 			<div class="formHeader">
 				<h3 class="formTitle">New Project</h3>
@@ -98,9 +97,9 @@ $members = User::getAllByProject($project->projectId);
 				<div>
 					<select name="colour">
 					<?php
-						$colours = array("white", "red", "orange", "yellow" , "green", "teal" , "blue", "purple", "pink", "brown");
-						foreach ($colours as $colour): ?>
-							<option class="<?= $colour ?>" value="<?= $colour ?>" <?= $project->colour==$colour?"selected":"" ?>><?= ucfirst($colour) ?></option>
+				$colours = array("white", "red", "orange", "yellow", "green", "teal", "blue", "purple", "pink", "brown");
+				foreach ($colours as $colour) : ?>
+							<option class="<?= $colour ?>" value="<?= $colour ?>" <?= $project->colour == $colour ? "selected" : "" ?>><?= ucfirst($colour) ?></option>
 						<?php endforeach ?>
 					</select>
 				</div>
@@ -139,12 +138,13 @@ if (!file_exists($filename)) $filename = $base . "default.png" ?>
 		</div>
 	</div>
 
+
 	<hr/>
 	<h1 class="center strong">Actions</h1>
 
 	<ul>
 		<li class="strong"><a> Delete Project</a></li>
-		<li class="strong"><a> Add member</a></li>
+		<li class="strong"><a id="addMember"> Add member</a></li>
 	</ul>
 </div>
 
