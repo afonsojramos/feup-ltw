@@ -40,18 +40,12 @@ if(count($projects) == 0 || (count($projects) && $projects[0]->projectId != "0")
 				</select>
 			</div>
 			<div>
-				<select name="colour" value="<?= $todo->colour ?>">
-					
-					<option class="white" value="white">White</option>
-					<option class="red" value="red">Red</option>
-					<option class="orange" value="orange">Orange</option>
-					<option class="yellow" value="yellow">Yellow</option>
-					<option class="green" value="green">Green</option>
-					<option class="teal" value="teal">Teal</option>
-					<option class="blue" value="blue">Blue</option>
-					<option class="purple" value="purple">Purple</option>
-					<option class="pink" value="pink">Pink</option>
-					<option class="brown" value="brown">Brown</option>
+				<select name="colour">
+					<?php 
+						$colours = array("white", "red", "orange", "yellow" , "green", "teal" , "blue", "purple", "pink", "brown");
+						foreach ($colours as $colour): ?>
+							<option class="<?= $colour ?>" value="<?= $colour ?>" <?= $todo->colour==$colour?"selected":"" ?>><?= ucfirst($colour) ?></option>
+						<?php endforeach ?>
 				</select>
 			</div>
 		</div>

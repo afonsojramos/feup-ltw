@@ -16,21 +16,14 @@ Array.prototype.forEach.call(editForms, function(editListForm) {
 
                 let todoTags = todo.getElementsByClassName("tags")[0];
 
-                todoTags = data.tags;
-
-                /* let todoTagsSplit = data.tags.split(",");
-
-                for (let index = 0; index < todoTagsSplit.length; index++) {
-                    todoTags.insertAdjacentHTML('beforeend', todoTagsSplit[i]);
-				} */
+                data.tags = data.tags.split(",").map(function(tag) {
+                    return `<a href="dashboard.php?tag=${tag}" class="tag"> ${tag}</a>`;
+                });
+                todoTags.innerHTML = data.tags.join("");
 
                 todo.className = ("todo show-on-hover-parent colour-" + data.colour);
 
                 editListForm.style.display = "none";
-
-                /* 
-                displayNewTodoList(data.todoListId);
-                parentNode.replaceChild(editListForm, todo); */
             } else {
                 addErrorMessage(editListForm, result.errors);
             }
