@@ -85,4 +85,19 @@ class User extends QueryBuilder{
 		}
 		return false;
 	}
+
+	/**
+	 * Get all users for a given project
+	*/
+	public static function getAllByProject($projectId){
+		$qb = new QueryBuilder(self::class);
+		$lines = $qb->select()->where("userId in (SELECT userId FROM members WHERE projectId = :projectId)")->addParam("projectId", $projectId)->getAll();
+		$users = array();
+		foreach ($lines as $line) {
+			$p = new User;
+			$p->loadFromArray($line);
+			$users[] = $p;
+		}
+		return $users;
+	}
 }

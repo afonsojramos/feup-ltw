@@ -64,13 +64,13 @@ class TodoList extends QueryBuilder{
 		return self::loadTodoFromDatabase($lines, $loadItemsAsWell);
 	}
 
+	*/
 	//all the lists that are in a project
 	public static function getAllByUserProject($userId, $projectId, $loadItemsAsWell = true){
 		$qb = new QueryBuilder(self::class);
-		//TODO: maybe load project information
 		$lines = $qb->select()->where("userId = :userId and projectId = :projectId")->addParam("userId", $userId)->addParam("projectId", $projectId)->getAll();
 		return self::loadTodoFromDatabase($lines, $loadItemsAsWell);
-	} */
+	}
 
 	private static function loadTodoFromDatabase($lines, $loadItemsAsWell = true){
 		if ($loadItemsAsWell) {
@@ -91,6 +91,7 @@ class TodoList extends QueryBuilder{
 		}
 		return $todos;
 	}
+
 
 	/**
 	 * Returns true if the supplied user has access to this list, wither it's his or it belongs to a project of which he is a member

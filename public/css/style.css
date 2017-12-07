@@ -103,6 +103,10 @@ input[type='submit'] {
 	float: left;
 }
 
+.strong {
+	font-weight: 500;
+}
+
 .error,
 .success {
 	position: relative;
