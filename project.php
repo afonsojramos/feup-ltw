@@ -62,14 +62,14 @@ $members = User::getAllByProject($project->projectId);
 
 ?>
 <div class="container">
-	<h1 class="center">Project: <span class="strong"><?= htmlentities($project->title) ?></span></h1>
-	<h2 class="strong">Statistics</h2>
-	<table class="statistics">
+	<h1 class="center"><span class="strong"><?= htmlentities($project->title) ?></span></h1>
+<!-- 	<h2 class="strong">Statistics</h2>
+ -->	<table class="statistics">
 		<tbody>
 			<?php foreach ($statistics as $name => $value) : ?>
-			<tr>
-				<td><?= $name ?></td>
-				<td><?= $value ?></td>
+			<tr class="statistics list">
+				<td class="statistics value"><?= $value ?></td>
+				<td class="statistics name"><?= $name ?></td>
 			</tr>
 			<?php endforeach ?>
 		</tbody>

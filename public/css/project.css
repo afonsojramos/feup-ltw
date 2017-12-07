@@ -22,6 +22,34 @@ a {
     color: black;
 }
 
+h1 {
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+h2 {
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.statistics.value {
+    display: block;
+    height: 60px;
+    width: 60px;
+    line-height: 60px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 2em;
+}
+
+.statistics.list {
+    display: flex;
+    flex-direction: column;
+}
+
 .memberContainer {
     display: inline-block;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -48,4 +76,36 @@ body.green {
 
 body.yellow {
     background-color: #FFF59D;
+}
+
+body.teal {
+    background-color: #80CBC4;
+}
+
+body.blue {
+    background-color: #90CAF9;
+}
+
+body.purple {
+    background-color: #CE93D8;
+}
+
+body.pink {
+    background-color: #F48FB1;
+}
+
+body.red {
+    background-color: #EF9A9A;
+}
+
+body.orange {
+    background-color: #FFCC80;
+}
+
+body.brown {
+    background-color: #BCAAA4;
+}
+
+body.grey {
+    background-color: #EEEEEE;
 }
