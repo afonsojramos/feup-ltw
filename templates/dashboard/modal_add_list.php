@@ -13,8 +13,10 @@ if (isset($_GET['projectId'])) {
 if(!isset($projects) && !is_array($projects)){
 	$projects = Project::getAllByUser($_SESSION["userId"]);
 }
-//create default project
-$projects = array_merge(array(new Project("0", "Private (No Project)")), $projects);
+if(count($projects) == 0 || (count($projects) && $projects[0]->projectId != "0")){
+	//create default project
+	$projects = array_merge(array(new Project("0", "Private (No Project)")), $projects);
+}
 ?>
 
 <form class="modal" opener="openAddListModal" id ="modalAddList">

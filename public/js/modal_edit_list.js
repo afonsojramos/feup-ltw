@@ -1,21 +1,34 @@
-let editForm = document.getElementById("modalEditList");
+let editForms = document.getElementsByClassName("modalEditList");
+Array.prototype.forEach.call(editForms, function(editListForm) {
 
-editForm.addEventListener("submit", function (e) {
-	let parentTodo = findParentByClass(title, "todo");
-	let formData = new FormData(editForm);
-	addErrorMessage(formData.entries(), data.errors);
-	for (let [key, value] of formData.entries()) {
-		data[key] = value;
-	}
-	data[key+1]=parentTodo.getAttribute("data-todoListId");
-	request("actions/list/edit_list.php", function (data) {
-		if(data.success){
-			editForm.style.display = "none";
-			editForm.reset();
-			displayNewTodoList(data.todoListId);
-		}else{
-			addErrorMessage(editForm, data.errors);
-		}
-	}, data, "post");
-	e.preventDefault();
-}, false);
+    editListForm.addEventListener("submit", function(e) {
+        let formData = new FormData(editListForm);
+        let data = {};
+        for (let [key, value] of formData.entries()) {
+            data[key] = value;
+        }
+        request("actions/list/edit_list.php", function(result) {
+            if (result.success) {
+                let todo = document.getElementById("todo_" + data.todoListId);
+                let todoTitle = todo.getElementsByClassName("todoTitle")[0];
+                todoTitle.innerHTML = data.title;
+
+                /*TODO: change dinamically colour and tags
+                let todoColour = todo.getElementsByClassName("todo show-on-hover-parent colour-" + data.todoListId);
+                todoColour.innerHTML = data.colour; */
+
+                editListForm.style.display = "none";
+
+                /* 
+                displayNewTodoList(data.todoListId);
+                parentNode.replaceChild(editListForm, todo); */
+            } else {
+                addErrorMessage(editListForm, result.errors);
+            }
+        }, data, "post");
+        e.preventDefault();
+    }, false);
+
+    let formData = new FormData(editListForm);
+
+});

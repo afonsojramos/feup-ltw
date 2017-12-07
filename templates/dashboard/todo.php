@@ -1,7 +1,6 @@
 <?php
 require_once(dirname(__FILE__) . "/../../includes/common/only_allow_login.php");
 require_once(dirname(__FILE__) . "/../../classes/TodoList.php");
-require_once(dirname(__FILE__) . "/modal_edit_list.php");
 $todo;
 if (!isset($todo)) {
 	if (isset($_GET["todoListId"])) {
@@ -15,8 +14,8 @@ if (!isset($todo)) {
 		die("Missing parameters");
 	}
 }
+require(dirname(__FILE__) . "/modal_edit_list.php");
 ?>
-
 
 <div class="todo show-on-hover-parent colour-<?= $todo->colour ?>" id = "todo_<?= $todo->todoListId; ?>"  data-todoListId="<?= $todo->todoListId ?>" >
 	<h3 class="noMargin"><span class="todoTitle"><?= htmlentities($todo->title) ?></span></h3>
@@ -40,7 +39,7 @@ if (!isset($todo)) {
 	</div>
 	<span class="listFooter show-on-hover">
 		<span class="archive"><a href="#"><i class="material-icons"><?= $todo->archived ? "unarchive" : "archive" ?></i></a></span>
-		<span class="colour" id="openEditListModal"><a href="#"><i class="material-icons">mode_edit</i></a></span>
+		<span class="colour" id="openEditListModal-<?= $todo->todoListId ?>"><a href="#"><i class="material-icons">mode_edit</i></a></span>
 		<span class="delete"><a href="#"><i class="material-icons">delete</i></a></span>
 		<span class="share"><a href="#"><i class="material-icons">share</i></a></span>
 	</span>
