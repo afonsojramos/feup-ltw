@@ -112,7 +112,7 @@ $members = User::getAllByProject($project->projectId);
 	</form>
 
 	<hr/>
-	<h1 class="center strong">Members</h1>
+	<h2 class="center strong">Members</h2>
 	<div class="members">
 		<div class="errors"></div>
 		<?php foreach ($members as $member) :
@@ -132,11 +132,9 @@ $members = User::getAllByProject($project->projectId);
 
 
 	<hr/>
-	<h1 class="center strong">Actions</h1>
+	<h1 class="center strong" id="actions">Actions</h1>
 
-	<ul>
-		<li class="strong"><a id="deleteProject"> Delete Project</a></li>
-	</ul>
+	<h1 class="strong"><a id="deleteProject"> Delete Project</a></h1>
 </div>
 
 <?php require_once(dirname(__FILE__) . "/templates/common/footer.php"); ?>
