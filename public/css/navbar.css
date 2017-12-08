@@ -41,11 +41,13 @@
 }
 
 .navPicture {
-    max-height: 30px;
-    max-width: 30px;
+    height: 30px;
+    width: 30px;
     vertical-align: middle;
     margin-right: 8px;
-    border-radius: 40px;
+	border-radius: 40px;
+	object-fit: cover;
+	overflow: hidden;
 }
 
 

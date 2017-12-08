@@ -74,7 +74,7 @@ $members = User::getAllByProject($project->projectId);
 	</div>
 
 	<h2 class="strong">Description</h2>
-	<div>
+	<div class="description">
 		<?= htmlentities($project->description) ?>
 	</div>
 
@@ -82,7 +82,7 @@ $members = User::getAllByProject($project->projectId);
 		<?php insertCsrfToken(); ?>
 		<div class="modalContent cardForm grid">
 			<div class="formHeader">
-				<h3 class="formTitle">New Project</h3>
+				<h3 class="formTitle">Edit Project</h3>
 			</div>
 			<div class="formBody">
 				<input type="hidden" name="projectId" value="<?= $project->projectId ?>">
@@ -90,7 +90,7 @@ $members = User::getAllByProject($project->projectId);
 					<input type="text" name="title" placeholder="Project title" value="<?= htmlentities($project->title) ?>" required>
 				</div>
 				<div>
-					<textarea name="description" placeholder="Project Description"><?= htmlentities($project->description) ?></textarea>
+					<textarea name="description" rows="5" placeholder="Project Description"><?= htmlentities($project->description) ?></textarea>
 				</div>
 				<div>
 					<select name="colour">
