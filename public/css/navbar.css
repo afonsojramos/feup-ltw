@@ -45,9 +45,9 @@
     width: 30px;
     vertical-align: middle;
     margin-right: 8px;
-	border-radius: 40px;
-	object-fit: cover;
-	overflow: hidden;
+    border-radius: 40px;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 
@@ -210,7 +210,7 @@
 /* The navigation menu links */
 
 .sidenav a {
-    padding: 0px 8px 8px 32px;
+    padding: 4px 8px 4px 32px;
     text-decoration: none;
     font-size: 25px;
     color: var(--text-accent-color);
