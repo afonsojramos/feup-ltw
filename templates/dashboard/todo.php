@@ -49,7 +49,7 @@ require(dirname(__FILE__) . "/modal_edit_list.php");
 			$base = "public/images/profile/";
 			$filename = $base . "thumb" . $member->userId . ".jpg";
 			if (!file_exists(dirname(__FILE__) . "/../../" . $filename)) $filename = $base . "default.png" ?>
-				<a class="memberLink" href="user.php?userId=<?= $member->userId ?>" title="user: <?= htmlentities($member->username) ?>"><img alt="profile picture" class="todoMember" src="<?= $filename ?>"/></a>
+				<a class="memberLink" href="user.php?userId=<?= $member->userId ?>" title="User: <?= htmlentities($member->username) ?>"><img alt="profile picture" class="todoMember" src="<?= $filename ?>"/></a>
 		<?php endforeach ?>
 	</div>
 	<?php

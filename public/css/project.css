@@ -1,158 +1,160 @@
 body {
-	margin-bottom: 50%;
+    margin-bottom: 50%;
 }
 
 a {
-	color: black;
+    color: black;
 }
 
 h1 {
-	font-size: 50px;
-	font-weight: bolder;
+    font-size: 50px;
+    font-weight: bolder;
 }
 
 h2 {
-	font-size: 30px;
-	font-weight: bolder;
-	text-align: center;
+    font-size: 30px;
+    font-weight: bolder;
+    text-align: center;
 }
 
 .container .description {
-	padding: 2em 0 2em 0;
-	text-align: center;
-	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16), 0 3px 3px 2px rgba(0, 0, 0, 0.23);
-	background-color: white;
+    padding: 2em 0 2em 0;
+    text-align: center;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16), 0 3px 3px 2px rgba(0, 0, 0, 0.23);
+    background-color: white;
 }
 
 #projectForm {
-	margin-top: 20px;
-	margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 
 /* members */
 
 .members {
-	text-align: center;
+    text-align: center;
 }
 
 .memberContainer {
-	display: inline-block;
-	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-	padding: 10px;
-	margin-right: 20px;
-	margin-bottom: 20px;
-	width: 250px;
-	background-color: var(--divider-color);
+    display: inline-block;
+    margin: auto;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    padding: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    width: 250px;
+    background-color: var(--divider-color);
 }
 
 .member {
-	border-radius: 500px;
-	margin: auto;
-	display: block;
-	width: 200px;
-	height: 200px;
-	object-fit: cover;
-	overflow: hidden;
+    border-radius: 500px;
+    margin: auto;
+    display: block;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 .memberContainer .removeMember:hover {
-	color: var(--default-primary-color)
+    color: var(--default-primary-color)
 }
 
 .members #addMember {
-	font-size: 20px;
-	font-weight: bold;
-	display: inline-block;
-	cursor: pointer;
-	padding: 10px 20px;
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
-	color: var(--text-accent-color);
-	-o-text-overflow: clip;
-	text-overflow: clip;
-	background-color: var(--default-accent-color);
-	-webkit-box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.5);
-	box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.5);
-	text-shadow: -1px -1px 0 rgba(15, 73, 168, 0.66);
-	-webkit-transition: background-color 0.3s;
-	transition: background-color 0.3s;
-	margin: 1em;
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px 20px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    color: var(--text-accent-color);
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    background-color: var(--default-accent-color);
+    -webkit-box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.5);
+    text-shadow: -1px -1px 0 rgba(15, 73, 168, 0.66);
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+    margin: 1em;
 }
 
 .members #addMember:hover {
-	background-color: var(--dark-accent-color);
+    background-color: var(--dark-accent-color);
 }
 
 .center.strong#actions {
-	display: none;
+    display: none;
 }
 
 #deleteProject {
-	font-size: 20px;
-	font-weight: bold;
-	display: block;
-	text-align: center;
-	cursor: pointer;
-	margin: 0 auto;
-	width: 15em;
-	padding: 10px 20px;
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
-	color: var(--text-accent-color);
-	-o-text-overflow: clip;
-	text-overflow: clip;
-	background-color: rgb(228, 17, 17);
-	-webkit-box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.5);
-	box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.5);
-	text-shadow: -1px -1px 0 rgba(15, 73, 168, 0.66);
-	-webkit-transition: background-color 0.3s;
-	transition: background-color 0.3s;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 auto;
+    width: 15em;
+    padding: 10px 20px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    color: var(--text-accent-color);
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    background-color: rgb(228, 17, 17);
+    -webkit-box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.5);
+    text-shadow: -1px -1px 0 rgba(15, 73, 168, 0.66);
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s;
 }
 
 #deleteProject:hover {
-	background-color: rgb(161, 0, 0);
+    background-color: rgb(161, 0, 0);
 }
 
 
 /* colors */
 
 body.green {
-	background-color: #C8E6C9;
+    background-color: #C8E6C9;
 }
 
 body.yellow {
-	background-color: #FFF59D;
+    background-color: #FFF59D;
 }
 
 body.teal {
-	background-color: #B2DFDB;
+    background-color: #B2DFDB;
 }
 
 body.blue {
-	background-color: #BBDEFB;
+    background-color: #BBDEFB;
 }
 
 body.purple {
-	background-color: #E1BEE7;
+    background-color: #E1BEE7;
 }
 
 body.pink {
-	background-color: #F8BBD0;
+    background-color: #F8BBD0;
 }
 
 body.red {
-	background-color: #FFCDD2;
+    background-color: #FFCDD2;
 }
 
 body.orange {
-	background-color: #FFE0B2;
+    background-color: #FFE0B2;
 }
 
 body.brown {
-	background-color: #BCAAA4;
+    background-color: #BCAAA4;
 }
 
 body.grey {
-	background-color: #EEEEEE;
+    background-color: #EEEEEE;
 }
