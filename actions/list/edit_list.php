@@ -10,8 +10,7 @@ require_once(dirname(__FILE__) . "/../../classes/Project.php");
 
 $result = array("success" => false);
 
-$todoList = new TodoList();
-
+$todoList = new TodoList;
 if ($todoList->load($_POST["todoListId"])) {
 	if ($todoList->verifyOwnership($_SESSION["userId"])) {
 		$todoList->title = $_POST["title"];

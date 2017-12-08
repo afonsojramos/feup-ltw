@@ -84,13 +84,19 @@
 	text-decoration: none;
 	padding: 0px 4px 0px 4px;
 	display: table;
-	margin-left:auto;
+	margin-left: auto;
 }
 
 .todoProject:hover {
 	background: white;
 	transition: box-shadow 0.3s ease-in-out;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
+}
+
+.readOnlyList .todo {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 
@@ -301,6 +307,9 @@ input.addItemText {
 	.todo {
 		width: 90%;
 	}
+	.readOnlyList .todo{
+		width: 80%;
+	}
 }
 
 @media screen and (min-width: 690px) {
@@ -310,6 +319,9 @@ input.addItemText {
 	}
 	.todo {
 		width: 20em;
+	}
+	.readOnlyList .todo{
+		width: 80%;
 	}
 }
 
@@ -321,6 +333,9 @@ input.addItemText {
 	.todo {
 		width: 25em;
 	}
+	.readOnlyList .todo{
+		width: 80%;
+	}
 }
 
 @media screen and (min-width: 1072px) {
@@ -331,6 +346,9 @@ input.addItemText {
 	.todo {
 		width: 20em;
 	}
+	.readOnlyList .todo{
+		width: 80%;
+	}
 }
 
 @media screen and (min-width: 1500px) {
@@ -340,5 +358,8 @@ input.addItemText {
 	}
 	.todo {
 		width: 20em;
+	}
+	.readOnlyList .todo{
+		width: 80%;
 	}
 }

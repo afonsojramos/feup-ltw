@@ -7,9 +7,9 @@ if (!isset($item)) {
 		global $item;
 		$item = new Item();
 		if (!$item->load($_GET["itemId"]))
-			die("Unable to find list");
+			die("Unable to find item");
 		if (!$item->verifyOwnership($_SESSION["userId"]))
-			die("No permission to see list");
+			die("No permission to see item");
 	} else {
 		die("Missing parameters");
 	}

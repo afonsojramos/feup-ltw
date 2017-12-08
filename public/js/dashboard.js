@@ -147,8 +147,13 @@ let listArchived = function (parentTodo, actionBtn, data) {
 		icon.innerHTML = "archive";
 	}
 };
-let listShared = function (parentTodo, actionBtn, data) {
-	parentTodo.remove(); //TODO: replace with correct
+let listShared = function (parentTodo, actionBtn, data, result) {
+	if (copyTextToClipboard(result.link)) {
+		addSuccessMessage(parentTodo, "Link copied to clipboard");
+	} else {
+		addErrorMessage(parentTodo, ["unable to copy to clipboard"]);
+		openInNewTab("list.php?link=" + result.link);
+	}
 };
 let simpleRequestListener = function (actionBtn, action) {
 	actionBtn.addEventListener("click", function (e) { //add listener to each action button
@@ -160,7 +165,7 @@ let simpleRequestListener = function (actionBtn, action) {
 			if (!result.success) { //on errors
 				addErrorMessage(parentTodo, result.errors);
 			} else {
-				action.onSuccess(parentTodo, actionBtn, data); //invoke callback
+				action.onSuccess(parentTodo, actionBtn, data, result); //invoke callback
 			}
 		}, data, "post");
 	});

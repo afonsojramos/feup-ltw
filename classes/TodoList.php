@@ -40,6 +40,22 @@ class TodoList extends QueryBuilder{
 		return parent::__set($name, $value);
 	}
 
+	public function loadByLink($link){
+		$this->link = $link;
+		$line = $this->select()->where("link = :link")->get();
+		if ($line) {
+			$this->loadFromArray($line);
+			$this->items = self::loadTodoFromDatabase(array($line), true)[0]->items;
+			return true;
+		}
+		return false;
+	}
+
+	public function share(){
+		$this->__set("link", bin2hex(mcrypt_create_iv(64, MCRYPT_DEV_URANDOM)));
+		return $this->update();
+	}
+
 	// Determine if query (copy os $_GET) is a search query, or a regular query.
 	private static function isSearchQuery($query){
 		foreach( array('members', 'flags', 'projects', 'words', 'expressions') as $p){
@@ -63,9 +79,9 @@ class TodoList extends QueryBuilder{
 	//all the lists this user can see, query is an array of key values with the possible search values
 	//example ["tags"=>array("harcore", "tag1"), "search" => "aquela nota", "users" => array("maps", "dannyps")]
 	public static function getAllQuery($query, $userId, $loadItemsAsWell = true){
-		
+
 		$qb = new QueryBuilder(self::class);
-		
+
 		if(self::isSearchQuery($query)){
 			//special build here
 			$searchQuery=self::buildSearchQuery($query, $userId, $qb);
@@ -74,7 +90,7 @@ class TodoList extends QueryBuilder{
 			$lines = $qb->select()->where("userId = :userId OR (projectId IN (SELECT m.projectId FROM members as m where userId = :userId))")->addParam("userId", $userId)->getAll();
 		}
 		//TODO: maybe load project information and user
-		
+
 		return self::loadTodoFromDatabase($lines, $loadItemsAsWell);
 	}
 
