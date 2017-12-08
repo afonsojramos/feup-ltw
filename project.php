@@ -61,7 +61,7 @@ require_once(dirname(__FILE__) . "/classes/User.php");
 $members = User::getAllByProject($project->projectId);
 
 ?>
-<div class="container">
+<div class="container" id="projectMainContainer" data-projectId="<?= $project->projectId ?>">
 	<h1 class="center"><span class="strong"><?= htmlentities($project->title) ?></span></h1>
 	<h2 class="strong">Statistics</h2>
 	<div class="statistics">
@@ -78,9 +78,9 @@ $members = User::getAllByProject($project->projectId);
 		<?= htmlentities($project->description) ?>
 	</div>
 
-	<form class="grid" action="actions/project/edit_project.php" method="post">
+	<form id="projectForm" action="actions/project/edit_project.php" method="post">
 		<?php insertCsrfToken(); ?>
-		<div class="modalContent cardForm grid">
+		<div class="cardForm">
 			<div class="formHeader">
 				<h3 class="formTitle">Edit Project</h3>
 			</div>
@@ -111,29 +111,20 @@ $members = User::getAllByProject($project->projectId);
 	<hr/>
 	<h1 class="center strong">Members</h1>
 	<div class="members">
-	<?php foreach ($members as $member) :
-	$base = "public/images/profile/";
-$filename = $base . $member->userId . ".jpg";
-if (!file_exists($filename)) $filename = $base . "default.png" ?>
-		<div class="memberContainer">
-			<img class="member" src="<?= $filename ?>"/>
-			<h2 class="center"><?= $member->username; ?></h2>
-			<hr/>
-			<a title="remove member"><i class="material-icons">delete</i></a>
-		</div>
+		<div class="errors"></div>
+		<?php foreach ($members as $member) :
+			$base = "public/images/profile/";
+			$filename = $base . $member->userId . ".jpg";
+			if (!file_exists($filename)) $filename = $base . "default.png" ?>
+			<div class="memberContainer">
+				<img class="member" src="<?= $filename ?>"/>
+				<h2 class="center"><?= $member->username; ?></h2>
+				<hr/>
+				<a title="remove member"><i class="material-icons">delete</i></a>
+			</div>
 		<?php endforeach ?>
-		<div class="memberContainer">
-			<img class="member" src="public/images/profile/2.jpg">
-			<h2 class="center"><?= $member->username; ?></h2>
-			<hr/>
-			<a><i class="material-icons">delete</i></a>
-		</div>
-		<div class="memberContainer">
-			<img class="member" src="public/images/profile/3.jpg">
-			<h2 class="center"><?= $member->username; ?></h2>
-			<hr/>
-			<a><i class="material-icons">delete</i></a>
-		</div>
+		<br/>
+		<a id="addMember"> Add member</a>
 	</div>
 
 
@@ -142,7 +133,6 @@ if (!file_exists($filename)) $filename = $base . "default.png" ?>
 
 	<ul>
 		<li class="strong"><a> Delete Project</a></li>
-		<li class="strong"><a id="addMember"> Add member</a></li>
 	</ul>
 </div>
 

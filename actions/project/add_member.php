@@ -10,21 +10,23 @@ require_once(dirname(__FILE__) . "/../../classes/Project.php");
 require_once(dirname(__FILE__) . "/../../classes/Member.php");
 
 $result = array("success" => false);
-
-$project = new Project();
-// $project->userId = $_SESSION["userId"];
-$project->loadFromArray($_POST);//load project properties from post
-
-if ($project->validate()) {
-	if ($project->insert()) {//created project
-		$member = new Member($project->projectId, $_SESSION["userId"]);
-		if($member->insert()){
+$project = new Project;
+if ($project->load($_POST["projectId"])) {
+	$user = new User;
+	if ($user->loadFromUsernameOrEmail($_POST["username"])) {
+		$member = new Member($project->projectId, $user->userId);
+		if ($member->load()) {
+			$result["errors"] = array("User is already in porject");
+		} elseif ( $member->insert()) {
 			$result["success"] = true;
+		}else{
+			$result["errors"] = array("Internal error");
 		}
-		$result["projectId"] = $project->projectId;
+	} else {
+		$result["errors"] = array("User not found");
 	}
 } else {
-	$result["errors"] = $project->errors;
+	$result["errors"] = array("Project not found");
 }
 
 echo json_encode($result);

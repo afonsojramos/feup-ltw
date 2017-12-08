@@ -63,16 +63,7 @@ class User extends QueryBuilder{
 	 * Login a user given an array with at least "username" and "password" fields (tests if username is not the email address)
 	 */
 	public function login($params){
-		$key = "username";
-		$value = strtolower($params["username"]);
-		if(strpos($value, "@") !== false){//this is actually an email
-			$key = "email";
-		}
-
-		$this->select()->where("$key = :$key");
-		$this->$key = $value;
-
-		if($line = $this->get()){
+		if($this->loadFromUsernameOrEmail($params["username"])){
 			if(password_verify($params["password"], $line["password"])){
 				//session creation
 				ini_set('session.cookie_lifetime', 60 * 60 * 24 * 7);  // 7 day cookie lifetime
@@ -82,6 +73,26 @@ class User extends QueryBuilder{
 				$_SESSION['username'] = $line["username"];
 				return true;
 			}
+		}
+		return false;
+	}
+
+
+	/**
+	 * Load a user given an array with at least "username" filed (tests if username is not the email address)
+	 */
+	public function loadFromUsernameOrEmail($username){
+		$key = "username";
+		$value = strtolower($username);
+		if(strpos($value, "@") !== false){//this is actually an email
+			$key = "email";
+		}
+
+		$this->select()->where("$key = :$key");
+		$this->$key = $value;
+		if ($line = $this->get()){
+			$this->loadFromArray($line);
+			return true;
 		}
 		return false;
 	}
