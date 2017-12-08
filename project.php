@@ -63,12 +63,12 @@ $members = User::getAllByProject($project->projectId);
 ?>
 <div class="container" id="projectMainContainer" data-projectId="<?= $project->projectId ?>">
 	<h1 class="center"><span class="strong"><?= htmlentities($project->title) ?></span></h1>
-	
+
 	<h2 class="strong">Description</h2>
 	<div class="description">
 		<?= htmlentities($project->description) ?>
 	</div>
-	
+
 	<h2 class="strong">Statistics</h2>
 	<div class="statistics">
 		<?php foreach ($statistics as $name => $value) : ?>
@@ -118,7 +118,7 @@ $members = User::getAllByProject($project->projectId);
 		$filename = $base . $member->userId . ".jpg";
 		if (!file_exists($filename)) $filename = $base . "default.png" ?>
 			<div class="memberContainer">
-				<a class="memberLink" href="user.php?userId=<?= $member->userId ?>" title="User: <?= htmlentities($member->username) ?>"><img alt="profile picture"class="member" href="user.php?userId=<?= $member->userId ?>" src="<?= $filename ?>"/></a>
+				<a class="memberLink" href="user.php?userId=<?= $member->userId ?>" title="User: <?= htmlentities($member->username) ?>"><img alt="profile picture" class="member" src="<?= $filename ?>"/></a>
 				<h2 class="center"> <?= htmlentities($member->username); ?></h2>
 				<hr/>
 				<a class="removeMember" data-userId="<?= $member->userId ?>" title="remove member"><i class="material-icons">delete</i></a>

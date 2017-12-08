@@ -1,5 +1,6 @@
 <?php
 require_once(dirname(__FILE__)."/QueryBuilder.php");
+require_once(dirname(__FILE__)."/Member.php");
 
 class Project extends QueryBuilder{
 	public $projectId;//attributes that do not require update can be public

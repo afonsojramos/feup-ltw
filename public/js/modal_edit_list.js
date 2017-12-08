@@ -13,6 +13,9 @@ let modalEditAddListener = function (editListForm) {
 				todoTitle.innerHTML = data.title;
 
 				let todoTags = todo.getElementsByClassName("tags")[0];
+				if (result.alteredProjectId) { //too much javascript complexity
+					location.reload();
+				}
 
 				data.tags = data.tags.split(",").map(function (tag) {
 					return `<a href="dashboard.php?tag=${tag}" class="tag"> ${tag}</a>`;
