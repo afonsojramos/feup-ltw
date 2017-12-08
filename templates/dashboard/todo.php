@@ -34,7 +34,7 @@ require(dirname(__FILE__) . "/modal_edit_list.php");
 	<hr/>
 	<div class="tags">
 	<?php foreach ($todo->getTags() as $tag) :?>
-		<a href="dashboard.php?tag=<?= urlencode($tag) ?>"class="tag"><?= htmlentities($tag) ?></a>
+		<a href="dashboard.php?tags=<?= urlencode($tag) ?>"class="tag"><?= htmlentities($tag) ?></a>
 	<?php endforeach ?>
 	</div>
 	<span class="listFooter show-on-hover">
