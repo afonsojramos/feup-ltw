@@ -66,13 +66,67 @@ class TodoList extends QueryBuilder{
 		return false;
 	}
 
-	private static function buildSearchQuery($query, $userId, &$qb){
-		$fullWhere="userId = :userId OR (projectId IN (SELECT m.projectId FROM members as m where userId = :userId))";
-		echo "building special WHERE clause.";
+	private static function buildSearchQuery($query, $userId, $qb){
+
+
+
+		$fullWhere="todoListId IN (";
+		$params=array();
+		$pq=array();
+
+		if(isset($query['words'])){
+			$words=explode(',', $_GET['words']);
+		}else{
+			$words=array();
+		}
+		if(isset($query['expressions'])){
+			$expressions=explode(',', $_GET['expressions']);
+		}else{
+			$expressions=array();
+		}
+		$words = array_merge($words, $expressions);
+		
 		if(isset($query['members'])){
 			$members=explode(',', $_GET['members']);
+			foreach($members as $m){
 
+			}
 		}
+		if(isset($query['projects'])){
+			$projects=explode(',', $_GET['projects']);
+			foreach($projects as $p){
+
+			}
+		}
+
+		/** 	(SELECT todoListId FROM todolists WHERE (
+        *			(tags LIKE "rcom" OR tags LIKE "rcom,%" OR tags LIKE "%,rcom,%" OR tags LIKE "%,rcom") 
+  		*	 	OR
+        *			(tags LIKE "ltw" OR tags LIKE "ltw,%" OR tags LIKE "%,ltw,%" OR tags LIKE "%,ltw") 
+		*		))
+		*/
+		if(isset($query['tags'])){
+			//tag(s) are set.
+			//pq stands for partial query
+			$pq['tags']="(SELECT todoListId FROM todolists WHERE (";
+			$tags=explode(',', $_GET['tags']);
+			$i=0;
+			foreach($tags as $t){
+				$pq['tags'].="(tags LIKE :tag{$i}0 OR tags LIKE :tag{$i}1 OR tags LIKE :tag{$i}2 OR tags LIKE :tag{$i}3) OR ";
+				$params["tag{$i}0"]="{$t}";
+				$params["tag{$i}1"]="{$t},%";
+				$params["tag{$i}2"]="%,{$t},%";
+				$params["tag{$i}3"]="{$t},%";
+
+				$i++;
+			}
+			$pq['tags']=substr($pq['tags'], 0, -4); // remove " OR " from end of string
+			$pq['tags'].="))";
+		}
+		var_dump($pq);
+		var_dump($params);
+
+
 		return $qb->select()->where($fullWhere)->addParam("userId", $userId);
 	}
 
@@ -135,6 +189,7 @@ class TodoList extends QueryBuilder{
 		}
 		return $todos;
 	}
+
 
 	/**
 	 * Returns true if the supplied user has access to this list, wither it's his or it belongs to a project of which he is a member
