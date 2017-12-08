@@ -70,3 +70,7 @@ require_once(dirname(__FILE__)."/connection.php");
 - [x] Edit tags
 - [x] Create a new todo list (in a project)
 - [x] Choose a profile picture
+- [x] CSRF tokens
+- [x] XSS prevention
+
+Many more
