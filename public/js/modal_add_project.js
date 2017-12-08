@@ -18,7 +18,7 @@ newProjectForm.addEventListener("submit", function (e) {
 		if (data.success) {
 			newProjectForm.style.display = "none";
 			newProjectForm.reset();
-			displayNewTodoList(data.todoListId);
+			location.reload();
 		} else {
 			addErrorMessage(newProjectForm, data.errors);
 		}
