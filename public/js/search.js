@@ -1,3 +1,13 @@
+document.addEventListener('keydown', (e) => { //on keyboard press
+	if (e.keyCode == 27) { //Esc
+		clearSearch();
+	} else if (e.ctrlKey && e.keyCode == 70) { //Ctrl+f -> open search
+		enterSearch(e);
+	} else if (e.keyCode == 13) { //Enter
+		doSearch();
+	}
+});
+
 let search = document.getElementById("search");
 
 

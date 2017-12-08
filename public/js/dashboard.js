@@ -3,17 +3,12 @@ let body = document.getElementById("dashboardContainer");
 document.addEventListener('keydown', (e) => { //on keyboard press
 	if (e.keyCode == 27) { //Esc
 		closeSideBar();
-		clearSearch();
-	} else if (e.ctrlKey && e.keyCode == 70) { //Ctrl+f -> open search
-		enterSearch(e);
 	} else if (e.ctrlKey && e.keyCode == 83) { //Ctrl+s -> show sidebar
 		toggleSideBar();
 		e.preventDefault();
 	} else if (e.ctrlKey && e.keyCode == 76) { //Ctrl+l -> open modal (new list)
 		document.getElementById("openAddListModal").click();
 		e.preventDefault();
-	} else if (e.keyCode == 13) { //Enter
-		doSearch();
 	}
 });
 

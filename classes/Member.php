@@ -14,6 +14,10 @@ class Member extends QueryBuilder{
 
 	static public function countByProject($projectId){
 		$qb = new QueryBuilder(self::class);
-		return count($qb->select()->where("projectId = :projectId")->addParam("projectId", $projectId)->getAll());
+		$line = $qb->select("COUNT (userId) AS total")->where("projectId = :projectId GROUP BY projectId")->addParam("projectId", $projectId)->get();
+		return $line ? $line["total"] : 0;
+	}
+
+	public function countMembersInProject(){
 	}
 }

@@ -3,7 +3,7 @@ require_once(dirname(__FILE__) . "/../../includes/common/only_allow_login.php");
 verifyCSRF();
 
 require_once(dirname(__FILE__) . "/../../includes/common/check_request.php");
-verifyAttributes($_POST, ["projectId", "username"]);
+verifyAttributes($_POST, ["projectId", "userId"]);
 
 require_once(dirname(__FILE__) . "/../../classes/User.php");
 require_once(dirname(__FILE__) . "/../../classes/Project.php");
@@ -13,18 +13,19 @@ $result = array("success" => false);
 $project = new Project;
 if ($project->load($_POST["projectId"])) {
 	if ($project->verifyOwnership($_SESSION["userId"])) {
-		$user = new User;
-		if ($user->loadFromUsernameOrEmail($_POST["username"])) {
-			$member = new Member($project->projectId, $user->userId);
-			if ($member->load()) {
-				$result["errors"] = array("User is already in porject");
-			} elseif ($member->insert()) {
-				$result["success"] = true;
+		$member = new Member($project->projectId, $_POST["userId"]);
+		if ($member->load()) {
+			if (Member::countByProject($project->projectId) > 1) {//the project has no more members
+				if ($member->delete()) {
+					$result["success"] = true;
+				} else {
+					$result["errors"] = array("Internal error");
+				}
 			} else {
-				$result["errors"] = array("Internal error");
+				$result["errors"] = array("Unable to delete last member");
 			}
 		} else {
-			$result["errors"] = array("User not found");
+			$result["errors"] = array("User is not a member of this project");
 		}
 	} else {
 		$result["errors"] = array("No permission");

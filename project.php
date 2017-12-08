@@ -118,9 +118,9 @@ $members = User::getAllByProject($project->projectId);
 			if (!file_exists($filename)) $filename = $base . "default.png" ?>
 			<div class="memberContainer">
 				<img class="member" src="<?= $filename ?>"/>
-				<h2 class="center"><?= $member->username; ?></h2>
+				<h2 class="center"><?= htmlentities($member->username); ?></h2>
 				<hr/>
-				<a title="remove member"><i class="material-icons">delete</i></a>
+				<a class="removeMember" data-userId="<?= $member->userId ?>" title="remove member"><i class="material-icons">delete</i></a>
 			</div>
 		<?php endforeach ?>
 		<br/>
