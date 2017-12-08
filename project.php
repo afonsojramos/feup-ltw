@@ -48,12 +48,12 @@ foreach ($todos as $todo) {
 }
 
 $statistics = array(
-	"Members:" => Member::countByProject($project->projectId),
-	"Todo Lists:" => count($todos),
-	"Archived Todo Lists:" => $countArchived,
-	"Complete Items:" => $countItems - $countIncompleteItems,
-	"Incomplete Items:" => $countIncompleteItems,
-	"Total Items:" => $countItems
+	"Members" => Member::countByProject($project->projectId),
+	"Todo Lists" => count($todos),
+	"Archived Todo Lists" => $countArchived,
+	"Complete Items" => $countItems - $countIncompleteItems,
+	"Incomplete Items" => $countIncompleteItems,
+	"Total Items" => $countItems
 );
 
 //load members
@@ -63,17 +63,15 @@ $members = User::getAllByProject($project->projectId);
 ?>
 <div class="container">
 	<h1 class="center"><span class="strong"><?= htmlentities($project->title) ?></span></h1>
-<!-- 	<h2 class="strong">Statistics</h2>
- -->	<table class="statistics">
-		<tbody>
-			<?php foreach ($statistics as $name => $value) : ?>
-			<tr class="statistics list">
-				<td class="statistics value"><?= $value ?></td>
-				<td class="statistics name"><?= $name ?></td>
-			</tr>
-			<?php endforeach ?>
-		</tbody>
-	</table>
+	<h2 class="strong">Statistics</h2>
+	<div class="statistics">
+		<?php foreach ($statistics as $name => $value) : ?>
+		<ul class="statistics list">
+			<li class="statistics value"><?= $value ?></li>
+			<li class="statistics name"><?= $name ?></li>
+		</ul>
+		<?php endforeach ?>
+	</div>
 
 	<h2 class="strong">Description</h2>
 	<div>
