@@ -184,9 +184,9 @@ class TodoList extends QueryBuilder{
 	}
 */
 	//all the lists that are in a project
-	public static function getAllByUserProject($userId, $projectId, $loadItemsAsWell = true){
+	public static function getAllByProject($projectId, $loadItemsAsWell = true){
 		$qb = new QueryBuilder(self::class);
-		$lines = $qb->select()->where("userId = :userId and projectId = :projectId")->addParam("userId", $userId)->addParam("projectId", $projectId)->getAll();
+		$lines = $qb->select()->where("projectId = :projectId")->addParam("projectId", $projectId)->getAll();
 		return self::loadTodoFromDatabase($lines, $loadItemsAsWell);
 	}
 
