@@ -77,6 +77,13 @@ class User extends QueryBuilder{
 		return false;
 	}
 
+	public static function logout(){
+		//Destroy the current user session
+		$_SESSION = array(); // Destroy the variables.
+		session_destroy(); // Destroy the session itself.
+		setcookie('PHPSESSID', null, time() - 7200, '', 0, 0);//Destroy the cookie
+	}
+
 
 	/**
 	 * Load a user given an array with at least "username" filed (tests if username is not the email address)

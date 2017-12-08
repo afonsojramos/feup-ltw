@@ -30,3 +30,18 @@ form2.addEventListener("submit", function (e) {
 	}, data, "post");
 	e.preventDefault();
 }, false);
+
+
+document.getElementById("deleteUserAccount").addEventListener("click", function(e){
+	if (confirm("Do you really want to delete your account") && confirm("This operation is irreversible, proceed anyway (double checking)?") ) {
+		request("actions/user/delete_profile.php", function (result) {
+			console.log(result);
+			if(result.success){
+				alert("Sorry to see you go :'(");
+				location.reload();
+			}else{
+				alert("Unable to delete account: " + result.errors.join());
+			}
+		}, {}, "post");
+	}
+});

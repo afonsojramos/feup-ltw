@@ -160,11 +160,12 @@ input[type='submit'] {
 	margin-top: 5px;
 }
 
-.memberLink{
+.memberLink {
 	width: 30px;
 	height: 30px;
 	margin-right: 5px;
 }
+
 .todoMember {
 	height: 30px;
 	max-width: 30px;
@@ -173,6 +174,20 @@ input[type='submit'] {
 
 .todoMember:hover {
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.userImage {
+	max-height: 300px;
+	max-width: 300px;
+}
+
+.largeFont {
+	font-size: large;
+}
+
+#deleteUserAccount {
+	color: red;
+	margin-bottom:200px;
 }
 
 

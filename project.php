@@ -1,14 +1,11 @@
 <?php
 require_once(dirname(__FILE__) . "/includes/common/only_allow_login.php");
 
-
-//load the prject if it exists project
 require_once(dirname(__FILE__) . "/includes/common/check_request.php");
 verifyAttributes($_GET, ["projectId"]);
 
 require_once(dirname(__FILE__) . "/classes/Project.php");
 require_once(dirname(__FILE__) . "/classes/Member.php");
-
 
 //load the project
 $project = new Project();

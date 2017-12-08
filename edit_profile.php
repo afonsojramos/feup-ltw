@@ -83,6 +83,9 @@ $user = $user->load($_SESSION['userId']);
 			</footer>
 		</form>
 	</div>
+
+	<hr/>
+	<a class="strong center largeFont" id="deleteUserAccount" ><i class="material-icons">delete</i> Delete Account</a>
 </div>
 
 
