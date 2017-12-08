@@ -74,6 +74,9 @@
 .todo.colour-white .tag {
 	color: #535353
 }
+.todo.colour-yellow .tag {
+	color: #535353
+}
 
 .todoProject {
 	font-size: 12px;
