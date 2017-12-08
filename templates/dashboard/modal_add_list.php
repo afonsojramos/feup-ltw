@@ -19,7 +19,7 @@ if(count($projects) == 0 || (count($projects) && $projects[0]->projectId != "0")
 }
 ?>
 
-<form class="modal" opener="openAddListModal" id ="modalAddList">
+<form class="modal" target="openAddListModal" id ="modalAddList">
 	<div class="errors"></div>
 	<div class="modalContent cardForm grid">
 		<div class="formHeader">

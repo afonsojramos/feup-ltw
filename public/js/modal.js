@@ -1,8 +1,9 @@
 'use strict';
 let modalListener = function (modal) {
-	let openerId;
-	if (openerId = modal.getAttribute("opener")) {
-		let btnThatOpens = document.getElementById(modal.getAttribute("opener"));
+	let targetId;
+	// if (targetId = modal.getAttribute("target")) {
+	if (targetId = modal.getAttribute("target")) {
+		let btnThatOpens = document.getElementById(modal.getAttribute("target"));
 		let span = modal.getElementsByClassName("closeModal")[0];
 		if (btnThatOpens) {
 			document.addEventListener('keydown', (e) => { //on keyboard press

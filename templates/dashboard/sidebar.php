@@ -15,7 +15,7 @@ require_once(dirname(__FILE__) . "/modal_add_project.php");
 			<a href="dashboard.php?filter=all"><i class="material-icons">lock_open</i> All Lists</a>
 			<a href="dashboard.php?filter=archived"><i class="material-icons archived">archive</i> Archived</a>
 			<hr/>
-		</li class="projects">
+		</li>
 		<?php foreach ($projects as $project) : ?>
 			<li><a href="dashboard.php?projectId=<?= $project->projectId ?>"><?= $project->title ?></a> <a class="floatRight" href="project.php?projectId=<?= $project->projectId ?>#projectForm"><i class="material-icons">edit</i></a></li>
 		<?php endforeach ?>

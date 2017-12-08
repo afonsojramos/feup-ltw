@@ -18,5 +18,5 @@ if (!isset($item)) {
 <div class="todoListItem" data-itemId="<?= $item->itemId ?>">
 	<input class="checkbox todoItem" id = "todoItem_<?= $item->itemId ?>" type="checkbox"  <?= $item->completed ? "checked" : "" ?>><label class="todoItemLabel" ><?= htmlentities($item->content) ?></label>
 	<input type="text" class="editItemTextBox hidden" id="editItem_<?= $item->itemId ?>">
-	<i class="material-icons close removeListItem show-on-hover" type="button">close</i>
+	<i class="material-icons close removeListItem show-on-hover">close</i>
 </div>

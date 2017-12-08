@@ -5,7 +5,7 @@ require_once(dirname(__FILE__) . "/../../classes/Project.php");
 
 ?>
 
-<form class="modal" opener="openAddProject" id ="modalAddProject">
+<form class="modal" target="openAddProject" id ="modalAddProject">
 	<div class="errors"></div>
 	<div class="modalContent cardForm grid">
 		<div class="formHeader">

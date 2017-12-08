@@ -18,7 +18,7 @@ if(count($projects) == 0 || (count($projects) && $projects[0]->projectId != "0")
 }
 ?>
 
-<form class="modal modalEditList" opener="openEditListModal-<?= $todo->todoListId ?>" id ="modalEditList-<?= $todo->todoListId ?>">
+<form class="modal modalEditList" target="openEditListModal-<?= $todo->todoListId ?>" id ="modalEditList-<?= $todo->todoListId ?>">
 	<div class="errors"></div>
 	<div class="modalContent cardForm grid">
 		<div class="formHeader">
@@ -27,10 +27,10 @@ if(count($projects) == 0 || (count($projects) && $projects[0]->projectId != "0")
 		<div class="formBody">
 			<input type="hidden" name="todoListId" value="<?= $todo->todoListId ?>">
 			<div>
-				<input type="text" name="title" id="title" placeholder="List title" value="<?= htmlentities($todo->title) ?>" required>
+				<input type="text" name="title" placeholder="List title" value="<?= htmlentities($todo->title) ?>" required>
 			</div>
 			<div>
-				<input type="text" name="tags" id="tags" placeholder="Tags (Comma separate)" value="<?= $todo->tags ?>">
+				<input type="text" name="tags" placeholder="Tags (Comma separate)" value="<?= $todo->tags ?>" />
 			</div>
 			<div>
 				<select name="projectId">
