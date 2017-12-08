@@ -294,6 +294,15 @@
 			return false;
 		}
 
+		/**
+		 * get the number of elements in the current table
+		*/
+		public static function countAll(){
+			$qb = new QueryBuilder(get_called_class());
+			$res = $qb->select("COUNT(*) as total")->get();
+			return $res?$res["total"]:0;
+		}
+
 		//------------HELPER PUBLIC FUCNTIONS
 
 		/**

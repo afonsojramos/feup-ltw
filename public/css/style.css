@@ -62,6 +62,13 @@ a {
 	cursor: pointer;
 }
 
+.mainLogo {
+	max-height: 300px;
+}
+
+a.primaryLink{
+	color: var(--dark-primary-color);
+}
 input {
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -187,7 +194,41 @@ input[type='submit'] {
 
 #deleteUserAccount {
 	color: red;
-	margin-bottom:200px;
+	margin-bottom: 200px;
+}
+
+
+/* Statistics */
+
+.statistics {
+	font-size: 20px;
+	font-weight: 530;
+	text-align: center;
+	justify-content: center;
+}
+
+.statistics.list {
+	display: inline-flex;
+	flex-direction: column;
+	padding: 0;
+}
+
+.statistics.value {
+	height: 60px;
+	width: 60px;
+	line-height: 60px;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	background-color: black;
+	color: white;
+	font-size: 2em;
+	display: block;
+	margin: 0 auto;
+}
+
+.statistics.name {
+	display: block;
+	width: 10rem;
 }
 
 
