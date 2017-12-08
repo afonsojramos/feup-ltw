@@ -37,8 +37,32 @@ $statistics = array(
 		</ul>
 		<?php endforeach ?>
 	</div>
+
 	<hr/>
-	<h2 class="center strong">Here is a dump from our database, using QueryBuilder. We advise you to use <a class="primaryLink" href="https://xdebug.org/">XDebug</a> to see prretty dumps!</h2>
+
+	<h2 class="center strong">Brought to you by:</h2>
+	<table class="center" id="broughtBy">
+		<tbody>
+			<tr>
+				<td>Afonso Ramos </td>
+				<td><a class="primaryLink" href="https://sigarra.up.pt/feup/pt/fest_geral.cursos_list?pv_num_unico=201506239" target="_blank">UP201506239</a></td>
+			</tr>
+			<tr>
+				<td>Daniel Silva </td>
+				<td><a class="primaryLink" href="https://sigarra.up.pt/feup/pt/fest_geral.cursos_list?pv_num_unico=201503212" target="_blank">UP201503212</a></td>
+			</tr>
+			<tr>
+				<td>Miguel Ramalho </td>
+				<td><a class="primaryLink" href="https://sigarra.up.pt/feup/pt/fest_geral.cursos_list?pv_num_unico=201403027" target="_blank">UP201403027</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<hr/>
+
+	<h2 class="center">We advise you to use <a class="strong primaryLink" href="https://xdebug.org/">XDebug</a> to see pretty dumps!</h2>
+	<h2 class="center">Here is a dump from our database users table, using <span class="strong">QueryBuilder</span>:</h2>
+
 	<?php
 		$query = new QueryBuilder(User::class);
 		var_dump($query->select()->getAll());
