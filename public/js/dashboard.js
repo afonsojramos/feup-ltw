@@ -122,6 +122,7 @@ let listAddItem = function (newItem) {
 			request("actions/item/add_item.php", function (result) {
 				if (result.success) {
 					displayNewTodoListItem(itemsList, result.itemId);
+					newItem.click();
 				} else {
 					addErrorMessage(parentTodo, result.errors);
 				}
@@ -141,7 +142,7 @@ let listArchived = function (parentTodo, actionBtn, data) {
 	let icon = parentTodo.getElementsByClassName("archive")[0].getElementsByClassName("material-icons")[0];
 	if (icon.innerHTML == "archive") {
 		icon.innerHTML = "unarchive";
-	} else if(icon.innerHTML == "unarchive"){
+	} else if (icon.innerHTML == "unarchive") {
 		icon.innerHTML = "archive";
 	}
 };
@@ -166,34 +167,33 @@ let simpleRequestListener = function (actionBtn, action) {
 
 //--------------------------Set listeners for initial elements
 let baseListners = [{
-		class: "todoItem", //change checked state of an item
-		callback: itemChangeCompleted
-	}, {
-		class: "todoTitle", //edit the TodoLists' title
-		callback: listEditTitle
-	}, {
-		class: "addItemText", //add a new item to a TodoList
-		callback: listAddItem
-	}, {
-		class: "todoItemLabel", //edit an item of a TodoList
-		callback: itemChangeContent
-	}, {
-		class: "removeListItem", //Remove Todo List Item
-		callback: itemDeleteItem
-	}, {
-		class: "delete",
-		callback: simpleRequestListener,
-		onSuccess: listDeleted
-	}, {
-		class: "archive",
-		callback: simpleRequestListener,
-		onSuccess: listArchived
-	}, {
-		class: "share",
-		callback: simpleRequestListener,
-		onSuccess: listShared
-	}
-];
+	class: "todoItem", //change checked state of an item
+	callback: itemChangeCompleted
+}, {
+	class: "todoTitle", //edit the TodoLists' title
+	callback: listEditTitle
+}, {
+	class: "addItemText", //add a new item to a TodoList
+	callback: listAddItem
+}, {
+	class: "todoItemLabel", //edit an item of a TodoList
+	callback: itemChangeContent
+}, {
+	class: "removeListItem", //Remove Todo List Item
+	callback: itemDeleteItem
+}, {
+	class: "delete",
+	callback: simpleRequestListener,
+	onSuccess: listDeleted
+}, {
+	class: "archive",
+	callback: simpleRequestListener,
+	onSuccess: listArchived
+}, {
+	class: "share",
+	callback: simpleRequestListener,
+	onSuccess: listShared
+}];
 baseListners.forEach(listener => {
 	let elements = document.getElementsByClassName(listener.class);
 	Array.prototype.forEach.call(elements, function (element) {
@@ -204,13 +204,17 @@ baseListners.forEach(listener => {
 //ajax for html parts
 function displayNewTodoList(id) { //get the html for a todolist
 	request("templates/dashboard/todo.php", function (html) {
-		let newList = nodeFromHtml(html);
+		let newList = nodeFromHtml("<span>" + html + "</span>");
+		console.log(newList);
 		document.getElementsByClassName("todos")[0].appendChild(newList);
 		baseListners.forEach(listener => { //set the new listeners
 			let toListen = newList.getElementsByClassName(listener.class)[0];
 			if (toListen)
 				listener.callback(toListen, listener);
 		});
+		let newForm = newList.getElementsByClassName("modal")[0];
+		modalListener(newForm);
+		modalEditAddListener(newForm);
 	}, {
 		todoListId: id
 	});

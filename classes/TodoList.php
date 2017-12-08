@@ -92,7 +92,6 @@ class TodoList extends QueryBuilder{
 		return $todos;
 	}
 
-
 	/**
 	 * Returns true if the supplied user has access to this list, wither it's his or it belongs to a project of which he is a member
 	 */

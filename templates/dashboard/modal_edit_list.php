@@ -9,7 +9,7 @@ if (isset($_GET['projectId'])) {
 	$selectedProjectId = 0;
 }
 //load projects if needed
-if(!isset($projects) && !is_array($projects)){
+if(!isset($projects) || !is_array($projects)){
 	$projects = Project::getAllByUser($_SESSION["userId"]);
 }
 if(count($projects) == 0 || (count($projects) && $projects[0]->projectId != "0")){
@@ -41,7 +41,7 @@ if(count($projects) == 0 || (count($projects) && $projects[0]->projectId != "0")
 			</div>
 			<div>
 				<select name="colour">
-					<?php 
+					<?php
 						$colours = array("white", "red", "orange", "yellow" , "green", "teal" , "blue", "purple", "pink", "brown");
 						foreach ($colours as $colour): ?>
 							<option class="<?= $colour ?>" value="<?= $colour ?>" <?= $todo->colour==$colour?"selected":"" ?>><?= ucfirst($colour) ?></option>

@@ -10,7 +10,6 @@ document.addEventListener('keydown', (e) => { //on keyboard press
 
 let search = document.getElementById("search");
 
-
 function getJsonFromUrl() {
 	let query = location.search.substr(1);
 	let result = {};

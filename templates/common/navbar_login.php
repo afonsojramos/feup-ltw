@@ -7,7 +7,6 @@
 		<div class="nav search">
 			<i class="material-icons search">search</i>
 			<input type="text" name="search" id="search" placeholder="search">
-			<i class="material-icons close">close</i>
 		</div>
 		<ul class="nav navRight">
 			<li><a href="edit_profile.php">

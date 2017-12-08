@@ -54,7 +54,7 @@ $statistics = array(
 	"Members" => Member::countByProject($project->projectId),
 	"Todo Lists" => count($todos),
 	"Archived Todo Lists" => $countArchived,
-	"Complete Items" => $countItems - $countIncompleteItems,
+	"Completed Items" => $countItems - $countIncompleteItems,
 	"Incomplete Items" => $countIncompleteItems,
 	"Total Items" => $countItems
 );
@@ -117,8 +117,8 @@ $members = User::getAllByProject($project->projectId);
 		<div class="errors"></div>
 		<?php foreach ($members as $member) :
 		$base = "public/images/profile/";
-	$filename = $base . $member->userId . ".jpg";
-	if (!file_exists($filename)) $filename = $base . "default.png" ?>
+		$filename = $base . $member->userId . ".jpg";
+		if (!file_exists($filename)) $filename = $base . "default.png" ?>
 			<div class="memberContainer">
 				<img class="member" src="<?= $filename ?>"/>
 				<h2 class="center"><?= htmlentities($member->username); ?></h2>
