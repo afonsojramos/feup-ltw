@@ -78,22 +78,21 @@ class TodoList extends QueryBuilder{
 		return self::loadTodoFromDatabase($lines, $loadItemsAsWell);
 	}
 
-/* 	//all the lists this user can see
+ 	//all the lists this user can see
 	public static function getAllByUser($userId, $loadItemsAsWell = true){
 		$qb = new QueryBuilder(self::class);
 	//TODO: maybe load project information
 		$lines = $qb->select()->where("userId = :userId OR (projectId IN (SELECT m.projectId FROM members as m where userId = :userId))")->addParam("userId", $userId)->getAll();
 		return self::loadTodoFromDatabase($lines, $loadItemsAsWell);
 	}
-
+/*
 	//all the lists that are not in a project
 	public static function getAllByUserPrivate($userId, $loadItemsAsWell = true){
 		$qb = new QueryBuilder(self::class);
 		$lines = $qb->select()->where("userId = :userId AND projectId = 0")->addParam("userId", $userId)->getAll();
 		return self::loadTodoFromDatabase($lines, $loadItemsAsWell);
 	}
-
-	*/
+*/
 	//all the lists that are in a project
 	public static function getAllByUserProject($userId, $projectId, $loadItemsAsWell = true){
 		$qb = new QueryBuilder(self::class);
