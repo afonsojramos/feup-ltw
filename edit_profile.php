@@ -63,7 +63,7 @@ $user = $user->load($_SESSION['userId']);
 		$filename = "public/images/profile/" . $_SESSION["userId"] . ".jpg";
 		if (file_exists($filename)) :?>
 		<div class="editProfileBackgroundParent">
-			<img class="editProfileBackground" src="<?= $filename ?>"/>
+			<img alt="profile picture" class="editProfileBackground" src="<?= $filename ?>"/>
 		</div>
 	<?php endif ?>
 	<div class="grid grid-long grid-small-margins shadow-1">

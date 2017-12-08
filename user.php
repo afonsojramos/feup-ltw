@@ -30,7 +30,7 @@ require_once(dirname(__FILE__) . "/includes/common/choose_navbar.php");
 		$filename = $base . $user->userId . ".jpg";
 		if (!file_exists($filename)) $filename = $base . "default.png"
 	?>
-	<img class="center userImage" src="<?= $filename ?>"/>
+	<img alt="profile picture" class="center userImage" src="<?= $filename ?>"/>
 	<div class="statistics">
 
 	<h2 class="strong">Data</h2>

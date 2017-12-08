@@ -10,7 +10,7 @@
 	<?php endforeach; ?>
 
 	<?php foreach ($PAGE["scripts"] as $scriptName) : ?>
-		<script type="text/javascript" src="<?= $PAGE["jsFolder"] . $scriptName ?>" defer></script>
+		<script src="<?= $PAGE["jsFolder"] . $scriptName ?>" defer></script>
 	<?php endforeach; ?>
 
 </head>

@@ -117,7 +117,7 @@ $members = User::getAllByProject($project->projectId);
 		$filename = $base . $member->userId . ".jpg";
 		if (!file_exists($filename)) $filename = $base . "default.png" ?>
 			<div class="memberContainer">
-				<a class="memberLink" href="user.php?userId=<?= $member->userId ?>" title="user: <?= htmlentities($member->username) ?>"><img class="member" href="user.php?userId=<?= $member->userId ?>" src="<?= $filename ?>"/></a>
+				<a class="memberLink" href="user.php?userId=<?= $member->userId ?>" title="user: <?= htmlentities($member->username) ?>"><img alt="profile picture"class="member" href="user.php?userId=<?= $member->userId ?>" src="<?= $filename ?>"/></a>
 				<h2 class="center"> <?= htmlentities($member->username); ?></h2>
 				<hr/>
 				<a class="removeMember" data-userId="<?= $member->userId ?>" title="remove member"><i class="material-icons">delete</i></a>

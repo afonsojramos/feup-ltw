@@ -25,7 +25,7 @@ $statistics = array(
 
 <div class="container">
 	<h1 class="center strong">Welcome to 4Me2DO</h1>
-	<img class="center mainLogo" src="public/images/logo_ltw.png">
+	<img alt="4Me2Do logo" class="center mainLogo" src="public/images/logo_ltw.png">
 	<h3 class="center">The ultimate todo list management tool!</h3>
 
 	<h2 class="center strong">Statistics</h2>
@@ -61,11 +61,11 @@ $statistics = array(
 	<hr/>
 
 	<h2 class="center">We advise you to use <a class="strong primaryLink" href="https://xdebug.org/">XDebug</a> to see pretty dumps!</h2>
-	<h2 class="center">Here is a dump from our database users table, using <span class="strong">QueryBuilder</span>:</h2>
+	<h2 class="center">Here is a dump from our database users table, using <span class="strong">QueryBuilder</span> (this output is commented, but you can simply uncomment the 2 lines in index.php that show it):</h2>
 
 	<?php
-		$query = new QueryBuilder(User::class);
-		var_dump($query->select()->getAll());
+		// $query = new QueryBuilder(User::class);
+		// var_dump($query->select()->getAll());
 	?>
 </div>
 
