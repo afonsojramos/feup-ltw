@@ -23,33 +23,7 @@ To initialise the database, go to the **database** folder and run: `sqlite3 -ini
     * :file_folder: **common** - Common includes
  * :open_file_folder: **templates** - folder that contains the `html` templates for the main pages to use
     * :file_folder: **common** - Common templates
-    * :file_folder: **user** - User includes
-    * :file_folder: **list** - List includes
-    * :file_folder: **project** - Project includes
-
-# Tasks
- - [ ] Define the pages to use:
- 	* index.php - the landing page, with links to `login.php` and `register.php`
-		* If no login -> display login and register forms with backgroun
-		* If login -> redirect to `dashboard.php`
-	* dashboard.php - main interface page that shows the projects, the todo lists cards and other utilities
-	* register.php - display the register form in a single page
-		* calls the `actions/user/register.php` with post values.
-	* actions/user/register.php - receive a `POST` to try to register a user
-		* redirect to `login.php` on success
-		* redirect to `register.php` on failure, with the errors (as GET parameters or in a `$_SESSION` variable)
-	* login.php - display the login form in a single page, can receive an `email` as GET and fills it automatically, redirects to `actions/user/login.php`
-	* actions/user/login.php - receives a `POST` and tries to login a user
-		* return JSON response with boolean success and optional errors array
-	* actions/user/logout.php -  log out the user and redirect to `index.php`
-	* edit_profile.php - accessible only for logged users, displays a form to edit the user profile, calls `actions/user/edit_profile.php`
-	* actions/user/edit_profile.php - receives a `POST` request to edit a user's profile
-		* redirect to ?????.php on success
-		* redirect to `edit_profile.php` on failure, with the errors
-	* user.php?id={userId} - accessible only for logged users, displays a user profile that is "readonly"
-	* 
- - [ ] Implement the default desgin (css)
-
+    * :file_folder: **dashboard** - Dasboard templates
 
 # UML (napknin version)
 
@@ -89,18 +63,10 @@ require_once(dirname(__FILE__)."/connection.php");
 
 <h2 align="center">Extra</h2>
 
-- [ ] Share a link to a todo list
-- [ ] Create a Project
-- [ ] Add users to Project
-- [ ] Change a List's color
-- [ ] Edit tags
-- [ ] Allow items to be assigned to user (in project)
-- [ ] Create a new todo list (in a project)
-- [ ] Choose a profile picture
-
-
-# Potential Extra
- * Embed todo list in other websites
- * RSS Feed
- * User can share
- * `.htaccess` to use REST-like paths
+- [x] Share a link to a todo list
+- [x] Create a Project
+- [x] Add users to Project
+- [x] Change a List's color
+- [x] Edit tags
+- [x] Create a new todo list (in a project)
+- [x] Choose a profile picture
