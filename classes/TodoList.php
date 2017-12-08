@@ -40,12 +40,41 @@ class TodoList extends QueryBuilder{
 		return parent::__set($name, $value);
 	}
 
+	// Determine if query (copy os $_GET) is a search query, or a regular query.
+	private static function isSearchQuery($query){
+		foreach( array('members', 'flags', 'projects', 'words', 'expressions') as $p){
+			if(array_key_exists($p, $query)){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private static function buildSearchQuery($query, $userId, &$qb){
+		$fullWhere="userId = :userId OR (projectId IN (SELECT m.projectId FROM members as m where userId = :userId))";
+		echo "building special WHERE clause.";
+		if(isset($query['members'])){
+			$members=explode(',', $_GET['members']);
+
+		}
+		return $qb->select()->where($fullWhere)->addParam("userId", $userId);
+	}
+
 	//all the lists this user can see, query is an array of key values with the possible search values
 	//example ["tags"=>array("harcore", "tag1"), "search" => "aquela nota", "users" => array("maps", "dannyps")]
 	public static function getAllQuery($query, $userId, $loadItemsAsWell = true){
+		
 		$qb = new QueryBuilder(self::class);
-	//TODO: maybe load project information and user
-		$lines = $qb->select()->where("userId = :userId OR (projectId IN (SELECT m.projectId FROM members as m where userId = :userId))")->addParam("userId", $userId)->getAll();
+		
+		if(self::isSearchQuery($query)){
+			//special build here
+			$searchQuery=self::buildSearchQuery($query, $userId, $qb);
+			$lines = $searchQuery->getAll();
+		}else{
+			$lines = $qb->select()->where("userId = :userId OR (projectId IN (SELECT m.projectId FROM members as m where userId = :userId))")->addParam("userId", $userId)->getAll();
+		}
+		//TODO: maybe load project information and user
+		
 		return self::loadTodoFromDatabase($lines, $loadItemsAsWell);
 	}
 
