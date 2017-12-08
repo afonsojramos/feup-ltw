@@ -117,21 +117,21 @@ $members = User::getAllByProject($project->projectId);
 		$filename = $base . $member->userId . ".jpg";
 		if (!file_exists($filename)) $filename = $base . "default.png" ?>
 			<div class="memberContainer">
-				<img class="member" src="<?= $filename ?>"/>
-				<h2 class="center"><?= htmlentities($member->username); ?></h2>
+				<a class="memberLink" href="user.php?userId=<?= $member->userId ?>" title="user: <?= htmlentities($member->username) ?>"><img class="member" href="user.php?userId=<?= $member->userId ?>" src="<?= $filename ?>"/></a>
+				<h2 class="center"> <?= htmlentities($member->username); ?></h2>
 				<hr/>
 				<a class="removeMember" data-userId="<?= $member->userId ?>" title="remove member"><i class="material-icons">delete</i></a>
 			</div>
 		<?php endforeach ?>
 		<br/>
-		<a id="addMember"> Add member</a>
+		<a id="addMember"><i class="material-icons">add</i> Add member</a>
 	</div>
 
 
 	<hr/>
 	<h1 class="center strong" id="actions">Actions</h1>
 
-	<h1 class="strong"><a id="deleteProject"> Delete Project</a></h1>
+	<h1 class="strong"><a id="deleteProject"><i class="material-icons">delete</i> Delete Project</a></h1>
 </div>
 
 <?php require_once(dirname(__FILE__) . "/templates/common/footer.php"); ?>
