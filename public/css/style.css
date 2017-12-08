@@ -219,8 +219,6 @@ input[type='submit'] {
 
 #deleteUserAccount:hover {
     background-color: rgb(161, 0, 0);
-    color: red;
-    margin-bottom: 200px;
 }
 
 
