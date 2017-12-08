@@ -122,7 +122,8 @@ let listAddItem = function (newItem) {
 			request("actions/item/add_item.php", function (result) {
 				if (result.success) {
 					displayNewTodoListItem(itemsList, result.itemId);
-					newItem.click();
+					if (myItem.enter)
+						newItem.click();
 				} else {
 					addErrorMessage(parentTodo, result.errors);
 				}

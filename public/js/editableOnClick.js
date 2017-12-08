@@ -20,10 +20,12 @@ class editableOnClick {
 			if (self.textBox.edit && self.textBox.value.length>0)
 				self.updateText(self.textBox);
 			self.textBox.remove();
+			self.false = true;
 		});
 		//add event listener for keydown on the textbox
 		this.textBox.addEventListener('keydown', function (e) {
 			if (e.keyCode == 13) { //enter
+				self.enter = true;
 				self.textBox.blur();
 			} else if (e.keyCode == 27) { //ESC
 				self.textBox.edit = false;
