@@ -11,14 +11,37 @@ function getJsonFromUrl() {
 	return result;
 }
 function populateSearchBar() {
-/*	let js = getJsonFromUrl();
+	let js = getJsonFromUrl();
 	console.log(js);
-	if(js.hasOwnProperty(members)){
-		js[members].forEach(element, function(){
-			search.value= search.value.concat("@"+element);
+	if(js.hasOwnProperty('members')){
+		js.members.split(',').forEach(function(element){
+			search.value= search.value.concat("@"+element+" ");
 		})
 	}
-	console.log(result);*/ //currently erroring
+
+	if(js.hasOwnProperty('tags')){
+		js.tags.split(',').forEach(function(element){
+			search.value= search.value.concat("!"+element+" ");
+		})
+	}
+
+	if(js.hasOwnProperty('projects')){
+		js.projects.split(',').forEach(function(element){
+			search.value= search.value.concat("#"+element+" ");
+		})
+	}
+
+	if(js.hasOwnProperty('words')){
+		js.words.split(',').forEach(function(element){
+			search.value= search.value.concat(""+element+" ");
+		})
+	}
+
+	if(js.hasOwnProperty('expressions')){
+		js.expressions.split(',').forEach(function(element){
+			search.value= search.value.concat("\""+element+"\"");
+		})
+	}
 }
 
 window.onload = populateSearchBar;
@@ -63,9 +86,9 @@ function doSearch(){
 		}
 		// build the url
 
-		let url="";
+		let url="?";
 		if(res.hasOwnProperty(1))
-			url=url.concat("?members=").	concat(res[1].join(','));
+			url=url.concat("&members=").	concat(res[1].join(','));
 		if(res.hasOwnProperty(2))
 			url=url.concat("&tags=").		concat(res[2].join(','));
 		if(res.hasOwnProperty(3))
