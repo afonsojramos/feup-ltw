@@ -3,6 +3,7 @@ loginForm.addEventListener("submit", function (e) {
 	let formData = new FormData(loginForm);
 	data = formDataToAjax(formData);
 	request("actions/user/login.php", function (result) {
+		console.log(result);
 		if (result.success) {
 			window.location.replace("dashboard.php");
 		} else {

@@ -15,7 +15,6 @@ document.getElementById("addMember").addEventListener("click", function (e) {
 			username: username
 		};
 		request("actions/project/add_member.php", function (result) { //send ajax request
-			console.log(result);
 			if (result.success) { //on errors
 				location.reload();
 			} else {
@@ -44,5 +43,21 @@ Array.prototype.forEach.call(removeMemberLinks, function (removeMemberLink) {
 	}, false);
 
 	let formData = new FormData(removeMemberLink);
+});
 
+//delete project
+document.getElementById("deleteProject").addEventListener("click", function (e) {
+	if (confirm("Are you sure you want to delete this project?")) {
+		data = {
+			projectId: document.getElementById("projectMainContainer").getAttribute("data-projectId")
+		};
+		request("actions/project/delete_project.php", function (result) { //send ajax request
+			console.log(result);
+			if (result.success) { //on errors
+				window.location.replace("dashboard.php");
+			} else {
+				addErrorMessage(parentDiv, result.errors);
+			}
+		}, data, "post");
+	}
 });

@@ -9,16 +9,19 @@ verifyAttributes($_GET, ["projectId"]);
 require_once(dirname(__FILE__) . "/classes/Project.php");
 require_once(dirname(__FILE__) . "/classes/Member.php");
 
-//check if the user is a member of the project
-$member = new Member($_GET["projectId"], $_SESSION["userId"]);
-if (!$member->load()) {
-	echo "No permission for you.";
+
+//load the project
+$project = new Project();
+if (!$project->load($_GET["projectId"])) {
+	echo "Project not found";
 	die();
 }
 
-//load the project
-$project = new Project($_GET["projectId"]);
-$project->load();
+//check if the user is a member of the project
+if (!$project->verifyOwnership($_SESSION["userId"])) {
+	echo "No permission for you.";
+	die();
+}
 
 //load page defaults
 require_once(dirname(__FILE__) . "/includes/common/defaults.php");
@@ -113,9 +116,9 @@ $members = User::getAllByProject($project->projectId);
 	<div class="members">
 		<div class="errors"></div>
 		<?php foreach ($members as $member) :
-			$base = "public/images/profile/";
-			$filename = $base . $member->userId . ".jpg";
-			if (!file_exists($filename)) $filename = $base . "default.png" ?>
+		$base = "public/images/profile/";
+	$filename = $base . $member->userId . ".jpg";
+	if (!file_exists($filename)) $filename = $base . "default.png" ?>
 			<div class="memberContainer">
 				<img class="member" src="<?= $filename ?>"/>
 				<h2 class="center"><?= htmlentities($member->username); ?></h2>
@@ -132,7 +135,7 @@ $members = User::getAllByProject($project->projectId);
 	<h1 class="center strong">Actions</h1>
 
 	<ul>
-		<li class="strong"><a> Delete Project</a></li>
+		<li class="strong"><a id="deleteProject"> Delete Project</a></li>
 	</ul>
 </div>
 
