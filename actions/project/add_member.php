@@ -17,7 +17,7 @@ if ($project->load($_POST["projectId"])) {
 		if ($user->loadFromUsernameOrEmail($_POST["username"])) {
 			$member = new Member($project->projectId, $user->userId);
 			if ($member->load()) {
-				$result["errors"] = array("User is already in porject");
+				$result["errors"] = array("User is already in project");
 			} elseif ($member->insert()) {
 				$result["success"] = true;
 			} else {
