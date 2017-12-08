@@ -120,9 +120,29 @@ class TodoList extends QueryBuilder{
 
 				$i++;
 			}
-			$pq['tags']=substr($pq['tags'], 0, -4); // remove " OR " from end of string
+			$pq['tags']=substr($pq['tags'], 0, -1*strlen(" OR ")); // remove " OR " from end of string
 			$pq['tags'].="))";
 		}
+
+
+		/**
+		 * (SELECT todoListId FROM items WHERE (REPLACE_ME LIKE "%search1%" OR REPLACE_ME LIKE "%search2%"))
+		 * 
+		 */
+
+		 if(count($words)>0){
+			 $pq['words']="(SELECT todoListId FROM items WHERE (REPLACE_ME LIKE ";
+			 $i = 0;
+			 foreach($words as $w){
+				$pq['words'].=":word{$i} OR REPLACE_ME LIKE ";
+				$params["word{$i}"]=$w;
+
+				$i++;
+			 }
+			 $pq["words"]=substr($pq["words"], 0, -1*strlen(" OR REPLACE_ME LIKE "));
+			 $pq['words'].='))';
+		 }
+		
 		var_dump($pq);
 		var_dump($params);
 
