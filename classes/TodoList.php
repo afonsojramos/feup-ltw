@@ -109,13 +109,13 @@ class TodoList extends QueryBuilder{
 		*/
 		if (isset($query["projects"])) {
 			$projects = explode(',', $query["projects"]);
-			$subquery = "SELECT DISTINCT todoListId FROM todolists WHERE projectId IN (SELECT projectId FROM projects WHERE title IN (";
+			$subquery = "SELECT DISTINCT todoListId FROM todolists WHERE projectId IN (SELECT projectId FROM projects WHERE LOWER(title) IN (";
 
 			$i = 0;
 			$temp = array();
 			foreach ($projects as $p) {
 				$temp[] = ":project{$i}";
-				$params["project{$i}"] = $p;
+				$params["project{$i}"] = strtolower($p);
 				$i++;
 			}
 			$subquery .= implode(", ", $temp);
@@ -141,14 +141,14 @@ class TodoList extends QueryBuilder{
 			$i = 0;
 			$temp = array();
 			foreach ($tags as $t) {
-				$temp[] = "tags LIKE :tag{$i}0 OR tags LIKE :tag{$i}1 OR tags LIKE :tag{$i}2 OR tags LIKE :tag{$i}3";
+				$temp[] = "(tags LIKE :tag{$i}0 OR tags LIKE :tag{$i}1 OR tags LIKE :tag{$i}2 OR tags LIKE :tag{$i}3)";
 				$params["tag{$i}0"] = "{$t}";
 				$params["tag{$i}1"] = "%,{$t}";
 				$params["tag{$i}2"] = "%,{$t},%";
 				$params["tag{$i}3"] = "{$t},%";
 				$i++;
 			}
-			$subquery .= implode(" OR ", $temp);
+			$subquery .= implode(" AND ", $temp);
 			$subquery .= ")";
 			$masterQuery[] = $subquery;
 		}
