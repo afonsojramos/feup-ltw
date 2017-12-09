@@ -2,6 +2,7 @@
 LTW Project - A TODO list management platform:
 
 Official [instructions](https://web.fe.up.pt/~arestivo/page/courses/2017/ltw/project/).
+### Full Reference in the [:book: WIKI](https://github.com/msramalho/feup-ltw/wiki)
 
 # Database
 
