@@ -66,7 +66,6 @@ class TodoList extends QueryBuilder{
 	}
 
 	private static function buildSearchQuery($query, $userId, $qb) {
-		var_dump($query);
 		$params = array();
 		$params["userId"] = $userId;
 		$pq = array();
