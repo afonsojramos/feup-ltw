@@ -130,6 +130,10 @@ input[type='submit'] {
 	font-weight: 500;
 }
 
+.data {
+	margin-bottom: 50px;
+}
+
 .error,
 .success {
 	position: relative;
