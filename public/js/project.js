@@ -61,3 +61,18 @@ document.getElementById("deleteProject").addEventListener("click", function (e) 
 		}, data, "post");
 	}
 });
+
+//editProject
+let editProjectForm = document.getElementById("projectForm");
+editProjectForm.addEventListener("submit", function(e){
+	let formData = new FormData(editProjectForm);
+	data = formDataToAjax(formData);
+	request("actions/project/edit_project.php", function (result) {
+		if (result.success) {
+			location.reload();
+		} else {
+			addErrorMessage(editProjectForm, result.errors);
+		}
+	}, data, "post");
+	e.preventDefault();
+});

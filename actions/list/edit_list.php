@@ -13,9 +13,9 @@ $result = array("success" => false);
 $todoList = new TodoList;
 if ($todoList->load($_POST["todoListId"])) {
 	if ($todoList->verifyOwnership($_SESSION["userId"])) {
-		$todoList->title = $_POST["title"];
-		$todoList->colour = $_POST["colour"];
-		$todoList->tags = $_POST["tags"];
+		if($_POST["title"]!="") $todoList->title = $_POST["title"];
+		if($_POST["colour"]!="") $todoList->colour = $_POST["colour"];
+		if($_POST["tags"]!="") $todoList->tags = $_POST["tags"];
 		if ($todoList->validate()) {
 			$project = new Project($_POST["projectId"]);
 			if ($project->projectId == 0 || ($project->load() && $project->verifyOwnership($_SESSION["userId"]))) {

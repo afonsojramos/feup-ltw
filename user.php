@@ -25,8 +25,8 @@ require_once(dirname(__FILE__) . "/includes/common/choose_navbar.php");
 //load statistics
 require_once(dirname(__FILE__) . "/classes/TodoList.php");
 require_once(dirname(__FILE__) . "/classes/Project.php");
-$projects = Project::getAllByUser($_SESSION["userId"]);
-$todos = TodoList::getAllByUser($_SESSION["userId"]);
+$projects = Project::getAllByUser($user->userId);
+$todos = TodoList::getAllByUser($user->userId);
 $countItems = 0;
 $countIncompleteItems = 0;
 $countArchived = 0;
@@ -57,19 +57,6 @@ $statistics = array(
 		if (!file_exists($filename)) $filename = $base . "default.png"
 	?>
 	<img alt="profile picture" class="center userImage" src="<?= $filename ?>"/>
-	
-	<div class="data">
-	<h2 class="strong">Data</h2>
-	<?php
-		$data = array("userId", "username", "email");
-		foreach ($data as $parameter) :
-	?>
-		<div class="largeFont">
-			<?= $parameter ?>:
-			<span class="strong"><?= htmlentities($user->$parameter) ?></span>
-		</div>
-	<?php endforeach ?>
-	</div>
 
 	<h2 class="center strong">Statistics</h2>
 	<div class="statistics">
@@ -78,6 +65,19 @@ $statistics = array(
 			<li class="statistics value"><?= $value ?></li>
 			<li class="statistics name"><?= $name ?></li>
 		</ul>
+		<?php endforeach ?>
+	</div>
+
+	<div class="data">
+		<h2 class="strong">Data</h2>
+		<?php
+			$data = array("userId", "username", "email");
+			foreach ($data as $parameter) :
+		?>
+			<div class="largeFont">
+				<?= $parameter ?>:
+				<span class="strong"><?= htmlentities($user->$parameter) ?></span>
+			</div>
 		<?php endforeach ?>
 	</div>
 </div>

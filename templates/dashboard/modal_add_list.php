@@ -35,7 +35,7 @@ if(count($projects) == 0 || (count($projects) && $projects[0]->projectId != "0")
 			<div>
 				<select name="projectId">
 					<?php foreach ($projects as $p): ?>
-						<option value="<?= $p->projectId ?>"><?= htmlentities($p->title) ?></option>
+						<option value="<?= $p->projectId ?>" <?= $selectedProjectId==$p->projectId?"selected":""?>><?= htmlentities($p->title) ?></option>
 					<?php endforeach ?>
 				</select>
 			</div>

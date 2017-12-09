@@ -101,7 +101,8 @@ let listEditTitle = function (title) {
 				todoListId: parentTodo.getAttribute("data-todoListId"),
 				title: textBox.value,
 				tags: "",
-				colour: ""
+				colour: "",
+				projectId: ""
 			};
 			myItem.doRequest("actions/list/edit_list.php", data, parentTodo);
 		};
