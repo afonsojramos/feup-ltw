@@ -63,14 +63,35 @@ require_once(dirname(__FILE__)."/connection.php");
 
 <h2 align="center">Extra</h2>
 
-- [x] Share a link to a todo list
 - [x] Create a Project
-- [x] Add users to Project
-- [x] Change a List's color
-- [x] Edit tags
+- [x] Manage Projects
+- [x] Manage Project's Members
 - [x] Create a new todo list (in a project)
+- [x] Share a link to a Todo List
+- [x] Share a links in Projects
+- [x] List's Tags and editing
+- [x] Flexible search
+- [x] Bookmarkable searches
 - [x] Choose a profile picture
-- [x] CSRF tokens
-- [x] XSS prevention
+- [x] Creation of thumbnails and full-sized photos
+- [x] Change a List's color
+- [x] Choose a Project's color
 
 Many more
+
+<h2 align="center">Security Functionalities</h2>
+
+- [x] Hashed passwords
+- [x] Authentication only pages
+- [x] Authentication AND permission only pages
+- [x] CSRF tokens on forms
+- [x] CSRF tokens on ajax
+- [x] XSS prevention
+
+<h2 align="center">Keyboard Shortcuts</h2>
+
+- [x] Ctrl+F opens Search
+- [x] Ctrl+S opens Sidebar
+- [x] Ctrl+P opens a Project's Modal
+- [x] Ctrl+L opens a New List's Modal
+- [x] Esc clears the search, closes modals, and cancels the text edits
