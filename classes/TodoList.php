@@ -165,7 +165,7 @@ class TodoList extends QueryBuilder{
 		*/
 		if (count($words) > 0) {
 			//SELECT DISTINCT todoListId FROM todolists WHERE (title LIKE "%rcom%" OR title LIKE "%ltw%")
-			$subquery = "SELECT DISTINCT todoListId FROM todolists WHERE (";
+			$subquery = "SELECT * FROM (SELECT DISTINCT todoListId FROM todolists WHERE (";
 
 			$i = 0;
 			$temp = array();
@@ -209,13 +209,13 @@ class TodoList extends QueryBuilder{
 			}
 			$subquery .= implode(" OR ", $temp);
 
-			$subquery .= ")";
+			$subquery .= "))";
 			$masterQuery[] = $subquery;
 		}
 
 		$gluedMasterQuery = implode(" INTERSECT ", $masterQuery);
 		var_dump($masterQuery);
-		// var_dump($params);
+		var_dump($params);
 
 		$finalQuery = "SELECT * FROM todolists WHERE todoListId IN (
 			$gluedMasterQuery
