@@ -171,6 +171,8 @@ class TodoList extends QueryBuilder{
 			 }
 			 $pq["words"]=substr($pq["words"], 0, -1*strlen(" OR REPLACE_ME LIKE ")); // remove " OR REPLACE_ME LIKE " from end of string
 			 $pq['words'].=')';
+		 }else{
+			$pq['words']="1";
 		 }
 		
 		var_dump($pq);
