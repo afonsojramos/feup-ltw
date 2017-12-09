@@ -50,25 +50,25 @@ $statistics = array(
 
 ?>
 <div class="container" id="userMainContainer" data-userId="<?= $user->userId ?>">
-	<h1 class="center">Username: <span class="strong"><?= htmlentities($user->username) ?></span></h1>
-
-	<?php $base = "public/images/profile/";
-		$filename = $base . $user->userId . ".jpg";
-		if (!file_exists($filename)) $filename = $base . "default.png"
-	?>
-	<img alt="profile picture" class="center userImage" src="<?= $filename ?>"/>
-	
-	<div class="data">
-	<h2 class="strong">Data</h2>
-	<?php
-		$data = array("userId", "username", "email");
-		foreach ($data as $parameter) :
-	?>
-		<div class="largeFont">
-			<?= $parameter ?>:
-			<span class="strong"><?= htmlentities($user->$parameter) ?></span>
+	<div class="user">
+		<div class="photo">
+		<?php $base = "public/images/profile/";
+			$filename = $base . $user->userId . ".jpg";
+			if (!file_exists($filename)) $filename = $base . "default.png"
+		?>
+		<img alt="profile picture" class="center userImage" src="<?= $filename ?>"/>
 		</div>
-	<?php endforeach ?>
+		<div class="data">
+		<?php
+			$data = array("username", "email");
+			foreach ($data as $parameter) :
+		?>
+			<div class="largeFont">
+				<span class="parameter name"><?= $parameter ?></span>
+				<span class="parameter specificData"><?= htmlentities($user->$parameter) ?></span>
+			</div>
+		<?php endforeach ?>
+		</div>
 	</div>
 
 	<h2 class="center strong">Statistics</h2>
