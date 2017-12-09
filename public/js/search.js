@@ -107,6 +107,6 @@ function doSearch(){
 		if(res.hasOwnProperty(5))
 			url=url.concat("&expressions=").concat(res[5].join(','));
 
-		document.location.href=window.location.href.replace(window.location.search,'').concat(url);
+		document.location.href=window.location.href.split('.php')[0].concat(".php").concat(url);
 	}
 }
