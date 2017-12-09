@@ -57,7 +57,7 @@ class TodoList extends QueryBuilder{
 
 	// Determine if query (copy os $_GET) is a search query, or a regular query.
 	private static function isSearchQuery($query){
-		foreach (array('members', 'tags', 'projects', 'words', 'expressions') as $p) {
+		foreach (array('members', 'tags', 'projects', 'words', 'expressions', 'projectId') as $p) {
 			if (array_key_exists($p, $query)) {
 				return true;
 			}
@@ -66,6 +66,7 @@ class TodoList extends QueryBuilder{
 	}
 
 	private static function buildSearchQuery($query, $userId, $qb) {
+		var_dump($query);
 		$params = array();
 		$params["userId"] = $userId;
 		$pq = array();
@@ -105,6 +106,15 @@ class TodoList extends QueryBuilder{
 
 
 		/*
+		SELECT DISTINCT todoListId FROM todolists WHERE projectId = :projectId
+		*/
+		if (isset($query["projectId"])) {
+			$subquery = "SELECT DISTINCT todoListId FROM todolists WHERE projectId = :projectId";
+			$params["projectId"] = $query["projectId"];
+			$masterQuery[] = $subquery;
+		}
+
+/*
 		SELECT DISTINCT todoListId FROM todolists WHERE projectId IN (SELECT projectId FROM projects WHERE title IN ("rcom","ltw")
 		*/
 		if (isset($query["projects"])) {
