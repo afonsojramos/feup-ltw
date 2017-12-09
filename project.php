@@ -34,7 +34,7 @@ require_once(dirname(__FILE__) . "/includes/common/choose_navbar.php");
 
 //load statistics
 require_once(dirname(__FILE__) . "/classes/TodoList.php");
-$todos = TodoList::getAllByUserProject($_SESSION["userId"], $project->projectId);
+$todos = TodoList::getAllByProject($project->projectId);
 $countArchived = 0;
 $countItems = 0;
 $countIncompleteItems = 0;
@@ -106,6 +106,7 @@ $members = User::getAllByProject($project->projectId);
 			<footer class="formFooter">
 				<input type="submit" value="Save">
 			</footer>
+			<div class="errors"></div>
 		</div>
 	</form>
 

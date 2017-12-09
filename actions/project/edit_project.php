@@ -19,7 +19,7 @@ if ($project->load($_POST["projectId"])) {
 		if ($project->validate()) {
 			$project->update();
 			$result["success"] = true;
-			header("Location: ../../project.php?projectId=".$project->projectId);
+			// header("Location: ../../project.php?projectId=".$project->projectId);
 		} else {
 			$result["errors"] = $project->errors;
 		}

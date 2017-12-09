@@ -68,10 +68,8 @@ class TodoList extends QueryBuilder{
 
 	private static function buildSearchQuery($query, $userId, $qb){
 
-
-
-		$fullWhere="todoListId IN (";
 		$params=array();
+		$params['userId']=$userId;
 		$pq=array();
 
 		if(isset($query['words'])){
@@ -86,17 +84,42 @@ class TodoList extends QueryBuilder{
 		}
 		$words = array_merge($words, $expressions);
 		
+
+		/**
+		 * (SELECT projectId FROM members WHERE userId IN (
+         *		SELECT userId FROM users WHERE username IN (:username1, username2) AND projectId in (SELECT projectId FROM members WHERE userId = :userId)) --
+         * )
+		 */
 		if(isset($query['members'])){
 			$members=explode(',', $_GET['members']);
+			$pq['members']="(SELECT projectId FROM members WHERE userId IN (SELECT userId FROM users WHERE username in (";
+			$i = 0;
 			foreach($members as $m){
+				$pq['members'].=":username{$i}, ";
+				$params["username{$i}"] = $m;
 
+				$i++;
 			}
+
+			$pq['members']=substr($pq['members'], 0, -1*strlen(", ")); // remove '"'from end of string
+			$pq['members'].=") AND projectId IN (SELECT projectId FROM members WHERE userId = :userId))";
 		}
+
+		/**
+		 * (SELECT * FROM projects WHERE projectId IN (SELECT projectId FROM members WHERE userId = :currentUser) AND (projects.title IN ("proj1", "proj2")))
+		 */
 		if(isset($query['projects'])){
 			$projects=explode(',', $_GET['projects']);
+			$pq['projects']="SELECT * FROM projects WHERE projectId IN (SELECT projectId FROM members WHERE userId = :userId) AND (projects.title IN (";
+			$i = 0;
 			foreach($projects as $p){
-
+				$pq['projects'].=":project{$i}, ";
+				$params["project{$i}"] = $p;
+				
+				$i++;
 			}
+			$pq['projects']=substr($pq['projects'], 0, -1*strlen(", ")); // remove ', 'from end of string
+			$pq['projects'].="))";
 		}
 
 		/** 	(SELECT todoListId FROM todolists WHERE (
@@ -126,12 +149,12 @@ class TodoList extends QueryBuilder{
 
 
 		/**
-		 * (SELECT todoListId FROM items WHERE (REPLACE_ME LIKE "%search1%" OR REPLACE_ME LIKE "%search2%"))
+		 * (REPLACE_ME LIKE "%search1%" OR REPLACE_ME LIKE "%search2%"))
 		 * 
 		 */
 
 		 if(count($words)>0){
-			 $pq['words']="(SELECT todoListId FROM items WHERE (REPLACE_ME LIKE ";
+			 $pq['words']="(REPLACE_ME LIKE ";
 			 $i = 0;
 			 foreach($words as $w){
 				$pq['words'].=":word{$i} OR REPLACE_ME LIKE ";
@@ -139,15 +162,42 @@ class TodoList extends QueryBuilder{
 
 				$i++;
 			 }
-			 $pq["words"]=substr($pq["words"], 0, -1*strlen(" OR REPLACE_ME LIKE "));
-			 $pq['words'].='))';
+			 $pq["words"]=substr($pq["words"], 0, -1*strlen(" OR REPLACE_ME LIKE ")); // remove " OR REPLACE_ME LIKE " from end of string
+			 $pq['words'].=')';
 		 }
 		
 		var_dump($pq);
 		var_dump($params);
 
 
-		return $qb->select()->where($fullWhere)->addParam("userId", $userId);
+		/** |--------------------------------------WHOLE QUERY-----------------------------------|
+		 * 	|																					 |
+		 * 	|-------------------1st sq--------------------|---2nd sq---|---3rd sq---|---4th sq---|
+		 *  |																					 |
+		 *  |----1.1 sq----|----1.2 sq----|----1.3 sq---- |										 |
+		 * 
+		 */
+
+		 $pq['sq11']=$pq['members'];
+		 $pq['sq12']=$pq['projects'];
+		 $pq['sq13']="SELECT projectId FROM projects WHERE ".str_replace("REPLACE_ME", "title", $pq['words'])." OR ".str_replace("REPLACE_ME", "description", $pq['words']);
+		 
+		 $pq['sq1']="(SELECT todoListId FROM todolists WHERE projectId IN(".$pq['sq11'].") UNION (".$pq['sq12']. ") UNION (" . $pq['sq13']. ")))";
+		 
+		 $pq['sq2']=$pq['tags'];
+
+		 $pq['sq3']="(SELECT todoListId FROM todolists WHERE " . str_replace("REPLACE_ME", "title", $pq['words']) . ")";
+
+		 $pq['sq4']="(SELECT todoListId FROM todolists WHERE " . str_replace("REPLACE_ME", "description", $pq['words']) . ")";
+
+		 $fullWhere="todoListId IN (";
+		 $fullWhere.=$pq['sq1']. " UNION ". $pq['sq2']. " UNION ". $pq['sq3']. " UNION ". $pq['sq4']. ")";
+
+		 ini_set('xdebug.var_display_max_depth', 5);
+		 ini_set('xdebug.var_display_max_children', 256);
+		 ini_set('xdebug.var_display_max_data', 1024);
+		 var_dump($fullWhere);
+		return $qb->select()->where($fullWhere)->addParams($params);
 	}
 
 	//all the lists this user can see, query is an array of key values with the possible search values

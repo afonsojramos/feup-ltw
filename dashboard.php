@@ -17,7 +17,7 @@ $todos = TodoList::getAllQuery($_GET, $_SESSION["userId"]);
 
 <div class="container" id="dashboardContainer">
 	<?php if (count($todos) == 0) : ?>
-		<h1 class="center">This page looks a bit empty <i class="material-icons">sentiment_very_dissatisfied</i></h1>
+		<h1 id="noTodos" class="center">This page looks a bit empty <i class="material-icons">sentiment_very_dissatisfied</i></h1>
 	<?php endif ?>
     <div class="todos">
 		<?php

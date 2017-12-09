@@ -11,6 +11,10 @@ form.addEventListener("submit", function (e) {
 			form.style.display = "none";
 			form.reset();
 			displayNewTodoList(data.todoListId);
+			let noTodos = document.getElementById("noTodos");
+			if(noTodos){
+				noTodos.remove();
+			}
 		}else{
 			addErrorMessage(form, data.errors);
 		}

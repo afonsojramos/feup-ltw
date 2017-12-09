@@ -14,7 +14,7 @@ class Item extends QueryBuilder{
 		"dueDate"=>"date"
 	);
 
-	public function __construct($itemId = null, $completed = false, $content = "", $dueDate = null, $todoListId = -1){
+	public function __construct($itemId = null, $completed = 0, $content = "", $dueDate = null, $todoListId = -1){
 		$this->itemId = $itemId;
 		$this->completed = $completed;
 		$this->content = $content;

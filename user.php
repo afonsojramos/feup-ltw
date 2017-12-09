@@ -25,8 +25,8 @@ require_once(dirname(__FILE__) . "/includes/common/choose_navbar.php");
 //load statistics
 require_once(dirname(__FILE__) . "/classes/TodoList.php");
 require_once(dirname(__FILE__) . "/classes/Project.php");
-$projects = Project::getAllByUser($_SESSION["userId"]);
-$todos = TodoList::getAllByUser($_SESSION["userId"]);
+$projects = Project::getAllByUser($user->userId);
+$todos = TodoList::getAllByUser($user->userId);
 $countItems = 0;
 $countIncompleteItems = 0;
 $countArchived = 0;
@@ -80,6 +80,7 @@ $statistics = array(
 		</ul>
 		<?php endforeach ?>
 	</div>
+
 </div>
 
 <?php require_once(dirname(__FILE__) . "/templates/common/footer.php"); ?>
