@@ -92,7 +92,7 @@ class TodoList extends QueryBuilder{
 		 */
 		if(isset($query['members'])){
 			$members=explode(',', $_GET['members']);
-			$pq['members']="(SELECT projectId FROM members WHERE userId IN (SELECT userId FROM users WHERE username in (";
+			$pq['members']="SELECT projectId FROM members WHERE userId IN (SELECT userId FROM users WHERE username in (";
 			$i = 0;
 			foreach($members as $m){
 				$pq['members'].=":username{$i}, ";
@@ -102,7 +102,9 @@ class TodoList extends QueryBuilder{
 			}
 
 			$pq['members']=substr($pq['members'], 0, -1*strlen(", ")); // remove '"'from end of string
-			$pq['members'].=") AND projectId IN (SELECT projectId FROM members WHERE userId = :userId))";
+			$pq['members'].=") AND projectId IN (SELECT projectId FROM members WHERE userId = :userId)";
+		}else{
+			$pq['members']="SELECT projectId FROM members WHERE userId IN (SELECT userId FROM users WHERE username in () AND projectId IN (SELECT projectId FROM members WHERE userId = :userId)";
 		}
 
 		/**
@@ -110,7 +112,7 @@ class TodoList extends QueryBuilder{
 		 */
 		if(isset($query['projects'])){
 			$projects=explode(',', $_GET['projects']);
-			$pq['projects']="SELECT * FROM projects WHERE projectId IN (SELECT projectId FROM members WHERE userId = :userId) AND (projects.title IN (";
+			$pq['projects']="SELECT todoListId FROM projects WHERE projectId IN (SELECT projectId FROM members WHERE userId = :userId) AND (projects.title IN (";
 			$i = 0;
 			foreach($projects as $p){
 				$pq['projects'].=":project{$i}, ";
@@ -120,6 +122,9 @@ class TodoList extends QueryBuilder{
 			}
 			$pq['projects']=substr($pq['projects'], 0, -1*strlen(", ")); // remove ', 'from end of string
 			$pq['projects'].="))";
+		}else{
+			$pq['projects']="SELECT todoListId FROM projects WHERE projectId IN (SELECT projectId FROM members WHERE userId = :userId) AND (projects.title IN ())";
+			
 		}
 
 		/** 	(SELECT todoListId FROM todolists WHERE (
@@ -131,7 +136,7 @@ class TodoList extends QueryBuilder{
 		if(isset($query['tags'])){
 			//tag(s) are set.
 			//pq stands for partial query
-			$pq['tags']="(SELECT todoListId FROM todolists WHERE (";
+			$pq['tags']="SELECT todoListId FROM todolists WHERE (";
 			$tags=explode(',', $_GET['tags']);
 			$i=0;
 			foreach($tags as $t){
@@ -144,7 +149,9 @@ class TodoList extends QueryBuilder{
 				$i++;
 			}
 			$pq['tags']=substr($pq['tags'], 0, -1*strlen(" OR ")); // remove " OR " from end of string
-			$pq['tags'].="))";
+			$pq['tags'].=")";
+		}else{
+			$pq['tags']="SELECT todoListId FROM todolists WHERE 1"; //verificar esse 1
 		}
 
 
@@ -182,13 +189,13 @@ class TodoList extends QueryBuilder{
 		 $pq['sq12']=$pq['projects'];
 		 $pq['sq13']="SELECT projectId FROM projects WHERE ".str_replace("REPLACE_ME", "title", $pq['words'])." OR ".str_replace("REPLACE_ME", "description", $pq['words']);
 		 
-		 $pq['sq1']="(SELECT todoListId FROM todolists WHERE projectId IN(".$pq['sq11'].") UNION (".$pq['sq12']. ") UNION (" . $pq['sq13']. ")))";
+		 $pq['sq1']="SELECT todoListId FROM todolists WHERE projectId IN(".$pq['sq11']." UNION ".$pq['sq12']. " UNION " . $pq['sq13']. "))";
 		 
 		 $pq['sq2']=$pq['tags'];
 
-		 $pq['sq3']="(SELECT todoListId FROM todolists WHERE " . str_replace("REPLACE_ME", "title", $pq['words']) . ")";
+		 $pq['sq3']="SELECT todoListId FROM todolists WHERE " . str_replace("REPLACE_ME", "title", $pq['words']);
 
-		 $pq['sq4']="(SELECT todoListId FROM todolists WHERE " . str_replace("REPLACE_ME", "description", $pq['words']) . ")";
+		 $pq['sq4']="SELECT todoListId FROM items WHERE " . str_replace("REPLACE_ME", "content", $pq['words']);
 
 		 $fullWhere="todoListId IN (";
 		 $fullWhere.=$pq['sq1']. " UNION ". $pq['sq2']. " UNION ". $pq['sq3']. " UNION ". $pq['sq4']. ")";
@@ -196,6 +203,7 @@ class TodoList extends QueryBuilder{
 		 ini_set('xdebug.var_display_max_depth', 5);
 		 ini_set('xdebug.var_display_max_children', 256);
 		 ini_set('xdebug.var_display_max_data', 1024);
+		 var_dump($pq);
 		 var_dump($fullWhere);
 		return $qb->select()->where($fullWhere)->addParams($params);
 	}
