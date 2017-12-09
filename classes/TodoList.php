@@ -214,15 +214,15 @@ class TodoList extends QueryBuilder{
 		}
 
 		$gluedMasterQuery = implode(" INTERSECT ", $masterQuery);
-		var_dump($masterQuery);
-		var_dump($params);
+		// var_dump($masterQuery);
+		// var_dump($params);
 
 		$finalQuery = "SELECT * FROM todolists WHERE todoListId IN (
 			$gluedMasterQuery
 			INTERSECT
 			SELECT DISTINCT todoListId FROM todolists WHERE userId = :userId OR (projectId IN (SELECT m.projectId FROM members as m where userId = :userId))
 		)";
-		echo $finalQuery;
+		// echo $finalQuery;
 		if($result = $qb->execute($finalQuery, $params)){
 			return $result->fetchAll(PDO::FETCH_ASSOC);
 		}
