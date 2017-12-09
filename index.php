@@ -57,6 +57,9 @@ $statistics = array(
 			</tr>
 		</tbody>
 	</table>
+	<a href="https://github.com/msramalho/feup-ltw#feup-ltw---group-1">
+		<img alt="Github logo" id="gitLogo" class="center" src="public/images/github.png">
+	</a>
 
 	<hr/>
 
