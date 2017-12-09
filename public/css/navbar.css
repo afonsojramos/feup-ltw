@@ -206,6 +206,15 @@
     font-size: 15px;
 }
 
+.sidenav .sidebar .projects {
+    display: inline-flex;
+}
+
+.sidenav .sidebar .projects .floatRight {
+    position: absolute;
+    left: 7em;
+}
+
 
 /* The navigation menu links */
 
