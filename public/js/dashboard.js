@@ -147,6 +147,7 @@ let listArchived = function (parentTodo, actionBtn, data) {
 	} else if (icon.innerHTML == "unarchive") {
 		icon.innerHTML = "archive";
 	}
+	parentTodo.remove();
 };
 let listShared = function (parentTodo, actionBtn, data, result) {
 	if (copyTextToClipboard(result.link)) {

@@ -11,7 +11,7 @@ require_once(dirname(__FILE__) . "/modal_add_project.php");
 	<a class="closebtn" onclick="toggleSideBar()">&times;</a>
 	<ul class="sidebar">
 		<li class="dropdown">
-			<a href="dashboard?projectId=0"><i class="material-icons">lock_outline</i> My Lists</a>
+			<a href="dashboard.php?projectId=0"><i class="material-icons">lock_outline</i> My Lists</a>
 			<a href="dashboard.php"><i class="material-icons">lock_open</i> All Lists</a>
 			<a href="dashboard.php?archived=1"><i class="material-icons archived">archive</i> Archived</a>
 			<hr/>
