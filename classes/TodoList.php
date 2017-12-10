@@ -57,7 +57,7 @@ class TodoList extends QueryBuilder{
 
 	// Determine if query (copy os $_GET) is a search query, or a regular query.
 	private static function isSearchQuery($query){
-		foreach (array('members', 'tags', 'projects', 'words', 'expressions', 'projectId') as $p) {
+		foreach (array('members', 'tags', 'projects', 'words', 'expressions', 'projectId', 'archived') as $p) {
 			if (array_key_exists($p, $query)) {
 				return true;
 			}
@@ -223,14 +223,21 @@ class TodoList extends QueryBuilder{
 		}
 
 		$gluedMasterQuery = implode(" INTERSECT ", $masterQuery);
+		if(strlen($gluedMasterQuery) != 0){
+			$gluedMasterQuery .= " INTERSECT ";
+		}
 		// var_dump($masterQuery);
 		// var_dump($params);
 
 		$finalQuery = "SELECT * FROM todolists WHERE todoListId IN (
 			$gluedMasterQuery
-			INTERSECT
 			SELECT DISTINCT todoListId FROM todolists WHERE userId = :userId OR (projectId IN (SELECT m.projectId FROM members as m where userId = :userId))
 		)";
+		if (isset($query["archived"]) && $query["archived"] == 1) {
+			$finalQuery .= " AND archived = 1";
+		}else{
+			$finalQuery .= " AND archived = 0";
+		}
 		// echo $finalQuery;
 		if($result = $qb->execute($finalQuery, $params)){
 			return $result->fetchAll(PDO::FETCH_ASSOC);
@@ -248,7 +255,7 @@ class TodoList extends QueryBuilder{
 			//special build here
 			$lines = self::buildSearchQuery($query, $userId, $qb);
 		} else {
-			$lines = $qb->select()->where("userId = :userId OR (projectId IN (SELECT m.projectId FROM members as m where userId = :userId))")->addParam("userId", $userId)->getAll();
+			$lines = $qb->select()->where("(userId = :userId OR (projectId IN (SELECT m.projectId FROM members as m where userId = :userId))) AND archived = 0")->addParam("userId", $userId)->getAll();
 		}
 
 		return self::loadTodoFromDatabase($lines, $loadItemsAsWell);
