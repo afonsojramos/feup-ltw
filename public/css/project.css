@@ -29,6 +29,11 @@ h2 {
     margin-bottom: 20px;
 }
 
+.formBody #editProjDesc {
+	resize: none;
+	overflow:hidden;
+}
+
 
 /* members */
 

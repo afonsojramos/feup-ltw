@@ -91,7 +91,7 @@ $members = User::getAllByProject($project->projectId);
 					<input type="text" name="title" placeholder="Project title" value="<?= htmlentities($project->title) ?>" required>
 				</div>
 				<div>
-					<textarea name="description" rows="5" placeholder="Project Description"><?= htmlentities($project->description) ?></textarea>
+					<textarea id="editProjDesc" name="description" rows="5" placeholder="Project Description"><?= htmlentities($project->description) ?></textarea>
 				</div>
 				<div>
 					<select name="colour">

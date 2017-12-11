@@ -59,6 +59,12 @@
     border-radius: 0 0 5px 5px;
 }
 
+#addProjDesc{
+	resize: none;
+	overflow:hidden;
+	height: 150px;
+}
+
 
 /* The Close Button */
 

@@ -16,7 +16,7 @@ require_once(dirname(__FILE__) . "/../../classes/Project.php");
 				<input type="text" name="title" placeholder="Project title" required>
 			</div>
 			<div>
-				<textarea name="description" placeholder="Project Description"></textarea>
+				<textarea id="addProjDesc" name="description" placeholder="Project Description"></textarea>
 			</div>
 			<div>
 				<select name="colour">
