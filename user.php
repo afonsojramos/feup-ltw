@@ -17,7 +17,7 @@ if (!$user->load($_GET["userId"])) {
 require_once(dirname(__FILE__) . "/includes/common/defaults.php");
 $PAGE["title"] .= " : User " . htmlentities($user->username);
 // $PAGE["styles"] = array_merge($PAGE["styles"], []]);
-$PAGE["scripts"] = array_merge($PAGE["scripts"], array("search.js"));
+$PAGE["scripts"][] = "search.js";
 
 require_once(dirname(__FILE__) . "/templates/common/header.php");
 require_once(dirname(__FILE__) . "/includes/common/choose_navbar.php");
@@ -53,16 +53,16 @@ $statistics = array(
 	<div class="user">
 		<div class="photo">
 		<?php $base = "public/images/profile/";
-			$filename = $base . $user->userId . ".jpg";
-			if (!file_exists($filename)) $filename = $base . "default.png"
-		?>
+	$filename = $base . $user->userId . ".jpg";
+	if (!file_exists($filename)) $filename = $base . "default.png"
+	?>
 		<img alt="profile picture" class="center userImage" src="<?= $filename ?>"/>
 		</div>
 		<div class="data">
 		<?php
-			$data = array("username", "email");
-			foreach ($data as $parameter) :
-		?>
+	$data = array("username", "email");
+	foreach ($data as $parameter) :
+	?>
 			<div class="largeFont">
 				<span class="parameter name"><?= $parameter ?></span>
 				<span class="parameter specificData"><?= htmlentities($user->$parameter) ?></span>

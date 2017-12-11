@@ -16,7 +16,7 @@ if (!$todo->loadByLink($_GET["link"])) {
 require_once(dirname(__FILE__) . "/includes/common/defaults.php");
 $PAGE["title"] .= " : READONLY List : " . htmlentities($todo->title);
 $PAGE["styles"] = array_merge($PAGE["styles"], ["todo_list.css"]);
-$PAGE["scripts"] = array_merge($PAGE["scripts"], array("search.js"));
+$PAGE["scripts"][] = "search.js";
 
 require_once(dirname(__FILE__) . "/templates/common/header.php");
 require_once(dirname(__FILE__) . "/includes/common/choose_navbar.php");

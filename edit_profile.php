@@ -4,7 +4,7 @@ require_once(dirname(__FILE__) . "/includes/common/defaults.php");
 $PAGE["title"] .= " : Edit Profile for" . $_SESSION["username"];
 $PAGE["styles"][] = "card_form.css";
 $PAGE['includeCSRF'] = true;
-$PAGE["scripts"] = array_merge($PAGE["scripts"], array("edit_profile.js", "ajax.js"));
+$PAGE["scripts"] = array_merge($PAGE["scripts"], array("edit_profile.js", "search.js", "ajax.js"));
 require_once(dirname(__FILE__) . "/templates/common/header.php");
 require_once(dirname(__FILE__) . "/includes/common/choose_navbar.php");
 require_once(dirname(__FILE__) . "/classes/User.php");

@@ -106,7 +106,9 @@ function doSearch(){
 			url=url.concat("&words=").		concat(res[4].join(','));
 		if(res.hasOwnProperty(5))
 			url=url.concat("&expressions=").concat(res[5].join(','));
-
-		document.location.href=window.location.href.split('.php')[0].concat(".php").concat(url);
+		parts = window.location.href.split('/');
+		parts.pop();
+		searchUrl = "/dashboard.php" + url;
+		document.location.href= parts.join("/").concat(searchUrl);
 	}
 }
