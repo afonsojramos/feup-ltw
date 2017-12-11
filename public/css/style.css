@@ -76,12 +76,13 @@ a {
 }
 
 a.primaryLink {
+	font-size: 20px;
 	color: var(--dark-primary-color);
 }
 
 #broughtBy {
 	list-style-type: none;
-	font-size: 30px;
+	font-size: 28px;
 	display: table;
 }
 
