@@ -9,7 +9,7 @@ CREATE TABLE `users` (
 INSERT INTO "users" VALUES(1,'jcl','jlopes@fe.up.pt','$2y$10$e.cV4dOdlHNKfCzs68m0B.XULEeUk5yuR8CCdzL2ZqAAuz1cY0hpq');
 INSERT INTO "users" VALUES(2,'putin','bb@bb.com','$2y$10$Do.RgVkvfuGnWzszpCL4Gulsl8dQvNukGZDWoiCtuByDRijkvLugG');
 INSERT INTO "users" VALUES(3,'trump','cc@cc.com','$2y$10$rBhdJkkS13eL7XoQVGL4W.TBRM/QGD0b5FrQe9A1jZLQWu2adhb3m');
-INSERT INTO "users" VALUES(4,'monhe','dd@dd.com','$2y$10$xfCI/0uI/xYY1tk9/2DWX.FzcUayIZeucuQ.kIqVyBrReVEGfVGYi');
+INSERT INTO "users" VALUES(4,'acosta','dd@dd.com','$2y$10$xfCI/0uI/xYY1tk9/2DWX.FzcUayIZeucuQ.kIqVyBrReVEGfVGYi');
 INSERT INTO "users" VALUES(5,'marcelo','ee@ee.com','$2y$10$NXbx/ZftuJf/KwntPQfEU.F7doPfX5iKxf7/dbcnL2ATtg.R37tsa');
 INSERT INTO "users" VALUES(6,'arestivo','arestivo@fe.up.pt','$2y$10$ZB8q7BZ7WwzAXLYV6qbk4ue3yvbdadSJlS/WFbouLZZDEborWUmPS');
 INSERT INTO "users" VALUES(7,'obama','obama@white.house.com','$2y$10$saMOolU1lbqFsqlJZ.jTxOHkoEpRtZTC7iuKMU2N.pvBPaSdzVz1e');
