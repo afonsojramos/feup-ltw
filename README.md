@@ -1,5 +1,14 @@
 # feup-ltw - Group 1
-LTW Project - A TODO list management platform:
+
+Univeristy Subject - Web Technologies Laboratory (Laboratório de Tecnologias Web)
+
+[Faculty of Engeneering of University of Porto](https://sigarra.up.pt/feup/en/WEB_PAGE.INICIAL)
+
+2017/2018
+
+With the colaboration of [Afonso Jorge Ramos](https://github.com/AJRamos308) and [Daniel Silva](https://github.com/Dannyps)
+
+**A TODO list management platform:**
 
 Official [instructions](https://web.fe.up.pt/~arestivo/page/courses/2017/ltw/project/).
 ### Full Reference in the [:book: WIKI](https://github.com/msramalho/feup-ltw/wiki)
