@@ -6,7 +6,7 @@ Univeristy Subject - Web Technologies Laboratory (Laboratório de Tecnologias We
 
 2017/2018
 
-With the colaboration of [Afonso Jorge Ramos](https://github.com/AJRamos308) and [Daniel Silva](https://github.com/Dannyps)
+With the colaboration of [Miguel Ramalho](https://github.com/msramalho) and [Daniel Silva](https://github.com/Dannyps)
 
 **A TODO list management platform:**
 
